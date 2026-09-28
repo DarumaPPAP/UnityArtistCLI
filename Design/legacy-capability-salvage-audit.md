@@ -8,6 +8,8 @@
 
 **AUDIT DECISION:** 50件をPORT、12件をKNOWLEDGE、15件をRETIREと分類しました。REPLACEDは0件です。これは「現行AdapterがLegacy Tool名を利用している」状態を、置換済みと誤認しない保守的な分類です。PORTは実装完了を意味しません。全PORTの実装・Eval・置換Evidenceは未完了です。
 
+**KNOWLEDGE移管の現状:** `world.compile_workflow`と`world.create_review_handoff`の入力・Human Review知識はWorldCreatorの現行[Plan契約](../SubAgents/world_creator_subagent/README.md)とOutput Schemaへ回収しました。`addressables.get_support_matrix`のPackage／Backend状態、非対象Build、未検証Versionの境界はUnityAgent Content Skillへ回収しました。12件中3件のKnowledge移管をRepositoryレベルで確認しています。旧ToolのAgent Graph／Review実行機能の置換、active caller移行、Live parityを証明したものではありません。他の9件は移管未完了です。
+
 | Decision | 件数 | 意味 |
 |---|---:|---|
 | REPLACED | 0 | 独立した後継実装と動作Evidenceを確認済み |
@@ -23,7 +25,7 @@
 - AddressablesはContentのSkill / Tool Pilotへ。最初はRead-only AnalyzeとPlanを対象とし、旧 `apply_entry` の自動移植はしません。
 - UI、Animation、AudioSourceの既存Scene操作は、Import最適化のContent Domainと混同せず、UnityAgentの決定論的Tool候補とします。CinematicはArtistの既存Timeline契約との意味差を検証します。
 - Agent 10件は旧Control Plane入口なのでRETIRE候補です。UnityAgentのOrchestration、Runtime、Persistence、Operationsで責務を保持し、旧MCP FrontendをCanonical pathへ復活させません。
-- WorldCreatorの `compile_workflow` と `create_review_handoff` はPlanningとHuman Reviewの知識として回収候補です。`world.start_preflight` は旧UnityAgentMcpRuntimeへのExecution FrontendなのでRETIREです。WorldCreatorからSubAgentを直接Dispatchしません。
+- WorldCreatorの `compile_workflow` と `create_review_handoff` のPlanningとHuman Reviewの知識は現行契約へ移管しました。`world.start_preflight` は旧UnityAgentMcpRuntimeへのExecution FrontendなのでRETIREです。WorldCreatorからSubAgentを直接Dispatchしません。
 
 ## Safety invariant照合
 
