@@ -17,12 +17,11 @@
     "compatibility",
     "dependencies",
     "backends",
-    "evidence",
-    "execution"
+    "evidence"
   ],
   "properties": {
     "schema_version": {
-      "const": "5.0"
+      "const": "4.0"
     },
     "kind": {
       "const": "subagent_manifest"
@@ -204,7 +203,7 @@
     },
     "backends": {
       "type": "array",
-      "minItems": 0,
+      "minItems": 1,
       "uniqueItems": true,
       "items": {
         "type": "object",
@@ -280,97 +279,6 @@
           }
         }
       }
-    },
-    "execution": {
-      "type": "object",
-      "oneOf": [
-        {
-          "additionalProperties": false,
-          "required": [
-            "kind"
-          ],
-          "properties": {
-            "kind": {
-              "const": "provider_backed"
-            }
-          }
-        },
-        {
-          "additionalProperties": false,
-          "required": [
-            "kind",
-            "reasoning_runtime",
-            "instructions_ref",
-            "output_contract_ref",
-            "source_context_binding",
-            "required_observation_capabilities",
-            "execution_mode"
-          ],
-          "properties": {
-            "kind": {
-              "const": "reasoning"
-            },
-            "reasoning_runtime": {
-              "const": "codex_runner"
-            },
-            "instructions_ref": {
-              "type": "string",
-              "minLength": 1
-            },
-            "output_contract_ref": {
-              "type": "string",
-              "minLength": 1
-            },
-            "source_context_binding": {
-              "const": "required"
-            },
-            "required_observation_capabilities": {
-              "type": "array",
-              "uniqueItems": true,
-              "items": {
-                "type": "string",
-                "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
-              }
-            },
-            "execution_mode": {
-              "enum": [
-                "planning_only",
-                "read_only_analysis"
-              ]
-            }
-          }
-        }
-      ]
     }
-  },
-  "oneOf": [
-    {
-      "properties": {
-        "execution": {
-          "properties": {
-            "kind": {
-              "const": "provider_backed"
-            }
-          }
-        },
-        "backends": {
-          "minItems": 1
-        }
-      }
-    },
-    {
-      "properties": {
-        "execution": {
-          "properties": {
-            "kind": {
-              "const": "reasoning"
-            }
-          }
-        },
-        "backends": {
-          "maxItems": 0
-        }
-      }
-    }
-  ]
+  }
 }

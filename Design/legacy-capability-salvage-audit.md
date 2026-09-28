@@ -8,6 +8,8 @@
 
 **AUDIT DECISION:** 50件をPORT、12件をKNOWLEDGE、15件をRETIREと分類しました。REPLACEDは0件です。これは「現行AdapterがLegacy Tool名を利用している」状態を、置換済みと誤認しない保守的な分類です。PORTは実装完了を意味しません。全PORTの実装・Eval・置換Evidenceは未完了です。
 
+**KNOWLEDGE移管の現状:** WorldCreator 2件は現行[Plan契約](../SubAgents/world_creator_subagent/README.md)へ、Addressables 1件はUnityAgent Content Skillへ、Visual Direction 4件はUnityAgent Visual Direction Skillへ移しました。旧Domain Support Matrix 5件は[対応境界のDocumentation](legacy-domain-support-boundaries.md)へ回収しました。12件のKnowledge内容をRepositoryレベルで記録しています。旧Toolの実行機能の置換、active caller移行、Live parityを証明したものではありません。各行の移管先と未検証事項はMatrixに記載します。
+
 | Decision | 件数 | 意味 |
 |---|---:|---|
 | REPLACED | 0 | 独立した後継実装と動作Evidenceを確認済み |
@@ -23,7 +25,7 @@
 - AddressablesはContentのSkill / Tool Pilotへ。最初はRead-only AnalyzeとPlanを対象とし、旧 `apply_entry` の自動移植はしません。
 - UI、Animation、AudioSourceの既存Scene操作は、Import最適化のContent Domainと混同せず、UnityAgentの決定論的Tool候補とします。CinematicはArtistの既存Timeline契約との意味差を検証します。
 - Agent 10件は旧Control Plane入口なのでRETIRE候補です。UnityAgentのOrchestration、Runtime、Persistence、Operationsで責務を保持し、旧MCP FrontendをCanonical pathへ復活させません。
-- WorldCreatorの `compile_workflow` と `create_review_handoff` はPlanningとHuman Reviewの知識として回収候補です。`world.start_preflight` は旧UnityAgentMcpRuntimeへのExecution FrontendなのでRETIREです。WorldCreatorからSubAgentを直接Dispatchしません。
+- WorldCreatorの `compile_workflow` と `create_review_handoff` のPlanningとHuman Reviewの知識は現行契約へ移管しました。`world.start_preflight` は旧UnityAgentMcpRuntimeへのExecution FrontendなのでRETIREです。WorldCreatorからSubAgentを直接Dispatchしません。
 
 ## Safety invariant照合
 
@@ -44,9 +46,18 @@
 
 ## Legacy detachment gate
 
+### 現行Sourceのactive dependency再確認（2026-09-29）
+
+- UnityAgent `Runtime/Tooling/provider_registry.yaml`には`myunitymcp`のCapability bindingが残る。ただし`production_enabled: false`で、`Runtime/Tooling/capability_resolver.py`はProduction解決候補から除外する。従って「Production実行中」と「Sourceに依存経路が残る」は区別する。
+- UnityAgent `Runtime/Tooling/Providers/MyUnityMcp/`には旧Tool名のMaterialization、Result正規化、Project binding、Mutation prepare／approval／revision経路が残る。これはPORT各件の独立実装・Parityを証明する後継Surfaceではない。
+- UnityAgent `Runtime/Tooling/Environment/discovery.py`と`Runtime/Contracts/environment-snapshot.schema.yaml`は`myunitymcp`の可用性を環境Factとして扱う。Legacy Providerを削除する場合、これらのContractと関連Runtime TestsもMigration対象になる。
+- Hubの現行`Registry/`、`Schemas/`、`SubAgents/`に`Legacy/` Sourceを実行時importする参照は確認されない。Hubの`Tests/Hub/test_legacy_salvage.py`はLegacy Source Inventoryに依存する監査Testなので、Sourceを撤去する際はTest目的を再設計する必要がある。
+
+**判定:** Production Resolverでは旧Providerは選出されないが、UnityAgentのRegistry、Environment Contract、Adapter、関連Testの残存により「active dependency = 0」は証明できない。PORTの独立実装・Live parityも未成立。`LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE`を維持する。
+
 - [x] 77 ToolをSourceから再Inventoryし、全件分類
 - [ ] PORT完了または明示的な機能別延期判断
-- [ ] KNOWLEDGE移管完了
+- [x] KNOWLEDGE 12件の知識移管完了（旧実行機能の置換は未確認）
 - [ ] REPLACEDの動作Evidence整備
 - [ ] RETIRE後の実行経路切替検証
 - [ ] active Legacy path dependencies = 0

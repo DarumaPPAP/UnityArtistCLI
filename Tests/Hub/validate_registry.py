@@ -23,7 +23,7 @@ BACKEND_ID = re.compile(r"^[a-z][a-z0-9_]*$")
 MANIFEST_PATH = re.compile(r"^SubAgents/([a-z][a-z0-9_]*_subagent)/manifest\.yaml$")
 SUPPORTED_SCHEMA_KEYWORDS = {
     "$schema", "$id", "title", "description", "type", "additionalProperties", "required", "properties",
-    "const", "enum", "minItems", "uniqueItems", "items", "pattern", "minLength", "minimum",
+    "const", "enum", "minItems", "maxItems", "oneOf", "uniqueItems", "items", "pattern", "minLength", "minimum",
 }
 
 
@@ -97,6 +97,19 @@ def _schema_errors(value: Any, schema: Any, location: str, errors: list[str]) ->
     if additional_properties is not None and not isinstance(additional_properties, bool):
         errors.append(f"{location}: additionalProperties must be boolean")
 
+    if "oneOf" in schema:
+        alternatives = schema["oneOf"]
+        if not isinstance(alternatives, list) or not alternatives:
+            errors.append(f"{location}: oneOf must contain schemas")
+        else:
+            matches = 0
+            for alternative in alternatives:
+                branch_errors: list[str] = []
+                _schema_errors(value, alternative, location, branch_errors)
+                matches += not branch_errors
+            if matches != 1:
+                errors.append(f"{location}: exactly one execution contract must match (matched {matches})")
+
     type_name = schema.get("type")
     type_checks = {
         "object": lambda item: isinstance(item, dict),
@@ -126,6 +139,8 @@ def _schema_errors(value: Any, schema: Any, location: str, errors: list[str]) ->
         if pattern and re.fullmatch(pattern, value) is None:
             errors.append(f"{location}: does not match required pattern {pattern!r}")
     if isinstance(value, list):
+        if "maxItems" in schema and len(value) > schema["maxItems"]:
+            errors.append(f"{location}: must contain at most {schema['maxItems']} item(s)")
         if len(value) < schema.get("minItems", 0):
             errors.append(f"{location}: must contain at least {schema['minItems']} item(s)")
         if schema.get("uniqueItems") and len({json.dumps(item, sort_keys=True, default=str) for item in value}) != len(value):
@@ -251,6 +266,15 @@ def _validate_manifest(root: Path, path: str, schema: Any, errors: list[str]) ->
     if len(set(capability_ids)) != len(capability_ids):
         errors.append(f"{path}: capability ids must be unique")
     _valid_reference(root, manifest.get("capability_contract_ref"), f"{path}: capability_contract_ref", errors)
+
+    execution = manifest.get("execution")
+    if isinstance(execution, dict) and execution.get("kind") == "reasoning":
+        for field in ("instructions_ref", "output_contract_ref"):
+            _valid_reference(root, execution.get(field), f"{path}: execution.{field}", errors)
+        semantic = {f"{item['id']}.{operation}" for item in capabilities if isinstance(item, dict) and isinstance(item.get("id"), str) and isinstance(item.get("operations"), list) for operation in item["operations"] if isinstance(operation, str)}
+        observations = execution.get("required_observation_capabilities")
+        if isinstance(observations, list) and any(isinstance(item, str) and item in semantic for item in observations):
+            errors.append(f"{path}: semantic reasoning capabilities cannot be observation Tool capabilities")
 
     compatibility = manifest.get("compatibility")
     if not isinstance(compatibility, dict):

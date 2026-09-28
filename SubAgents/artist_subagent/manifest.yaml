@@ -1,5 +1,7 @@
-schema_version: '4.0'
+schema_version: '5.0'
 kind: subagent_manifest
+execution:
+  kind: provider_backed
 identity:
   id: artist_subagent
   name: ArtistSubAgent
