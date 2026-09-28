@@ -46,6 +46,15 @@
 
 ## Legacy detachment gate
 
+### 現行Sourceのactive dependency再確認（2026-09-29）
+
+- UnityAgent `Runtime/Tooling/provider_registry.yaml`には`myunitymcp`のCapability bindingが残る。ただし`production_enabled: false`で、`Runtime/Tooling/capability_resolver.py`はProduction解決候補から除外する。従って「Production実行中」と「Sourceに依存経路が残る」は区別する。
+- UnityAgent `Runtime/Tooling/Providers/MyUnityMcp/`には旧Tool名のMaterialization、Result正規化、Project binding、Mutation prepare／approval／revision経路が残る。これはPORT各件の独立実装・Parityを証明する後継Surfaceではない。
+- UnityAgent `Runtime/Tooling/Environment/discovery.py`と`Runtime/Contracts/environment-snapshot.schema.yaml`は`myunitymcp`の可用性を環境Factとして扱う。Legacy Providerを削除する場合、これらのContractと関連Runtime TestsもMigration対象になる。
+- Hubの現行`Registry/`、`Schemas/`、`SubAgents/`に`Legacy/` Sourceを実行時importする参照は確認されない。Hubの`Tests/Hub/test_legacy_salvage.py`はLegacy Source Inventoryに依存する監査Testなので、Sourceを撤去する際はTest目的を再設計する必要がある。
+
+**判定:** Production Resolverでは旧Providerは選出されないが、UnityAgentのRegistry、Environment Contract、Adapter、関連Testの残存により「active dependency = 0」は証明できない。PORTの独立実装・Live parityも未成立。`LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE`を維持する。
+
 - [x] 77 ToolをSourceから再Inventoryし、全件分類
 - [ ] PORT完了または明示的な機能別延期判断
 - [ ] KNOWLEDGE移管完了
