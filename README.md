@@ -46,9 +46,11 @@ Registry登録は、installed / compatible / project-bound / available / eligibl
 flowchart LR
     U[User / Unity UI / Codex] --> A["UnityAgent<br/>Control Plane"]
     H["UnitySubAgentHub<br/>Registry / Manifest / Validation"] -. metadata / snapshot .-> A
-    A --> S[Eligible Specialist SubAgent]
-    S --> B[Specialist Backend / Provider]
-    B --> E[Evidence]
+    A --> R[Specialist Reasoning Runtime]
+    A --> T[Runtime ToolBroker]
+    T --> B[Resolved Provider]
+    R --> E[Evidence / State]
+    B --> E
     E --> A
 ```
 
@@ -71,6 +73,10 @@ Hubは実行経路のControl Planeではありません。Manifestは「候補�
 | Specialist | Canonical ID | Backend / Provider ID | Lifecycle |
 |---|---|---|---|
 | ArtistSubAgent | `artist_subagent` | `unity_artist_cli` | `active` |
+| GraphicsSubAgent | `graphics_subagent` | Reasoning、Tool Backendなし | `active` |
+| WorldCreatorSubAgent | `world_creator_subagent` | Reasoning、Tool Backendなし | `active` |
+
+Graphicsは `project.inspect` / `source.read` をUnityAgent ToolBrokerで観測した後にReasoningします。WorldCreatorの `world.plan` はReasoning Runtimeで実行します。Performanceは必要観測 `profiler.observe` のProduction Surfaceが未成立のため未登録です。登録はProduction Verifiedを意味しません。
 
 ArtistSubAgentは専門AgentのIdentityです。
 
@@ -86,6 +92,8 @@ Resolver-visible Capability:
 - `artist.camera.inspect`
 - `artist.camera.refine`
 - `visual.capture`
+- `graphics.inspect` / `graphics.diagnose` / `graphics.validate`（Reasoning）
+- `world.plan`（Reasoning）
 
 Backend CLIの全コマンドやContractに存在する広い機能は、ManifestとUnityAgent Runtimeの両方で対応されるまでResolver候補ではありません。
 

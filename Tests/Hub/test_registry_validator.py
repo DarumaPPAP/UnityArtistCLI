@@ -14,7 +14,8 @@ from validate_registry import validate_repository
 def manifest(subagent_id: str, backend_id: str) -> dict:
     capability_prefix = subagent_id.removesuffix("_subagent")
     return {
-        "schema_version": "4.0",
+        "schema_version": "5.0",
+        "execution": {"kind": "provider_backed"},
         "kind": "subagent_manifest",
         "identity": {"id": subagent_id, "name": subagent_id.replace("_", " ").title(), "version": "1.0.0"},
         "lifecycle": "active",
@@ -136,8 +137,8 @@ class RegistryValidatorTests(unittest.TestCase):
         manifest = yaml.safe_load((root / "SubAgents/artist_subagent/manifest.yaml").read_text(encoding="utf-8"))
         snapshot = export_hub_snapshot(root)
         artist = snapshot["specialists"][0]["manifest"]
-        self.assertEqual(manifest["schema_version"], "4.0")
-        self.assertEqual(snapshot["schema_version"], "2.0")
+        self.assertEqual(manifest["schema_version"], "5.0")
+        self.assertEqual(snapshot["schema_version"], "3.0")
         self.assertEqual(snapshot["kind"], "subagent_catalog_snapshot")
         self.assertEqual(artist, manifest)
         self.assertNotIn("support_matrix_ref", artist["compatibility"])
@@ -181,6 +182,44 @@ class RegistryValidatorTests(unittest.TestCase):
         self.write_registry()
 
         self.assertEqual([], validate_repository(self.root))
+
+    def test_reasoning_manifest_has_no_tool_backend(self) -> None:
+        self.add_manifest("planner_subagent", "unused_backend")
+        path = self.root / "SubAgents/planner_subagent/manifest.yaml"
+        value = yaml.safe_load(path.read_text(encoding="utf-8"))
+        value["backends"] = []
+        value["dependencies"] = []
+        value["execution"] = {"kind": "reasoning", "reasoning_runtime": "codex_runner", "instructions_ref": "Contracts/capabilities.yaml", "output_contract_ref": "Contracts/evidence.yaml", "source_context_binding": "required", "required_observation_capabilities": ["project.inspect"]}
+        value["execution"]["execution_mode"] = "planning_only"
+        path.write_text(yaml.safe_dump(value, sort_keys=False), encoding="utf-8")
+        self.write_registry()
+        self.assertEqual([], validate_repository(self.root))
+        for invalid in ("backend", "missing_contract", "semantic_observation", "model"):
+            with self.subTest(invalid=invalid):
+                changed = __import__("copy").deepcopy(value)
+                if invalid == "backend":
+                    changed["backends"] = [{"id": "fake_provider", "kind": "cli", "contract_ref": "Contracts/backend.yaml"}]
+                elif invalid == "missing_contract":
+                    changed["execution"]["instructions_ref"] = "Contracts/missing.md"
+                elif invalid == "semantic_observation":
+                    changed["execution"]["required_observation_capabilities"] = ["planner.inspect"]
+                else:
+                    changed["execution"]["model"] = "gpt-example"
+                path.write_text(yaml.safe_dump(changed, sort_keys=False), encoding="utf-8")
+                self.assertTrue(validate_repository(self.root))
+
+    def test_provider_backed_requires_backend_and_old_version_is_not_reinterpreted(self) -> None:
+        self.add_manifest("artist_subagent", "unity_artist_cli")
+        self.write_registry()
+        path = self.root / "SubAgents/artist_subagent/manifest.yaml"
+        value = yaml.safe_load(path.read_text(encoding="utf-8"))
+        value["backends"] = []
+        path.write_text(yaml.safe_dump(value, sort_keys=False), encoding="utf-8")
+        self.assertTrue(validate_repository(self.root))
+        value["schema_version"] = "4.0"
+        value.pop("execution")
+        path.write_text(yaml.safe_dump(value, sort_keys=False), encoding="utf-8")
+        self.assertTrue(validate_repository(self.root))
 
     def test_unindexed_manifest_is_rejected(self) -> None:
         self.add_manifest("artist_subagent", "unity_artist_cli")

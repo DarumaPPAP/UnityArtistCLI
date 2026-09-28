@@ -23,7 +23,7 @@ HubのRegistryやSnapshotはInstall状態、Project状態、現在のPlatform、
 | Specialist固有の詳細契約 | Manifestから参照されるファイル |
 | Runtime ProfileとImport Adapter | UnityAgent |
 
-Registry v2はManifest Pathのみを索引化します。Manifest v4はIdentity、Lifecycle、Optional Installation、Activation、Capabilities、対応するUnity Version / Render Pipelineの組、Dependencies、Backend identities、Evidence requirementsを宣言します。Compatibility MatrixとRelease EvidenceはBackend Product側に置き、Manifestから参照しません。`audience`、`goal_type`、`primary_capability`、既定Profile、特定TaskのCamera GUID、Approval範囲はHubの契約に含めません。
+Registry v2はManifest Pathのみを索引化します。Manifest v5はExecution kind、Identity、Lifecycle、Optional Installation、Activation、Capabilities、対応するUnity Version / Render Pipelineの組、Dependencies、Backend identities、Evidence requirementsを宣言します。Compatibility MatrixとRelease EvidenceはBackend Product側に置き、Manifestから参照しません。`audience`、`goal_type`、`primary_capability`、既定Profile、特定TaskのCamera GUID、Approval範囲はHubの契約に含めません。
 
 ## Lifecycle and eligibility
 
@@ -31,7 +31,7 @@ Registry v2はManifest Pathのみを索引化します。Manifest v4はIdentity�
 
 ## Snapshot and import boundary
 
-`Tests/Hub/export_agent_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v2として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIは`Hub-SubAgent-Catalog-Snapshot`を公開します。
+`Tests/Hub/export_agent_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v3として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIは`Hub-SubAgent-Catalog-Snapshot`を公開します。
 
 ```text
 Hub Manifest → Hub Snapshot → UnityAgent Offline Import Adapter → UnityAgent Runtime Catalog
@@ -55,3 +55,7 @@ Hub ManifestはRuntime Context値やTaskごとのSkill選択を所有しませ�
 4. 廃止時はLifecycleを`deprecated`、`retired`または`revoked`へ変更します。既存利用・配布URL・Consumer参照を監査し、履歴が不要になるまでIdentityを再利用しません。
 
 `Legacy/MyUnityMCP-1.1.1/`は現在のHubまたはBackend Runtimeではありません。現行Release Validatorが一部を参照するため、参照を移行するまでmainからの除去を保留します。公開TagとGit履歴は変更しません。
+
+## Execution Contract v5
+
+`provider_backed` は1件以上のBackend、`reasoning` はBackendなし・CodexRunner・Instructions / Output Contract・source Context binding・Observation要件を宣言する。Snapshot v3としてexportする。旧v4の暗黙変換は行わず、UnityAgent Consumer Profile v3への明示Migrationを要求する。詳細は `DecisionLog/2026-09-27-specialist-execution-contract.md`。
