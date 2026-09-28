@@ -8,7 +8,7 @@
 
 **AUDIT DECISION:** 50件をPORT、12件をKNOWLEDGE、15件をRETIREと分類しました。REPLACEDは0件です。これは「現行AdapterがLegacy Tool名を利用している」状態を、置換済みと誤認しない保守的な分類です。PORTは実装完了を意味しません。全PORTの実装・Eval・置換Evidenceは未完了です。
 
-**KNOWLEDGE移管の現状:** `world.compile_workflow`と`world.create_review_handoff`の入力・Human Review知識はWorldCreatorの現行[Plan契約](../SubAgents/world_creator_subagent/README.md)とOutput Schemaへ回収しました。`addressables.get_support_matrix`のPackage／Backend状態、非対象Build、未検証Versionの境界はUnityAgent Content Skillへ回収しました。12件中3件のKnowledge移管をRepositoryレベルで確認しています。旧ToolのAgent Graph／Review実行機能の置換、active caller移行、Live parityを証明したものではありません。他の9件は移管未完了です。
+**KNOWLEDGE移管の現状:** WorldCreator 2件は現行[Plan契約](../SubAgents/world_creator_subagent/README.md)へ、Addressables 1件はUnityAgent Content Skillへ、Visual Direction 4件はUnityAgent Visual Direction Skillへ移しました。旧Domain Support Matrix 5件は[対応境界のDocumentation](legacy-domain-support-boundaries.md)へ回収しました。12件のKnowledge内容をRepositoryレベルで記録しています。旧Toolの実行機能の置換、active caller移行、Live parityを証明したものではありません。各行の移管先と未検証事項はMatrixに記載します。
 
 | Decision | 件数 | 意味 |
 |---|---:|---|
@@ -57,7 +57,7 @@
 
 - [x] 77 ToolをSourceから再Inventoryし、全件分類
 - [ ] PORT完了または明示的な機能別延期判断
-- [ ] KNOWLEDGE移管完了
+- [x] KNOWLEDGE 12件の知識移管完了（旧実行機能の置換は未確認）
 - [ ] REPLACEDの動作Evidence整備
 - [ ] RETIRE後の実行経路切替検証
 - [ ] active Legacy path dependencies = 0

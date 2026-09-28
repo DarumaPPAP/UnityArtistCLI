@@ -30,6 +30,14 @@ class LegacySalvageTests(unittest.TestCase):
                 self.assertTrue(all(row[field] for field in ("legacy_module", "responsibility", "current_equivalent", "current_owner", "gap", "target_owner", "migration_risk", "replacement_evidence", "source")))
                 self.assertTrue((ROOT / row["source"]).is_file())
 
+        knowledge = [row for row in rows if row["decision"] == "KNOWLEDGE"]
+        self.assertEqual(len(knowledge), 12)
+        for row in knowledge:
+            with self.subTest(migrated_knowledge=row["legacy_tool"]):
+                self.assertIn("Knowledge migrated", row["gap"])
+                self.assertNotIn("static path only", row["replacement_evidence"])
+                self.assertTrue("SKILL.md" in row["replacement_evidence"] or "legacy-domain-support-boundaries.md" in row["replacement_evidence"] or "SubAgents/world_creator_subagent/README.md" in row["replacement_evidence"])
+
 
 if __name__ == "__main__":
     unittest.main()
