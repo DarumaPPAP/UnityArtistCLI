@@ -5,7 +5,7 @@ verification_status: partial_verified
 terminal_state: partial_verified
 operational_surface:
   commands: 14
-  package: com.darumappap.unity-artist
+  package: com.darumappap.artist-subagent
   executable: unity-artist
   generic_operations: delegated
 editor_verification:
