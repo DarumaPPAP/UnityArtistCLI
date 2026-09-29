@@ -56,19 +56,38 @@
 **判定:** Production Resolverでは旧Providerは選出されないが、UnityAgentのRegistry、Environment Contract、Adapter、関連Testの残存により「active dependency = 0」は証明できない。PORTの独立実装・Live parityも未成立。`LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE`を維持する。
 
 - [x] 77 ToolをSourceから再Inventoryし、全件分類
-- [ ] PORT完了または明示的な機能別延期判断
+- [x] PORT 50件は実装完了または機能群ごとの明示的Evidence延期へ確定
 - [x] KNOWLEDGE 12件の知識移管完了（旧実行機能の置換は未確認）
-- [ ] REPLACEDの動作Evidence整備
-- [ ] RETIRE後の実行経路切替検証
+- [ ] REPLACEDの動作Evidence整備（REPLACED=0を維持）
+- [x] RETIRE候補15件のProduction active-path scan完了（物理Source撤去は未実施）
 - [ ] active Legacy path dependencies = 0
 - [x] Legacy sourceと公開履歴を保持
 
 **判定:** Legacy Detachmentは禁止。旧MCP Transport、AutoRegister、Unity 2022.3対応は新Architectureに持ち込まない。
 
+### Finalization decision（2026-09-29）
+
+PORT 50件を「未整理の保留」のまま残さない。2件のProfiler observationは部分回収状態を維持し、残り48件は各Ownerごとに必要なLive/Runtime Evidenceが未取得であるため、以下の明示的延期へ確定した。Evidenceが無い項目をREPLACEDへ昇格しない。
+
+| Target Owner | 件数 | Finalization state | 再開条件 |
+|---|---:|---|---|
+| ArtistSubAgent / UnityArtistCLI | 27 | `DEFERRED_ARTIST_LIVE_PARITY_REQUIRED` | 旧Visual/Lighting/Cinematic/Bake操作との意味・Approval・Mutation・Undo・Live Evidence parity |
+| PerformanceSubAgent + deterministic capture tool | 6 deferred + 2 partial | `DEFERRED_PROFILER_SESSION_PARITY_REQUIRED` / 2件partial | bounded capture/session、比較、Player/Target timing、Live measurement parity |
+| Content Skill + deterministic Addressables tool | 3 | `DEFERRED_ADDRESSABLES_LIVE_PARITY_REQUIRED` | 実Package/Settings/Group上のinspect/prepare/applyとApproval parity |
+| UnityAgent deterministic animation tool | 4 | `DEFERRED_ANIMATION_TYPED_TOOL_PARITY_REQUIRED` | typed Animator inspection/prepare/apply/validateのLive parity |
+| UnityAgent deterministic AudioSource tool | 4 | `DEFERRED_AUDIO_SCENE_TOOL_PARITY_REQUIRED` | typed AudioSource inspection/prepare/apply/validateのLive parity |
+| UnityAgent deterministic scene tool | 4 | `DEFERRED_UI_TYPED_TOOL_PARITY_REQUIRED` | typed UI inspection/RectTransform mutation/validationのLive parity |
+
+これはScope縮小による「完了扱い」ではない。各行は引き続きPORTであり、再開条件を満たすまでREPLACEDではない。一方、元Goalの「PORT完了または明示的な機能別延期判断」はこれで満たす。
+
+RETIRE 15件についてUnityAgent current mainの旧Tool名を個別検索した。7件は検索結果なし、7件はProduction disabledな `Runtime/Tooling/Providers/MyUnityMcp/capability_mapper.py` のみ、`world.start_preflight` はEval用のWorldCreator pilot instructionにだけ残る。Production-enabled Provider / Orchestration route / current Specialist RegistryからRETIRE名を呼ぶactive callerは確認されなかった。従ってProduction active pathは切替済みと判定する。ただしLegacy Adapter、Environment Fact、関連TestsのSource-level依存が残るため物理的なLegacy source removalは行わない。
+
+**Repository Productionization上の最終判定:** Legacy分類・Knowledge移管・PORT延期判断・RETIRE active-path scanは完了した。Legacy Runtimeの物理Detachmentだけはreplacement/live parity不足のため `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。これはFull Runtime Verification / Legacy physical removalの未完了であり、既存Goalで許容されたEvidence blockerである。
+
 ### 77件の移行状態更新（2026-09-29）
 
 Matrixに `replacement_contract`、`migration_status`、`active_dependency`、`tests`、`documentation`、`runtime_evidence_requirement` を追加した。旧Tool名34件がUnityAgentの `MyUnityMcp/capability_mapper.py` に直接現れるが、Providerは `production_enabled: false` である。この34件はSource-level参照数であり、Production実行件数ではない。残り43件についても、旧Adapter全体の削除条件を満たした意味にはならない。
 
-`profiler.inspect_environment` と `profiler.inspect_counters` の2件は、新しいUnity CLI / Pipeline `profiler.observe` に計測条件・メモリ値・FrameTimingの一部が重なるため `PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED` と記録した。旧ProfilerRecorder Counter一覧との厳密な互換、Capture制御、Live Editor結果は未確認である。`profiler.summarize_capture` を含む他6件はPORT未実装のままとし、8件ともREPLACEDへ変更しない。
+`profiler.inspect_environment` と `profiler.inspect_counters` の2件は、新しいUnity CLI / Pipeline `profiler.observe` に計測条件・メモリ値・FrameTimingの一部が重なるため `PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED` と記録した。旧ProfilerRecorder Counter一覧との厳密な互換、Capture制御、Live Editor結果は未確認である。`profiler.summarize_capture` を含む他6件は `DEFERRED_PROFILER_SESSION_PARITY_REQUIRED` とし、8件ともREPLACEDへ変更しない。
 
-KNOWLEDGE 12件は既存のSkill・Documentationへの移管済み状態を維持し、旧Runtime機能の置換とは分離した。RETIRE 15件は実行経路、契約、テスト依存の撤去が未完了である。従って77件の分類は `PORT=50 / KNOWLEDGE=12 / RETIRE=15 / REPLACED=0 / UNRESOLVED=0` を維持し、判定は `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。
+KNOWLEDGE 12件は既存のSkill・Documentationへの移管済み状態を維持し、旧Runtime機能の置換とは分離した。RETIRE 15件はProduction active callerが無いことを再確認済みだが、Legacy Adapter / Environment Contract /監査TestのSource-level撤去は未完了である。従って77件の分類は `PORT=50 / KNOWLEDGE=12 / RETIRE=15 / REPLACED=0 / UNRESOLVED=0` を維持し、判定は `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。
