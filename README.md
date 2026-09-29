@@ -16,6 +16,7 @@
   <a href="#eligibility">Eligibility</a> ·
   <a href="#add-a-specialist">Add a Specialist</a> ·
   <a href="Design/subagent-hub-architecture.md">Architecture</a> ·
+  <a href="docs/README.md">Docs Index</a> ·
   <a href="docs/references/unity-cli-reference.md">Unity CLI Reference</a>
 </p>
 
@@ -95,6 +96,7 @@ Resolver-visible Capability:
 - `visual.capture`
 - `graphics.inspect` / `graphics.diagnose` / `graphics.validate`（Reasoning）
 - `world.plan`（Reasoning）
+- `performance.analyze`（Reasoning、`profiler.observe` Observation必須）
 
 Backend CLIの全コマンドやContractに存在する広い機能は、ManifestとUnityAgent Runtimeの両方で対応されるまでResolver候補ではありません。
 
@@ -168,12 +170,16 @@ python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
 
 Registryへの追加はdata-onlyです。新しいCapability semanticsを追加する場合は、UnityAgent Runtime側の対応も必要です。
 
-## ArtistSubAgent
+## Specialist Guides
 
-- [ArtistSubAgent Guide](SubAgents/artist_subagent/README.md)
-- [Canonical Manifest](SubAgents/artist_subagent/manifest.yaml)
+- [ArtistSubAgent](SubAgents/artist_subagent/README.md) — Provider-backed。Backendは `unity_artist_cli`
+- [GraphicsSubAgent](SubAgents/graphics_subagent/README.md) — Read-only reasoning
+- [WorldCreatorSubAgent](SubAgents/world_creator_subagent/README.md) — Planning-only reasoning
+- [PerformanceSubAgent](SubAgents/performance_subagent/README.md) — Observation-backed read-only reasoning
 - [Hub Architecture](Design/subagent-hub-architecture.md)
 - [Migration from MyUnityMCP](MIGRATION_FROM_MYUNITYMCP.md)
+
+各SpecialistのIdentity / Lifecycle / Capability / Execution kindの正本は対応する `manifest.yaml` です。Graphics / WorldCreator / Performance配下の旧 `capability-contracts.yaml` はPilot時点のbaselineを比較するために残されており、Current Production Contractではありません。Current Contractは各Manifestの `capability_contract_ref` が指す `production-capability-contract.yaml` です。
 
 このRepositoryにはArtist backend implementationも移行互換性のため同居していますが、Hub Registry / Validator自身がそれをdispatch・executeするわけではありません。
 
