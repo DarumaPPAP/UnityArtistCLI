@@ -1,0 +1,91 @@
+name: UnitySubAgentHub Snapshot Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_release:
+        description: Publish HUB_VERSION from main as an immutable prerelease
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    name: Human-gated Hub snapshot release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Resolve canonical Hub release tag
+        env:
+          CONFIRM_RELEASE: ${{ inputs.confirm_release }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Hub release workflow must run from main. Current ref: $GITHUB_REF"
+            exit 1
+          fi
+          if [ "$CONFIRM_RELEASE" != "true" ]; then
+            echo "::error::Check confirm_release before publishing a Hub release."
+            exit 1
+          fi
+          version="$(tr -d '\r\n' < HUB_VERSION)"
+          test -n "$version"
+          tag="hub-v$version"
+          echo "HUB_RELEASE_VERSION=$version" >> "$GITHUB_ENV"
+          echo "HUB_RELEASE_TAG=$tag" >> "$GITHUB_ENV"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "::error::Tag $tag already exists; refusing to move or replace it."
+            exit 1
+          fi
+
+      - name: Install validation dependencies
+        run: python3 -m pip install --disable-pip-version-check pyyaml
+
+      - name: Validate Hub contracts
+        run: |
+          set -euo pipefail
+          python3 Tests/Hub/validate_registry.py
+          python3 -m unittest discover -s Tests/Hub -p 'test_*.py' -v
+
+      - name: Export consumer-neutral Snapshot
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          python3 Tests/Hub/export_agent_snapshot.py --output artifacts/subagent-catalog.yaml
+          cp Registry/subagents.yaml artifacts/subagents-registry.yaml
+          (
+            cd artifacts
+            sha256sum subagent-catalog.yaml subagents-registry.yaml > SHA256SUMS.txt
+          )
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create immutable Hub tag
+        run: git tag -a "$HUB_RELEASE_TAG" -m "UnitySubAgentHub $HUB_RELEASE_TAG"
+
+      - name: Push immutable Hub tag
+        run: git push origin "$HUB_RELEASE_TAG"
+
+      - name: Create GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$HUB_RELEASE_TAG" \
+            --verify-tag \
+            --prerelease \
+            --title "UnitySubAgentHub $HUB_RELEASE_TAG" \
+            --notes-file HUB_RELEASE_NOTES.md \
+            artifacts/*
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: UnitySubAgentHub-${{ env.HUB_RELEASE_TAG }}-Snapshot
+          path: artifacts

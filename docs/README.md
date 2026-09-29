@@ -56,3 +56,14 @@ Current Production Contractは各Manifestの `capability_contract_ref` を参照
 - Registry登録をinstalled / available / eligible / Production Verifiedと書かない
 - Current docsへHistorical Support Matrixを混在させない
 - Legacy sourceはactive dependencyとdetachment gateが0になるまで削除しない
+
+## Release channels
+
+HubとArtist BackendはVersion ownerが異なります。
+
+- `VERSION`: UnityArtistCLI / ArtistSubAgent backend release version
+- `HUB_VERSION`: consumer-neutral Hub Snapshot release version
+- Artist backend tag: `v<Version>`
+- Hub Snapshot tag: `hub-v<Version>`
+
+Hub Snapshot Releaseは4 SpecialistのManifestを配布しますが、Runtime readinessや自動Installを保証しません。Codex MarketplaceはUnityAgent側の単一entryを使用し、SubAgentごとのMarketplace Pluginは公開しません。

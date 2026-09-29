@@ -9,7 +9,7 @@
 | `SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml` | DELETE | A fixed camera GUID, property and approval range were historical task fixtures. Only a Hub test asserted that the file existed. |
 | `Templates/AcceptanceProfiles/balanced-graphics.json` | DELETE | No active repository or UnityAgent reference was found. Scores and budgets are project evaluation policy, not registry metadata. |
 | Eight forwarding scripts in `Tests/Release/` | DELETE | Each only imported `verify_unity_artist_contract.main`; no active workflow or non-Legacy source referenced their filenames. The canonical validator remains. |
-| Artist package, CLI, compatibility tests, release scripts, install scripts and Artist workflows | MIGRATION CANDIDATE; retain co-located | Artist backend product owns these surfaces. UnityAgent's `release_installer.py` downloads `v0.0.1-beta` from this repository, and the Hub release workflow publishes the corresponding archive. Moving them now would change a live distribution URL. |
+| Artist package, CLI, compatibility tests, release scripts, install scripts and Artist workflows | MIGRATION CANDIDATE; retain co-located | Artist backend product owns these surfaces. UnityAgent's `release_installer.py` downloads the current immutable Artist release from this repository, and the Hub release workflow publishes the corresponding archive. Moving them now would change a live distribution URL. |
 | `Legacy/MyUnityMCP-1.1.1/` | MIGRATION CANDIDATE; retain for now | `Tests/Release/verify_unity_artist_contract.py` reads `Legacy/MyUnityMCP-1.1.1/Package/package.json` as an active release gate. Remove that dependency before detaching the tree. |
 
 ## Contract decisions

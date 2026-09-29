@@ -11,10 +11,11 @@ RELEASE_WORKFLOW = ROOT / ".github" / "workflows" / "release-tag.yml"
 def main() -> None:
     installer = INSTALLER.read_text(encoding="utf-8")
     workflow = RELEASE_WORKFLOW.read_text(encoding="utf-8")
+    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
     required_installer_tokens = (
         '"DarumaPPAP/UnitySubAgentHub"',
-        '"v0.0.1-beta"',
+        f'"v{version}"',
         '"UnityArtistCLI-host-windows-x64.zip"',
         '"https://github.com/$repository/releases/download/$requestedVersion"',
         "Get-FileHash",

@@ -2,6 +2,26 @@
 
 このProjectは[Semantic Versioning](https://semver.org/)に従います。
 
+## [0.0.2-beta] - 2026-09-29
+
+### Added
+
+- GraphicsSubAgent / WorldCreatorSubAgent / PerformanceSubAgent を reasoning Specialist として Hub Registry / Manifest v5 / Snapshot v3 に正式登録
+- ArtistSubAgent の provider-backed 実行境界と reasoning Specialist の execution contract を分離
+- Hub の consumer-neutral Snapshot export と UnityAgent Offline Import Gate 向け契約を追加
+
+### Changed
+
+- UnityArtistCLI の Production baseline を Unity 6.x+ / Built-in・URP・HDRP に統一
+- standalone Artist Codex Plugin を廃止し、ArtistSubAgent は UnityAgent Control Plane 配下の Backend として実行
+- Artist backend surface、Context receipt、Provider authority boundary を現行 Architecture に同期
+- Release version 検証を固定文字列ではなく `VERSION` Source of Truth に追従する形へ整理
+
+### Verification
+
+- Release Gate は Artist static contract、Unity API compatibility contract、portable path、remote installer contract、checked-in compatibility evidence contract、CLI build、UPM package preview を検証
+- 既存の Unity Editor / Pipeline 実測 Evidence は観測時点の `0.0.1-beta` 記録として保持し、`0.0.2-beta` の再実測結果へ偽装しない
+
 ## [0.0.1-beta] - 2026-09-10
 
 ### Added
