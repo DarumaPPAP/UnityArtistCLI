@@ -28,7 +28,12 @@ class LegacySalvageTests(unittest.TestCase):
         for row in rows:
             with self.subTest(tool=row["legacy_tool"]):
                 self.assertTrue(all(row[field] for field in ("legacy_module", "responsibility", "current_equivalent", "current_owner", "gap", "target_owner", "migration_risk", "replacement_evidence", "source")))
+                self.assertTrue(all(row[field] for field in ("replacement_contract", "migration_status", "active_dependency", "tests", "documentation", "runtime_evidence_requirement")))
                 self.assertTrue((ROOT / row["source"]).is_file())
+
+        self.assertEqual(Counter(row["decision"] for row in rows), {"PORT": 50, "KNOWLEDGE": 12, "RETIRE": 15})
+        self.assertEqual(sum(row["migration_status"] == "PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED" for row in rows), 2)
+        self.assertEqual(sum(row["active_dependency"] == "legacy_adapter_source_reference_production_disabled" for row in rows), 34)
 
         knowledge = [row for row in rows if row["decision"] == "KNOWLEDGE"]
         self.assertEqual(len(knowledge), 12)

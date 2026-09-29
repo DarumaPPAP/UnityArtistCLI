@@ -75,8 +75,9 @@ Hubは実行経路のControl Planeではありません。Manifestは「候補�
 | ArtistSubAgent | `artist_subagent` | `unity_artist_cli` | `active` |
 | GraphicsSubAgent | `graphics_subagent` | Reasoning、Tool Backendなし | `active` |
 | WorldCreatorSubAgent | `world_creator_subagent` | Reasoning、Tool Backendなし | `active` |
+| PerformanceSubAgent | `performance_subagent` | Reasoning、Tool Backendなし | `active` |
 
-Graphicsは `project.inspect` / `source.read` をUnityAgent ToolBrokerで観測した後にReasoningします。WorldCreatorの `world.plan` はReasoning Runtimeで実行します。Performanceは必要観測 `profiler.observe` のProduction Surfaceが未成立のため未登録です。登録はProduction Verifiedを意味しません。
+Graphicsは `project.inspect` / `source.read` をUnityAgent ToolBrokerで観測した後にReasoningします。WorldCreatorの `world.plan` はReasoning Runtimeで実行します。Performanceは `profiler.observe` の検証済み観測後にReasoningします。現在のUnity CLI / Pipeline経路は結合済みEditorの単一snapshotを `limited` として扱い、比較・回帰判定を許可しません。登録はProduction Verifiedを意味しません。
 
 ArtistSubAgentは専門AgentのIdentityです。
 

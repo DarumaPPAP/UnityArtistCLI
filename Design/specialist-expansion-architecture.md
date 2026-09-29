@@ -1,5 +1,9 @@
 # Registered Specialist Expansion: Architecture Foundation
 
+## 現行状態（2026-09-29）
+
+Hub RegistryにはArtist、Graphics、WorldCreator、Performanceの4 Specialistが登録されている。Performanceの必須観測 `profiler.observe` は、結合済みUnity EditorとUnity CLI / Pipelineの対応コマンドが利用可能な場合に限り、単一snapshotを `limited` として扱う。Player / 実機の計測、比較・回帰判定は検証していない。以下の「Status and authority」のFACTとPROPOSED CHANGEは、この拡張設計を起案した時点の記録である。
+
 ## Status and authority
 
 **ARCHITECTURE INVARIANT:** UnityAgent is the sole Control Plane. It owns Intent、Routing、Policy、Approval、Context Assembly、Specialist Selection、Provider Resolution、Retry / Loop Control、Persistence、Runtime State、Evidence Lifecycle. Hub owns static Specialist identity and contract only. `provider_id` identifies a Runtime Backend, never a Specialist.
