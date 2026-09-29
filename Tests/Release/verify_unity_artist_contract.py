@@ -81,7 +81,7 @@ def read_yaml(errors: list[str], path: Path) -> dict:
 def check_identity(errors: list[str]) -> None:
     version = VERSION_PATH.read_text(encoding="utf-8").strip() if VERSION_PATH.is_file() else ""
     package = read_json(errors, PACKAGE_PATH)
-    if not re.fullmatch(r"\\d+\\.\\d+\\.\\d+-beta", version):
+    if not re.fullmatch(r"\d+\.\d+\.\d+-beta", version):
         error(errors, f"VERSION must be a beta semantic version, got {version!r}")
     if package.get("name") != "com.darumappap.unity-artist":
         error(errors, "current package name is not com.darumappap.unity-artist")
