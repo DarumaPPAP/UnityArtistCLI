@@ -1,6 +1,6 @@
 # ArtistSubAgent Backend Unity Package
 
-`Packages/com.darumappap.unity-artist/`は、ArtistSubAgentのためにUnity Editor内で提供するBackend Packageです。Package IDは`com.darumappap.unity-artist`、Manifest上の専門Agent IDは`artist_subagent`、Backend IDは`unity_artist_cli`です。Package、Specialist、Backendは別の識別子です。
+`Packages/com.darumappap.artist-subagent/`は、ArtistSubAgentのためにUnity Editor内で提供するBackend Packageです。Package IDは`com.darumappap.artist-subagent`、Manifest上の専門Agent IDは`artist_subagent`、Backend IDは`unity_artist_cli`です。Package、Specialist、Backendは別の識別子です。
 
 ## Backend command registrations
 
