@@ -3,7 +3,6 @@
 <p align="center"><strong>Optional Specialist SubAgentsの Registry / Catalog / Manifest / Schema / Validation Hub。</strong></p>
 
 <p align="center">
-  <a href="VERSION"><img alt="Version" src="https://img.shields.io/badge/version-0.0.1--beta-blue"></a>
   <a href="https://github.com/DarumaPPAP/UnitySubAgentHub/actions/workflows/subagent-hub-contract.yml"><img alt="Hub Contract CI" src="https://github.com/DarumaPPAP/UnitySubAgentHub/actions/workflows/subagent-hub-contract.yml/badge.svg"></a>
   <img alt="Scope: Registry and Validation" src="https://img.shields.io/badge/scope-registry%20%2F%20validation-111827">
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-green.svg"></a>
@@ -145,7 +144,7 @@ CompatibilityはManifestで宣言されますが、現在のProjectが実際に�
 
 ## Snapshot Integration
 
-Hub CIは登録されたManifestを検証し、`Hub-SubAgent-Catalog-Snapshot` Artifactを生成します。SnapshotにはLifecycleを含む静的ManifestとそのRepository相対Pathを収録します。`Schemas/subagent-catalog-snapshot.schema.json`で構造を検証します。
+Hub CIは登録されたManifestを検証し、consumer-neutral Snapshotを一時生成してSchema適合性まで確認します。Hub自身はSnapshotをRelease/配布しません。UnityAgent Releaseが固定Hub commitを取得し、同じExporterからRelease provenance用Snapshotを生成します。
 
 SnapshotにTask Route、`goal_type`、`primary_capability`、既定Profile、現在のProject / Environment状態、選択済みProvider、実行時Evidence producerは含めません。
 
@@ -203,13 +202,8 @@ GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Close
 
 UnitySubAgentHubは [MIT License](LICENSE) で提供されます。
 
-## Release channels
+## Distribution
 
-HubとArtist BackendはVersion ownerが異なります。
+UnitySubAgentHubと個別SubAgentは独立Releaseを持ちません。Current sourceはこのRepositoryの`main`で管理し、公開時はUnityAgent Releaseが**固定commit SHA**をpinしてHub contractsを検証し、必要なArtist backend / package / SnapshotをUnityAgentのRelease Assetsへ同梱します。
 
-- `VERSION`: UnityArtistCLI / ArtistSubAgent backend release version
-- `HUB_VERSION`: consumer-neutral Hub Snapshot release version
-- Artist backend tag: `v<Version>`
-- Hub Snapshot tag: `hub-v<Version>`
-
-Hub Snapshot Releaseは4 SpecialistのManifestを配布しますが、Runtime readinessや自動Installを保証しません。Codex MarketplaceはUnityAgent側の単一entryを使用し、SubAgentごとのMarketplace Pluginは公開しません。
+Codex MarketplaceとGitHub Releaseの公開単位は`unity-agent`のみです。Hubの`main`を実行時に直接追従させず、公開済みUnityAgent Releaseの内容は固定されたHub commitから再現可能にします。

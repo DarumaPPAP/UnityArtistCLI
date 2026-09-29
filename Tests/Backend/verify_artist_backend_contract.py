@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical static contract gate for the current ArtistSubAgent release candidate."""
+"""Canonical static contract gate for the co-located ArtistSubAgent backend source."""
 from __future__ import annotations
 
 import json
@@ -11,7 +11,6 @@ import sys
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-VERSION_PATH = ROOT / "VERSION"
 PACKAGE_PATH = ROOT / "Packages/com.darumappap.artist-subagent/package.json"
 CLI_PROJECT = ROOT / "src/UnityArtist.Cli/UnityArtist.Cli.csproj"
 CLI_SOURCE = ROOT / "src/UnityArtist.Cli/Program.cs"
@@ -21,7 +20,7 @@ GATE_EVIDENCE_PATH = ROOT / "Tests/Compatibility/cli-pipeline-gate-evidence.yaml
 CLI_REFERENCE_AUDIT_PATH = ROOT / "Tests/Compatibility/unity-cli-reference-audit.yaml"
 MANIFEST_PATH = ROOT / "SubAgents/artist_subagent/manifest.yaml"
 SURFACE_PATH = ROOT / "SubAgents/artist_subagent/contracts/backend-surface-contract.yaml"
-RELEASE_CONTRACT_PATH = ROOT / "Tests/Release/artist-backend-release-contract.yaml"
+BACKEND_CONTRACT_PATH = ROOT / "Tests/Backend/artist-backend-contract.yaml"
 REPO_SKILLS_ROOT = ROOT / ".agents/skills"
 LEGACY_PLUGIN_ROOT = ROOT / ".agents/plugins/unity-artist"
 
@@ -79,14 +78,12 @@ def read_yaml(errors: list[str], path: Path) -> dict:
 
 
 def check_identity(errors: list[str]) -> None:
-    version = VERSION_PATH.read_text(encoding="utf-8").strip() if VERSION_PATH.is_file() else ""
     package = read_json(errors, PACKAGE_PATH)
-    if not re.fullmatch(r"\d+\.\d+\.\d+-beta", version):
-        error(errors, f"VERSION must be a beta semantic version, got {version!r}")
+    version = str(package.get("version") or "")
+    if not re.fullmatch(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?", version):
+        error(errors, f"Artist backend package version must be semantic, got {version!r}")
     if package.get("name") != "com.darumappap.artist-subagent":
         error(errors, "current package name is not com.darumappap.artist-subagent")
-    if package.get("version") != version:
-        error(errors, "VERSION and UnityArtist package version disagree")
     dependencies = package.get("dependencies") or {}
     if dependencies:
         error(errors, f"current package dependencies must be empty; Pipeline is an explicit setup dependency, got {sorted(dependencies)}")
@@ -109,14 +106,16 @@ def check_cli_surface(errors: list[str]) -> None:
         error(errors, "CLI project file is missing")
     else:
         project = CLI_PROJECT.read_text(encoding="utf-8")
-        version = VERSION_PATH.read_text(encoding="utf-8").strip()
+        package = read_json(errors, PACKAGE_PATH)
+        version = str(package.get("version") or "")
         if f"<Version>{version}</Version>" not in project:
-            error(errors, "CLI project version disagrees with VERSION")
-    version = VERSION_PATH.read_text(encoding="utf-8").strip()
+            error(errors, "CLI project version disagrees with Artist backend package version")
+    package = read_json(errors, PACKAGE_PATH)
+    version = str(package.get("version") or "")
     if f'private const string Version = "{version}";' not in source:
-        error(errors, "CLI Version constant disagrees with VERSION")
+        error(errors, "CLI Version constant disagrees with Artist backend package version")
     if f'private const string SemanticVersion = "{version}";' not in source:
-        error(errors, "CLI SemanticVersion constant disagrees with VERSION")
+        error(errors, "CLI SemanticVersion constant disagrees with Artist backend package version")
 
 
 def check_editor_surface(errors: list[str]) -> None:
@@ -144,7 +143,7 @@ def check_matrix(errors: list[str]) -> None:
     rows = matrix.get("rows") or []
     actual = {(str(row.get("unity_version")), str(row.get("render_pipeline"))) for row in rows if isinstance(row, dict)}
     if actual != EXPECTED_ROWS:
-        error(errors, f"formal release matrix drifted: {sorted(actual)}")
+        error(errors, f"formal support matrix drifted: {sorted(actual)}")
     if matrix.get("transport") != "official_unity_cli_pipeline":
         error(errors, "matrix transport must remain official_unity_cli_pipeline")
     if matrix.get("verification_contract", {}).get("unsupported_result_before_mutation") is not True:
@@ -205,13 +204,14 @@ def check_cli_reference_audit(errors: list[str]) -> None:
 def check_catalog(errors: list[str]) -> None:
     manifest = read_yaml(errors, MANIFEST_PATH)
     surface = read_yaml(errors, SURFACE_PATH)
-    release_contract = read_yaml(errors, RELEASE_CONTRACT_PATH)
+    backend_contract = read_yaml(errors, BACKEND_CONTRACT_PATH)
     identity = manifest.get("identity") or {}
     if manifest.get("kind") != "subagent_manifest" or identity.get("name") != "ArtistSubAgent":
         error(errors, "canonical ArtistSubAgent manifest identity is invalid")
-    version = VERSION_PATH.read_text(encoding="utf-8").strip()
-    if identity.get("id") != "artist_subagent" or identity.get("version") != version:
-        error(errors, "canonical SubAgent id or release version disagrees with VERSION")
+    package = read_json(errors, PACKAGE_PATH)
+    version = str(package.get("version") or "")
+    if identity.get("id") != "artist_subagent" or str(identity.get("version")) != version:
+        error(errors, "canonical SubAgent id or version disagrees with Artist backend package version")
     if manifest.get("lifecycle") != "active":
         error(errors, "ArtistSubAgent manifest must remain active")
     install = manifest.get("installation") or {}
@@ -227,7 +227,7 @@ def check_catalog(errors: list[str]) -> None:
         for target in targets if isinstance(target, dict)
     }
     if actual_targets != EXPECTED_ROWS:
-        error(errors, "manifest supported version/pipeline pairs disagree with the Artist release matrix")
+        error(errors, "manifest supported version/pipeline pairs disagree with the Artist support matrix")
     backends = manifest.get("backends") or []
     backend_ids = [backend.get("id") for backend in backends if isinstance(backend, dict)]
     if "unity_artist_cli" not in backend_ids or identity.get("id") in backend_ids:
@@ -240,13 +240,13 @@ def check_catalog(errors: list[str]) -> None:
         error(errors, "Artist backend interface must not own Control Plane authority")
     if surface.get("context_receipt") != ["generated", "transported", "received"]:
         error(errors, "Artist backend interface must declare the context receipt lifecycle")
-    if set(release_contract.get("backend_commands") or []) != REQUIRED_COMMANDS:
+    if set(backend_contract.get("backend_commands") or []) != REQUIRED_COMMANDS:
         error(errors, "backend command set disagrees with CLI contract")
-    forbidden = set(release_contract.get("forbidden_surface") or [])
+    forbidden = set(backend_contract.get("forbidden_surface") or [])
     if not {"mcp_transport", "generic_gameobject_crud", "generic_hierarchy_crud", "arbitrary_eval"}.issubset(forbidden):
-        error(errors, "backend release contract must continue to forbid MCP and generic CRUD/eval")
-    if release_contract.get("automatic_save") is not False or release_contract.get("arbitrary_eval") is not False:
-        error(errors, "Artist backend release contract must disable automatic save and arbitrary eval")
+        error(errors, "backend contract must continue to forbid MCP and generic CRUD/eval")
+    if backend_contract.get("automatic_save") is not False or backend_contract.get("arbitrary_eval") is not False:
+        error(errors, "Artist backend contract must disable automatic save and arbitrary eval")
 
 def check_agent_distribution(errors: list[str]) -> None:
     if LEGACY_PLUGIN_ROOT.exists():
@@ -307,7 +307,7 @@ def main() -> int:
     check_catalog(errors)
     check_agent_distribution(errors)
     check_legacy_anchor(errors)
-    print(f"ArtistSubAgent production contract: {len(errors)} error(s)")
+    print(f"ArtistSubAgent backend contract: {len(errors)} error(s)")
     return 1 if errors else 0
 
 

@@ -34,14 +34,14 @@ python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
 python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
-The Hub workflow publishes a consumer-neutral static Manifest snapshot. Overlapping active capabilities are valid Hub metadata; the current UnityAgent Import Gate rejects them until its resolver supports ranking. The snapshot does not observe runtime installation, compatibility, binding, or readiness; UnityAgent must apply those checks against its own environment facts. UnityAgent owns runtime profile fields, including default profile, audience, goal type, primary capability, reference scope and evidence producer.
+The Hub workflow validates that a consumer-neutral static Manifest snapshot can be exported, but it does not publish a Hub release or long-lived distribution artifact. UnityAgent Release pins an exact Hub commit and owns public distribution. Overlapping active capabilities are valid Hub metadata; the current UnityAgent Import Gate rejects them until its resolver supports ranking. The snapshot does not observe runtime installation, compatibility, binding, or readiness; UnityAgent must apply those checks against its own environment facts. UnityAgent owns runtime profile fields, including default profile, audience, goal type, primary capability, reference scope and evidence producer.
 
 Keep the existing Artist gates green when changing its linked contracts:
 
 ```sh
-python Tests/Release/verify_unity_artist_contract.py
+python Tests/Backend/verify_artist_backend_contract.py
 python Tests/Compatibility/verify-unity-api-compatibility.py
-python Tests/Release/verify_portable_paths.py
+python Tests/Backend/verify_portable_paths.py
 ```
 
 Compatibility-sensitive Artist code and API changes must apply `skills/unity-artist-unity-api-compatibility/SKILL.md`.

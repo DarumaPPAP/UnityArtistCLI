@@ -9,8 +9,8 @@
 | `SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml` | DELETE | A fixed camera GUID, property and approval range were historical task fixtures. Only a Hub test asserted that the file existed. |
 | `Templates/AcceptanceProfiles/balanced-graphics.json` | DELETE | No active repository or UnityAgent reference was found. Scores and budgets are project evaluation policy, not registry metadata. |
 | Eight forwarding scripts in `Tests/Release/` | DELETE | Each only imported `verify_unity_artist_contract.main`; no active workflow or non-Legacy source referenced their filenames. The canonical validator remains. |
-| Artist package, CLI, compatibility tests, release scripts, install scripts and Artist workflows | MIGRATION CANDIDATE; retain co-located | Artist backend product owns these surfaces. UnityAgent's `release_installer.py` downloads the current immutable Artist release from this repository, and the Hub release workflow publishes the corresponding archive. Moving them now would change a live distribution URL. |
-| `Legacy/MyUnityMCP-1.1.1/` | MIGRATION CANDIDATE; retain for now | `Tests/Release/verify_unity_artist_contract.py` reads `Legacy/MyUnityMCP-1.1.1/Package/package.json` as an active release gate. Remove that dependency before detaching the tree. |
+| Artist package, CLI, compatibility tests, local install scripts and backend skills | KEEP co-located | They are Specialist source owned by the Hub repository boundary. Hub does not dispatch them. Public distribution is owned by UnityAgent, which pins an exact Hub commit and packages required backend assets into the UnityAgent release. |
+| `Legacy/MyUnityMCP-1.1.1/` | MIGRATION CANDIDATE; retain for now | `Tests/Backend/verify_artist_backend_contract.py` reads `Legacy/MyUnityMCP-1.1.1/Package/package.json` as an active release gate. Remove that dependency before detaching the tree. |
 
 ## Contract decisions
 
@@ -20,9 +20,9 @@
 - **IMPLEMENTED CHANGE (Hub vNext):** Registry v2 is a Manifest index. Manifest v4 and Snapshot v2 omit `default_profile`, `runtime_profile`, Backend `primary`, and UnityAgent-specific Evidence producer fields, Backend implementation fields, and Backend test evidence refs. UnityAgent's adapter retains consumer-owned Runtime Profile values.
 - **IMPLEMENTED CHANGE (Hub vNext):** Hub validation permits overlapping active Capability declarations. UnityAgent's Import Gate enforces the current one-profile-per-capability limitation.
 
-## Backend extraction gate
+## Backend distribution boundary
 
-The current co-location is a documented transition exception, not Hub execution authority. The Artist package, CLI, tests, scripts, backend-specific skills, `VERSION`, `CHANGELOG.md`, `RELEASE_NOTES.md`, and release workflows follow the Artist product lifecycle. The Hub contract workflow is already separate from Artist release workflows. Physical extraction is deferred until the version/tag owner, published artifacts, installer URLs, UnityAgent Provider references, manifest references, fixtures and external consumers have a compatible migration path. A new repository is not required if this ownership boundary remains explicit.
+The Artist package, CLI, tests and backend-specific skills remain co-located as Hub-owned Specialist source. Artist no longer has an independent product lifecycle, release tag, release workflow or remote release installer. UnityAgent is the sole public distribution owner and pins the exact Hub commit used for each release. A new backend repository is not required to preserve this authority boundary.
 
 ## Legacy detachment gate
 

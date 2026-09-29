@@ -21,8 +21,7 @@ function Resolve-HostExecutable {
     }
 
     $candidates = @(
-        (Join-Path $repoRoot "src\UnityArtist.Cli\bin\Release\net8.0\unity-artist.exe"),
-        (Join-Path $repoRoot "dist\unity-artist-0.0.1-beta\unity-artist.exe")
+        (Join-Path $repoRoot "src\UnityArtist.Cli\bin\Release\net8.0\unity-artist.exe")
     )
     foreach ($candidate in $candidates) {
         if (Test-Path -LiteralPath $candidate -PathType Leaf) {
@@ -30,7 +29,7 @@ function Resolve-HostExecutable {
         }
     }
 
-    throw "unity-artist was not found on PATH or in the local Release/dist artifacts. Build it first or pass -HostPath."
+    throw "unity-artist was not found on PATH or in the local build output. Build it first or pass -HostPath."
 }
 
 function Invoke-ExternalCheck {
