@@ -14,6 +14,17 @@
 
 UnityAgentが唯一のControl Planeです。Hubの記録はSpecialistが導入済み、eligible、実行可能であることを示しません。HubはRuntime、Orchestrator、Request Resolver、Installerではありません。
 
+## Current registered specialists
+
+| Specialist | Execution kind | Current contract |
+|---|---|---|
+| `artist_subagent` | `provider_backed` | `SubAgents/artist_subagent/contracts/capability-contracts.yaml` |
+| `graphics_subagent` | `reasoning` | `SubAgents/graphics_subagent/contracts/production-capability-contract.yaml` |
+| `world_creator_subagent` | `reasoning` | `SubAgents/world_creator_subagent/contracts/production-capability-contract.yaml` |
+| `performance_subagent` | `reasoning` | `SubAgents/performance_subagent/contracts/production-capability-contract.yaml` |
+
+Graphics / WorldCreator / Performanceの `contracts/capability-contracts.yaml` はProduction昇格前のPilot baselineです。削除せず比較Evidenceとして保持しますが、Current Resolver contractとして読みません。
+
 ## Legacyとの区別
 
 `Legacy/MyUnityMCP-1.1.1/Design/`は旧MyUnityMCPの設計記録です。現在のHub ContractやUnityAgentのProduction Architectureとして読み替えないでください。
