@@ -90,8 +90,8 @@ internal sealed class CliArguments
 internal static class ArtistCli
 {
     private const string Product = "UnityArtistCLI";
-    private const string Version = "0.0.1-beta";
-    private const string SemanticVersion = "0.0.1-beta";
+    private const string Version = "0.0.2-beta";
+    private const string SemanticVersion = "0.0.2-beta";
     private const string PackageId = "com.darumappap.unity-artist";
     private const string UnityCommand = "unity";
     private static readonly HashSet<string> SupportedCommands = new(StringComparer.Ordinal)

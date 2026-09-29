@@ -23,9 +23,9 @@ if ($PSVersionTable.PSVersion.Major -eq 5 -and $PSVersionTable.PSVersion.Minor -
 }
 
 $repository = "DarumaPPAP/UnitySubAgentHub"
-$requestedVersion = if ($env:UNITY_ARTIST_VERSION) { $env:UNITY_ARTIST_VERSION.Trim() } else { "v0.0.1-beta" }
+$requestedVersion = if ($env:UNITY_ARTIST_VERSION) { $env:UNITY_ARTIST_VERSION.Trim() } else { "v0.0.2-beta" }
 if ($requestedVersion -notmatch '^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') {
-    throw "UNITY_ARTIST_VERSION must be a release tag such as v0.0.1-beta."
+    throw "UNITY_ARTIST_VERSION must be a release tag such as v0.0.2-beta."
 }
 
 $productVersion = $requestedVersion.Substring(1)

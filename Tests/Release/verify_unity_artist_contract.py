@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical static contract gate for ArtistSubAgent 0.0.1-beta."""
+"""Canonical static contract gate for the current ArtistSubAgent release candidate."""
 from __future__ import annotations
 
 import json
@@ -81,8 +81,8 @@ def read_yaml(errors: list[str], path: Path) -> dict:
 def check_identity(errors: list[str]) -> None:
     version = VERSION_PATH.read_text(encoding="utf-8").strip() if VERSION_PATH.is_file() else ""
     package = read_json(errors, PACKAGE_PATH)
-    if version != "0.0.1-beta":
-        error(errors, f"VERSION must be 0.0.1-beta, got {version!r}")
+    if not re.fullmatch(r"\d+\.\d+\.\d+-beta", version):
+        error(errors, f"VERSION must be a beta semantic version, got {version!r}")
     if package.get("name") != "com.darumappap.unity-artist":
         error(errors, "current package name is not com.darumappap.unity-artist")
     if package.get("version") != version:
@@ -107,6 +107,16 @@ def check_cli_surface(errors: list[str]) -> None:
         error(errors, "CLI does not expose install and official Pipeline command delegation")
     if not CLI_PROJECT.is_file():
         error(errors, "CLI project file is missing")
+    else:
+        project = CLI_PROJECT.read_text(encoding="utf-8")
+        version = VERSION_PATH.read_text(encoding="utf-8").strip()
+        if f"<Version>{version}</Version>" not in project:
+            error(errors, "CLI project version disagrees with VERSION")
+    version = VERSION_PATH.read_text(encoding="utf-8").strip()
+    if f'private const string Version = "{version}";' not in source:
+        error(errors, "CLI Version constant disagrees with VERSION")
+    if f'private const string SemanticVersion = "{version}";' not in source:
+        error(errors, "CLI SemanticVersion constant disagrees with VERSION")
 
 
 def check_editor_surface(errors: list[str]) -> None:
@@ -199,8 +209,9 @@ def check_catalog(errors: list[str]) -> None:
     identity = manifest.get("identity") or {}
     if manifest.get("kind") != "subagent_manifest" or identity.get("name") != "ArtistSubAgent":
         error(errors, "canonical ArtistSubAgent manifest identity is invalid")
-    if identity.get("id") != "artist_subagent" or identity.get("version") != "0.0.1-beta":
-        error(errors, "canonical SubAgent id or release version is invalid")
+    version = VERSION_PATH.read_text(encoding="utf-8").strip()
+    if identity.get("id") != "artist_subagent" or identity.get("version") != version:
+        error(errors, "canonical SubAgent id or release version disagrees with VERSION")
     if manifest.get("lifecycle") != "active":
         error(errors, "ArtistSubAgent manifest must remain active")
     install = manifest.get("installation") or {}
