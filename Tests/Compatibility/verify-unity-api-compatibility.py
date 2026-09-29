@@ -9,8 +9,8 @@ import sys
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-COMPATIBILITY = ROOT / "Packages/com.darumappap.unity-artist/Editor/Compatibility/ArtistCompatibility.cs"
-COMPATIBILITY_TESTS = ROOT / "Packages/com.darumappap.unity-artist/Tests/Editor/ArtistCompatibilityTests.cs"
+COMPATIBILITY = ROOT / "Packages/com.darumappap.artist-subagent/Editor/Compatibility/ArtistCompatibility.cs"
+COMPATIBILITY_TESTS = ROOT / "Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs"
 SKILL = ROOT / "skills/unity-artist-unity-api-compatibility/SKILL.md"
 SPEC = ROOT / "Specs/Compatibility/unity-api-compatibility.md"
 AGENTS = ROOT / "AGENTS.md"

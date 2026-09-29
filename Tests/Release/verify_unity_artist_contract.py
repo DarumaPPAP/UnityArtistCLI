@@ -12,10 +12,10 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 VERSION_PATH = ROOT / "VERSION"
-PACKAGE_PATH = ROOT / "Packages/com.darumappap.unity-artist/package.json"
+PACKAGE_PATH = ROOT / "Packages/com.darumappap.artist-subagent/package.json"
 CLI_PROJECT = ROOT / "src/UnityArtist.Cli/UnityArtist.Cli.csproj"
 CLI_SOURCE = ROOT / "src/UnityArtist.Cli/Program.cs"
-EDITOR_ROOT = ROOT / "Packages/com.darumappap.unity-artist/Editor"
+EDITOR_ROOT = ROOT / "Packages/com.darumappap.artist-subagent/Editor"
 MATRIX_PATH = ROOT / "Tests/Compatibility/support-matrix.yaml"
 GATE_EVIDENCE_PATH = ROOT / "Tests/Compatibility/cli-pipeline-gate-evidence.yaml"
 CLI_REFERENCE_AUDIT_PATH = ROOT / "Tests/Compatibility/unity-cli-reference-audit.yaml"
@@ -83,8 +83,8 @@ def check_identity(errors: list[str]) -> None:
     package = read_json(errors, PACKAGE_PATH)
     if not re.fullmatch(r"\d+\.\d+\.\d+-beta", version):
         error(errors, f"VERSION must be a beta semantic version, got {version!r}")
-    if package.get("name") != "com.darumappap.unity-artist":
-        error(errors, "current package name is not com.darumappap.unity-artist")
+    if package.get("name") != "com.darumappap.artist-subagent":
+        error(errors, "current package name is not com.darumappap.artist-subagent")
     if package.get("version") != version:
         error(errors, "VERSION and UnityArtist package version disagree")
     dependencies = package.get("dependencies") or {}
@@ -133,7 +133,7 @@ def check_editor_surface(errors: list[str]) -> None:
         if token not in sources:
             error(errors, f"current Editor source is missing bounded Artist/Cinematic contract token: {token}")
     compatibility = EDITOR_ROOT / "Compatibility/ArtistCompatibility.cs"
-    compatibility_tests = ROOT / "Packages/com.darumappap.unity-artist/Tests/Editor/ArtistCompatibilityTests.cs"
+    compatibility_tests = ROOT / "Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs"
     for path in (compatibility, compatibility_tests):
         if not path.is_file() or not Path(str(path) + ".meta").is_file():
             error(errors, f"compatibility asset or .meta is missing: {path.relative_to(ROOT)}")
