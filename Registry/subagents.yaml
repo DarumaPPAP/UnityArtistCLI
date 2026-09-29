@@ -4,3 +4,4 @@ entries:
 - manifest: SubAgents/artist_subagent/manifest.yaml
 - manifest: SubAgents/graphics_subagent/manifest.yaml
 - manifest: SubAgents/world_creator_subagent/manifest.yaml
+- manifest: SubAgents/performance_subagent/manifest.yaml

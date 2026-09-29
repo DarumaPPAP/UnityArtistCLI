@@ -64,3 +64,11 @@
 - [x] Legacy sourceと公開履歴を保持
 
 **判定:** Legacy Detachmentは禁止。旧MCP Transport、AutoRegister、Unity 2022.3対応は新Architectureに持ち込まない。
+
+### 77件の移行状態更新（2026-09-29）
+
+Matrixに `replacement_contract`、`migration_status`、`active_dependency`、`tests`、`documentation`、`runtime_evidence_requirement` を追加した。旧Tool名34件がUnityAgentの `MyUnityMcp/capability_mapper.py` に直接現れるが、Providerは `production_enabled: false` である。この34件はSource-level参照数であり、Production実行件数ではない。残り43件についても、旧Adapter全体の削除条件を満たした意味にはならない。
+
+`profiler.inspect_environment` と `profiler.inspect_counters` の2件は、新しいUnity CLI / Pipeline `profiler.observe` に計測条件・メモリ値・FrameTimingの一部が重なるため `PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED` と記録した。旧ProfilerRecorder Counter一覧との厳密な互換、Capture制御、Live Editor結果は未確認である。`profiler.summarize_capture` を含む他6件はPORT未実装のままとし、8件ともREPLACEDへ変更しない。
+
+KNOWLEDGE 12件は既存のSkill・Documentationへの移管済み状態を維持し、旧Runtime機能の置換とは分離した。RETIRE 15件は実行経路、契約、テスト依存の撤去が未完了である。従って77件の分類は `PORT=50 / KNOWLEDGE=12 / RETIRE=15 / REPLACED=0 / UNRESOLVED=0` を維持し、判定は `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。
