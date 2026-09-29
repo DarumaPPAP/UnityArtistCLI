@@ -43,7 +43,7 @@ jobs:
       - name: Pack Unity package
         run: |
           mkdir -p artifacts
-          (cd Packages/com.darumappap.unity-artist && npm pack --pack-destination "$GITHUB_WORKSPACE/artifacts")
+          (cd Packages/com.darumappap.artist-subagent && npm pack --pack-destination "$GITHUB_WORKSPACE/artifacts")
           (cd artifacts && sha256sum *.zip *.tgz > SHA256SUMS.txt)
       - name: Configure Git identity
         run: |

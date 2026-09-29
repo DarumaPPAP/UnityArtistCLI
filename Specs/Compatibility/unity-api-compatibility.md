@@ -6,7 +6,7 @@ UnityArtistCLI maintains one compatibility boundary for the four supported relea
 
 The maintenance buckets are `BASE`, `UNITY_6000_4`, `UNITY_6000_5`, and `UNITY_6000_7`. Unity 6.6 changes roll into the `UNITY_6000_7` bucket. Confirmed API facts and planned breaking changes are separate in the compatibility record.
 
-The current implementation is `Packages/com.darumappap.unity-artist/Editor/Compatibility/ArtistCompatibility.cs`; its EditMode coverage is `Packages/com.darumappap.unity-artist/Tests/Editor/ArtistCompatibilityTests.cs`. These files change together for compatibility-sensitive work and both carry Unity `.meta` files.
+The current implementation is `Packages/com.darumappap.artist-subagent/Editor/Compatibility/ArtistCompatibility.cs`; its EditMode coverage is `Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs`. These files change together for compatibility-sensitive work and both carry Unity `.meta` files.
 
 ## Adapter policy
 

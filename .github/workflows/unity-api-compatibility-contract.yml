@@ -5,9 +5,9 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - Packages/com.darumappap.unity-artist/**/*.cs
-      - Packages/com.darumappap.unity-artist/**/*.asmdef
-      - Packages/com.darumappap.unity-artist/package.json
+      - Packages/com.darumappap.artist-subagent/**/*.cs
+      - Packages/com.darumappap.artist-subagent/**/*.asmdef
+      - Packages/com.darumappap.artist-subagent/package.json
       - skills/unity-artist-unity-api-compatibility/**
       - Tests/Compatibility/**
       - Specs/Compatibility/**

@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - Packages/com.darumappap.unity-artist/**
+      - Packages/com.darumappap.artist-subagent/**
       - TestProjects/UnityArtistVerification/**
       - Tests/Compatibility/**
       - skills/unity-artist-unity-api-compatibility/**

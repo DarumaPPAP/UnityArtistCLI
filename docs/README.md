@@ -28,7 +28,7 @@ Current manifests are v5 and current exported Snapshot is v3.
 
 Artist backend implementationは移行上このRepositoryに同居していますが、Hub Runtimeではありません。
 
-- [Artist Unity Package](../Packages/com.darumappap.unity-artist/Documentation~/README.md)
+- [Artist Unity Package](../Packages/com.darumappap.artist-subagent/Documentation~/README.md)
 - [ArtistSubAgent Specification](../Specs/ArtistSubAgent/spec.md)
 - [Unity API Compatibility](../Specs/Compatibility/unity-api-compatibility.md)
 - [Compatibility Tests](../Tests/Compatibility/README.md)

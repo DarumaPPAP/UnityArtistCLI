@@ -42,7 +42,7 @@ dependencies:
   kind: backend
   required: true
   eligibility_gate: unity_artist_cli.available
-- id: com.darumappap.unity-artist
+- id: com.darumappap.artist-subagent
   kind: unity_package
   required: true
   eligibility_gate: unity_artist_cli.package_installed

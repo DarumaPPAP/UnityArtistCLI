@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.darumappap.unity-artist": {
-      "version": "file:../../../Packages/com.darumappap.unity-artist",
+    "com.darumappap.artist-subagent": {
+      "version": "file:../../../Packages/com.darumappap.artist-subagent",
       "depth": 0,
       "source": "local",
       "dependencies": {}

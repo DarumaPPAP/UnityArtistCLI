@@ -118,7 +118,7 @@ class RegistryValidatorTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[2]
         manifest = yaml.safe_load((root / "SubAgents/artist_subagent/manifest.yaml").read_text(encoding="utf-8"))
         matrix = yaml.safe_load((root / "Tests/Compatibility/support-matrix.yaml").read_text(encoding="utf-8"))
-        package = json.loads((root / "Packages/com.darumappap.unity-artist/package.json").read_text(encoding="utf-8"))
+        package = json.loads((root / "Packages/com.darumappap.artist-subagent/package.json").read_text(encoding="utf-8"))
         targets = {(item["unity_version"], item["render_pipeline"]) for item in manifest["compatibility"]["supported_targets"]}
         rows = {(item["unity_version"], item["render_pipeline"]) for item in matrix["rows"]}
         expected = {("Unity 6.x+", pipeline) for pipeline in ("builtin", "urp", "hdrp")}

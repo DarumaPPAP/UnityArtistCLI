@@ -5,7 +5,7 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-SCAN_ROOTS = [ROOT / "Packages/com.darumappap.unity-artist/Editor", ROOT / "src/UnityArtist.Cli"]
+SCAN_ROOTS = [ROOT / "Packages/com.darumappap.artist-subagent/Editor", ROOT / "src/UnityArtist.Cli"]
 FORBIDDEN = re.compile(r"McpForUnityTool|com\.coplaydev\.unity-mcp|AutoRegister|UnityGraphicsMcp", re.IGNORECASE)
 violations = []
 

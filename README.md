@@ -85,7 +85,7 @@ ArtistSubAgentは専門AgentのIdentityです。
 - `artist_subagent` — Specialist identity
 - `unity_artist_cli` — Current backend/provider ID
 - `unity-artist` — Host CLI executable
-- `com.darumappap.unity-artist` — Unity Package ID
+- `com.darumappap.artist-subagent` — ArtistSubAgent Backend Unity Package ID
 
 これらを同じIdentityとして扱いません。
 

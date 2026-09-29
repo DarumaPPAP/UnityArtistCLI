@@ -92,7 +92,7 @@ internal static class ArtistCli
     private const string Product = "UnityArtistCLI";
     private const string Version = "0.0.2-beta";
     private const string SemanticVersion = "0.0.2-beta";
-    private const string PackageId = "com.darumappap.unity-artist";
+    private const string PackageId = "com.darumappap.artist-subagent";
     private const string UnityCommand = "unity";
     private static readonly HashSet<string> SupportedCommands = new(StringComparer.Ordinal)
     {
@@ -485,7 +485,7 @@ internal sealed record ProjectFacts(
         var digest = manifest.Length == 0 ? null : Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(manifest))).ToLowerInvariant();
         return new ProjectFacts(root, assets && packages && settings, unityVersion, renderPipeline,
             manifest.Contains("com.unity.pipeline", StringComparison.OrdinalIgnoreCase),
-            manifest.Contains("com.darumappap.unity-artist", StringComparison.OrdinalIgnoreCase),
+            manifest.Contains("com.darumappap.artist-subagent", StringComparison.OrdinalIgnoreCase),
             manifest.Contains("com.unity.timeline", StringComparison.OrdinalIgnoreCase),
             manifest.Contains("com.unity.cinemachine", StringComparison.OrdinalIgnoreCase),
             digest);
