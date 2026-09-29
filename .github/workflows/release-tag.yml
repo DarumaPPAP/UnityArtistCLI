@@ -3,10 +3,11 @@ name: UnityArtistCLI Release
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: Immutable release tag to publish after human review
+      confirm_release:
+        description: Publish the canonical VERSION from main as an immutable prerelease
         required: true
-        type: string
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -18,14 +19,32 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - name: Check release tag and current version
+      - name: Resolve canonical release tag
         env:
-          REQUESTED_TAG: ${{ inputs.tag }}
+          CONFIRM_RELEASE: ${{ inputs.confirm_release }}
         run: |
           set -euo pipefail
-          version="$(cat VERSION)"
-          test "$REQUESTED_TAG" = "v$version"
-          git tag --verify "$REQUESTED_TAG" 2>/dev/null && { echo "Tag already exists; refusing to move it."; exit 1; } || true
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Artist release workflow must run from main. Current ref: $GITHUB_REF"
+            exit 1
+          fi
+          if [ "$CONFIRM_RELEASE" != "true" ]; then
+            echo "::error::Check confirm_release before publishing an Artist release."
+            exit 1
+          fi
+          version="$(tr -d '\r\n' < VERSION)"
+          if [ -z "$version" ]; then
+            echo "::error::VERSION is empty."
+            exit 1
+          fi
+          tag="v$version"
+          echo "RELEASE_VERSION=$version" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=$tag" >> "$GITHUB_ENV"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "::error::Tag $tag already exists; refusing to move or replace it."
+            exit 1
+          fi
+          echo "Canonical Artist release tag: $tag"
       - name: Install validation dependencies
         run: python3 -m pip install --disable-pip-version-check pyyaml
       - name: Validate contracts
@@ -50,21 +69,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Create immutable tag
-        env:
-          REQUESTED_TAG: ${{ inputs.tag }}
-        run: git tag -a "$REQUESTED_TAG" -m "UnityArtistCLI $REQUESTED_TAG"
+        run: git tag -a "$RELEASE_TAG" -m "ArtistSubAgent Backend $RELEASE_TAG"
       - name: Push immutable tag
-        env:
-          REQUESTED_TAG: ${{ inputs.tag }}
-        run: git push origin "$REQUESTED_TAG"
-      - name: Create GitHub Release with host archive
+        run: git push origin "$RELEASE_TAG"
+      - name: Create GitHub prerelease with host archive
         env:
           GH_TOKEN: ${{ github.token }}
-          REQUESTED_TAG: ${{ inputs.tag }}
         run: |
-          gh release create "$REQUESTED_TAG" \
+          gh release create "$RELEASE_TAG" \
             --verify-tag \
-            --title "UnityArtistCLI $REQUESTED_TAG" \
+            --prerelease \
+            --title "ArtistSubAgent Backend $RELEASE_TAG" \
             --notes-file RELEASE_NOTES.md \
             artifacts/UnityArtistCLI-host-windows-x64.zip \
             artifacts/UnityArtistCLI-host-windows-x64.zip.sha256 \
@@ -72,5 +87,5 @@ jobs:
             artifacts/*.tgz
       - uses: actions/upload-artifact@v7
         with:
-          name: UnityArtistCLI-${{ inputs.tag }}-Distribution
+          name: ArtistSubAgent-Backend-${{ env.RELEASE_TAG }}-Distribution
           path: artifacts
