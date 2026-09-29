@@ -4,7 +4,7 @@
 
 ArtistSubAgent is the optional Artist specialist selected by UnityAgent. It handles visual intent inspection and planning, mood/lookdev, lighting, environment, sky/fog/reflection/GI, camera/depth/continuity, Cinemachine/Timeline cinematic planning, capture, human evaluation, and linked refinement. It does not become a general Unity editor API or a second Control Plane.
 
-The canonical Specialist identity, lifecycle, optional installation policy, capabilities, compatibility ranges, dependencies, activation gates, backend references, and evidence requirements are in the [ArtistSubAgent manifest](../../SubAgents/artist_subagent/manifest.yaml). The backend id `unity_artist_cli`, host executable `unity-artist`, command UX `unity artist`, UPM package `com.darumappap.unity-artist`, and C# namespace `UnityArtist` identify implementation compatibility surfaces; they are not the Specialist identity.
+The canonical Specialist identity, lifecycle, optional installation policy, capabilities, compatibility ranges, dependencies, activation gates, backend references, and evidence requirements are in the [ArtistSubAgent manifest](../../SubAgents/artist_subagent/manifest.yaml). The backend id `unity_artist_cli`, host executable `unity-artist`, command UX `unity artist`, UPM package `com.darumappap.artist-subagent`, and C# namespace `UnityArtist` identify implementation compatibility surfaces; they are not the Specialist identity.
 
 ## Current UnityAgent resolver profile
 

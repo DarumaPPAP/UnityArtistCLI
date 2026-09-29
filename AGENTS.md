@@ -50,6 +50,6 @@ Direct Unity Editor, License, Pipeline, and visual end-to-end evidence must be d
 
 ## Artist backend compatibility
 
-The first specialist's implementation remains in `Packages/com.darumappap.unity-artist/` and `src/UnityArtist.Cli/` during this Hub transition. Its backend contract and detailed workflow specification remain linked from `SubAgents/artist_subagent/manifest.yaml`.
+The first specialist's implementation remains in `Packages/com.darumappap.artist-subagent/` and `src/UnityArtist.Cli/` during this Hub transition. Its backend contract and detailed workflow specification remain linked from `SubAgents/artist_subagent/manifest.yaml`.
 
 Preserve its bounded typed-argument CLI, explicit project targeting, allowlisted commands, Unity Undo, no automatic save, no arbitrary evaluation, and concrete-gate-only fallback behavior. Compatibility-sensitive changes must keep the Editor implementation and EditMode tests together. These Artist-specific rules do not define additional Hub runtime behavior.

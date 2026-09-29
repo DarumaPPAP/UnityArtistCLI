@@ -10,7 +10,7 @@ ArtistSubAgentはUnityのVisual Art、LookDev、Lighting、Environment、Camera�
 | Display name | `ArtistSubAgent` |
 | Current backend ID | `unity_artist_cli` |
 | Backend executable | `unity-artist` |
-| Unity Package ID | `com.darumappap.unity-artist` |
+| Backend Unity Package ID | `com.darumappap.artist-subagent` |
 
 `unity_artist_cli`は実行BackendのIdentityであり、Specialist IDの代替ではありません。
 
