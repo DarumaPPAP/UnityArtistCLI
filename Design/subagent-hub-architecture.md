@@ -23,7 +23,7 @@ HubのRegistryやSnapshotはInstall状態、Project状態、現在のPlatform、
 | Specialist固有の詳細契約 | Manifestから参照されるファイル |
 | Runtime ProfileとImport Adapter | UnityAgent |
 
-Registry v2はManifest Pathのみを索引化します。Manifest v5はExecution kind、Identity、Lifecycle、Optional Installation、Activation、Capabilities、対応するUnity Version / Render Pipelineの組、Dependencies、Backend identities、Evidence requirementsを宣言します。Compatibility MatrixとRelease EvidenceはBackend Product側に置き、Manifestから参照しません。`audience`、`goal_type`、`primary_capability`、既定Profile、特定TaskのCamera GUID、Approval範囲はHubの契約に含めません。
+Registry v2はManifest Pathのみを索引化します。Manifest v5はExecution kind、Identity、Lifecycle、Optional Installation、Activation、Capabilities、対応するUnity Version / Render Pipelineの組、Dependencies、Backend identities、Evidence requirementsを宣言します。Backend固有のCompatibility/EvidenceはHub内のBackend source validationとして保持し、ManifestからCurrent runtime stateとして参照しません。`audience`、`goal_type`、`primary_capability`、既定Profile、特定TaskのCamera GUID、Approval範囲はHubの契約に含めません。
 
 ## Lifecycle and eligibility
 
@@ -31,7 +31,7 @@ Registry v2はManifest Pathのみを索引化します。Manifest v5はExecution
 
 ## Snapshot and import boundary
 
-`Tests/Hub/export_agent_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v3として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIは`Hub-SubAgent-Catalog-Snapshot`を公開します。
+`Tests/Hub/export_agent_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v3として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIはSnapshotを一時生成してSchema/Contractを検証しますが、Hub自身のRelease artifactとして公開しません。
 
 ```text
 Hub Manifest → Hub Snapshot → UnityAgent Offline Import Adapter → UnityAgent Runtime Catalog
@@ -45,7 +45,9 @@ Hub ManifestはRuntime Context値やTaskごとのSkill選択を所有しませ�
 
 ## Backend ownership
 
-`artist_subagent`はSpecialist identity、`unity_artist_cli`はBackend identityです。Artist Package、CLI、Installer、Compatibility Tests、Release workflows、Backend固有SkillsとVersionはArtist Backend Productの責務です。現在は移行例外として同一Repositoryにありますが、Hub CIはBackend実行を必要としません。配布URLとRelease tagをUnityAgent Installerが参照しているため、物理分離の条件は[Authority cleanup audit](authority-cleanup-audit.md)に記録します。
+`artist_subagent`はSpecialist identity、`unity_artist_cli`はBackend identityです。Artist Package、CLI、Compatibility Tests、Backend固有SkillsはこのHub repositoryにco-locateするSpecialist sourceです。HubはそれらをRuntime dispatchしません。
+
+**公開DistributionのownerはUnityAgentです。** Hub/Artistは独立Tag・GitHub Release・Marketplace entryを持たず、UnityAgent Releaseが固定Hub commit SHAをpinしてBackendをbuild/packageします。したがって同じUnityAgent Versionから取得されるBackend bytesはHub `main` の後続変更に影響されません。
 
 ## Add, deprecate and retire a specialist
 

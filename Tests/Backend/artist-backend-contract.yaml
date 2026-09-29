@@ -1,5 +1,5 @@
 schema_version: '1.0'
-kind: artist_backend_release_contract
+kind: artist_backend_contract
 backend_commands: [help, version, doctor, capabilities, install, inspect, plan, preview, apply, capture, evaluate, refine, cinematic, history]
 delegated_generic_operations:
   - project.inspect

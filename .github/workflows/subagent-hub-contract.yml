@@ -30,11 +30,11 @@ permissions:
 
 jobs:
   validate-hub:
-    name: Validate registry, manifests, and fail-closed invariants
+    name: Validate registry, manifests, and snapshot contract
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install YAML validator dependency
@@ -45,9 +45,3 @@ jobs:
         run: python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
       - name: Export and validate consumer-neutral Hub snapshot
         run: python Tests/Hub/export_agent_snapshot.py --output "$RUNNER_TEMP/subagent-catalog.yaml"
-      - name: Publish Hub catalog artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Hub-SubAgent-Catalog-Snapshot
-          path: ${{ runner.temp }}/subagent-catalog.yaml
-          retention-days: 90

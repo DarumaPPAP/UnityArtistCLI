@@ -100,11 +100,11 @@ class RegistryValidatorTests(unittest.TestCase):
             self.assertIn("Design/**", paths)
             self.assertIn("Schemas/**", paths)
 
-    def test_release_gate_covers_canonical_manifest_changes(self) -> None:
+    def test_artist_backend_gate_covers_canonical_manifest_changes(self) -> None:
         root = Path(__file__).resolve().parents[2]
-        workflow = (root / ".github/workflows/release-gate.yml").read_text(encoding="utf-8")
+        workflow = (root / ".github/workflows/artist-backend-contract.yml").read_text(encoding="utf-8")
 
-        self.assertIn("      - SubAgents/**", workflow)
+        self.assertIn("      - SubAgents/artist_subagent/**", workflow)
 
     def test_artist_manifest_does_not_define_consumer_runtime_profile(self) -> None:
         root = Path(__file__).resolve().parents[2]
