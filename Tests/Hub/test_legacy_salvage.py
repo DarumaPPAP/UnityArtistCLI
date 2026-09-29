@@ -33,6 +33,11 @@ class LegacySalvageTests(unittest.TestCase):
 
         self.assertEqual(Counter(row["decision"] for row in rows), {"PORT": 50, "KNOWLEDGE": 12, "RETIRE": 15})
         self.assertEqual(sum(row["migration_status"] == "PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED" for row in rows), 2)
+        self.assertEqual(sum(row["migration_status"].startswith("DEFERRED_") for row in rows), 48)
+        self.assertFalse(any(row["migration_status"] == "PORT_PENDING_IMPLEMENTATION_AND_PARITY" for row in rows))
+        retire = [row for row in rows if row["decision"] == "RETIRE"]
+        self.assertEqual(len(retire), 15)
+        self.assertTrue(all(row["migration_status"] == "RETIRE_PRODUCTION_PATH_DETACHED_SOURCE_REMOVAL_BLOCKED" for row in retire))
         self.assertEqual(sum(row["active_dependency"] == "legacy_adapter_source_reference_production_disabled" for row in rows), 34)
 
         knowledge = [row for row in rows if row["decision"] == "KNOWLEDGE"]
