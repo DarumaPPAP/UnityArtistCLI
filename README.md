@@ -105,6 +105,7 @@ Canonical files:
 
 | Concern | Canonical Source |
 |---|---|
+| Repository authority / mirrored declarations | `Specs/repository-authority-map.yaml` |
 | Registry index | `Registry/subagents.yaml` |
 | Specialist identity / lifecycle / capability / compatibility / backend / evidence | `SubAgents/<id>/manifest.yaml` |
 | Registry / Manifest structure | `Schemas/` |
@@ -162,6 +163,7 @@ UnityAgent `main` は、現在Repository内の `Runtime/ReferenceImplementation/
 6. Hub validationを実行します。
 
 ```sh
+python Tests/Hub/validate_repository_authority.py
 python Tests/Hub/validate_registry.py
 python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
 python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml

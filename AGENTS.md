@@ -4,7 +4,7 @@
 
 This repository owns the SubAgent registry, shared schemas, per-specialist manifests, lifecycle metadata, contract references, and validation. It is not a runtime, orchestrator, resolver, installer, or execution surface. UnityAgent is the only Control Plane and remains authoritative for policy, approval, environment discovery, binding, capability resolution, execution, retry/fallback, and evidence normalization.
 
-`Registry/subagents.yaml` is the index. `SubAgents/<id>/manifest.yaml` is the source of truth for that specialist's identity, lifecycle, install mode, capabilities, compatibility, dependencies, backend references, and evidence requirements. Do not duplicate those facts in a second Hub catalog. Detailed specialist behavior may live in linked contracts.
+`Specs/repository-authority-map.yaml` is the machine-readable map of repository authority and mirrored declarations. `Registry/subagents.yaml` is the index. `SubAgents/<id>/manifest.yaml` is the source of truth for that specialist's identity, lifecycle, install mode, capabilities, compatibility, dependencies, backend references, and evidence requirements. Do not duplicate those facts in a second Hub catalog. Detailed specialist behavior may live in linked contracts.
 
 ## Required invariants
 
@@ -29,6 +29,7 @@ Do not add runtime dispatch, candidate ranking, local environment discovery, pac
 Run:
 
 ```sh
+python Tests/Hub/validate_repository_authority.py
 python Tests/Hub/validate_registry.py
 python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
 python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
