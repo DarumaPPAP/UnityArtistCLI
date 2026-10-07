@@ -18,6 +18,13 @@ This repository owns the SubAgent registry, shared schemas, per-specialist manif
 - Manifests and committed evidence use repository-relative paths. Never commit machine-specific paths or live installation state.
 - Do not change `Legacy/MyUnityMCP-1.1.1/` or rewrite its published tag.
 
+## Git workflow
+
+Branch運用の正本は `.github/branch-policy.json`、説明は `docs/development/branch-policy.md` とする。
+`main` は永続する統合正本であり、通常の作業は `main` から `feature/*`、`fix/*`、`chore/*`、必要時のみ `release/*` を作成する。
+新機能は `feature/*`、不具合修正は `fix/*`、CI・Docs・Refactor・Repository整理は `chore/*` に分類する。`release/*` を `develop` の代替として常設しない。
+新規branchに `codex/*`、`refactor/*`、`docs/*`、`ci/*` 等の追加prefixを作らない。通常PRのbaseは `main` とし、Squash Merge後に短命branchを削除する。
+
 ## Adding a specialist
 
 Create one `SubAgents/<id>/manifest.yaml` that satisfies `Schemas/subagent-manifest.schema.json`, then add its path to `Registry/subagents.yaml`. Keep the manifest's backend ids separate from its specialist id. Use stable resolver-visible capability ids and declare exact supported Unity-version/render-pipeline pairs, dependencies, backend refs, and evidence refs. Every required dependency must have a gate in `activation.required_before_resolution`. A new specialist may require an explicit UnityAgent import migration when the consumer has no corresponding Runtime Profile.
