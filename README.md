@@ -14,6 +14,7 @@
   <a href="#registry">Registry</a> ·
   <a href="#eligibility">Eligibility</a> ·
   <a href="#add-a-specialist">Add a Specialist</a> ·
+  <a href="#branch-workflow">Branch Workflow</a> ·
   <a href="Design/subagent-hub-architecture.md">Architecture</a> ·
   <a href="docs/README.md">Docs Index</a> ·
   <a href="docs/references/unity-cli-reference.md">Unity CLI Reference</a>
@@ -183,6 +184,12 @@ Registryへの追加はdata-onlyです。新しいCapability semanticsを追加�
 各SpecialistのIdentity / Lifecycle / Capability / Execution kindの正本は対応する `manifest.yaml` です。Graphics / WorldCreator / Performance配下の旧 `capability-contracts.yaml` はPilot時点のbaselineを比較するために残されており、Current Production Contractではありません。Current Contractは各Manifestの `capability_contract_ref` が指す `production-capability-contract.yaml` です。
 
 このRepositoryにはArtist backend implementationも移行互換性のため同居していますが、Hub Registry / Validator自身がそれをdispatch・executeするわけではありません。
+
+## Branch Workflow
+
+開発branchは `main` から作成し、`feature/*`、`fix/*`、`chore/*`、必要時のみ `release/*` を使用します。通常PRは `main` をbaseにし、Squash Merge後の短命branchは自動削除します。
+
+詳細と機械可読な契約は [Branch Policy](docs/development/branch-policy.md) を参照してください。
 
 ## Validation
 
