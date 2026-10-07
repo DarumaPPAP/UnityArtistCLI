@@ -1,0 +1,33 @@
+schema_version: "1.0"
+kind: repository_authority_map
+repository: DarumaPPAP/UnitySubAgentHub
+
+authorities:
+  registry_index: Registry/subagents.yaml
+  manifest_root: SubAgents
+  registry_schema: Schemas/subagent-registry.schema.json
+  manifest_schema: Schemas/subagent-manifest.schema.json
+  architecture: Design/subagent-hub-architecture.md
+  legacy_root: Legacy
+  artist_backend_version:
+    source: SubAgents/artist_subagent/manifest.yaml
+    mirrors:
+      upm_package: Packages/com.darumappap.artist-subagent/package.json
+      cli_project: src/UnityArtist.Cli/UnityArtist.Cli.csproj
+      cli_runtime: src/UnityArtist.Cli/Program.cs
+      support_matrix: Tests/Compatibility/support-matrix.yaml
+
+external_authorities:
+  runtime_and_resolution:
+    repository: DarumaPPAP/UnityAgent
+  public_distribution:
+    repository: DarumaPPAP/UnityAgent
+
+rules:
+  independent_release: false
+  hub_is_runtime: false
+  hub_is_control_plane: false
+
+notes:
+  - This file maps authority and mirrors; it does not replace specialist manifests or Registry/subagents.yaml.
+  - Historical files under Legacy are not current authority.
