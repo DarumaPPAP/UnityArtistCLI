@@ -3,22 +3,6 @@ name: SubAgent Hub Contract
 on:
   pull_request:
     branches: [main]
-    paths:
-      - AGENTS.md
-      - README.md
-      - Design/**
-      - Specs/**
-      - Registry/**
-      - Schemas/**
-      - SubAgents/**
-      - Packages/com.darumappap.artist-subagent/**
-      - src/UnityArtist.Cli/**
-      - Tests/Compatibility/support-matrix.yaml
-      - Tests/Hub/**
-      - docs/development/branch-policy.md
-      - .github/branch-policy.json
-      - .github/workflows/branch-policy.yml
-      - .github/workflows/subagent-hub-contract.yml
   push:
     branches: [main]
     paths:
