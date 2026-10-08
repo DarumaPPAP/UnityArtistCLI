@@ -1,0 +1,775 @@
+{
+  "schema_version": "1.0",
+  "capabilities": [
+    {
+      "legacy_module": "unity_addressables_mcp",
+      "legacy_tool": "addressables.apply_entry",
+      "responsibility": "承認済みPlanをAddressables Public APIで適用します。自動SaveやContent Buildは行いません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Addressables/UnityAddressablesMcp.cs",
+      "source_blob_sha": "8e9b9a9c18924944bdea58eed4d3e7db0a1d3f18",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_addressables_mcp",
+      "legacy_tool": "addressables.get_support_matrix",
+      "responsibility": "Package導入状態とAddressablesMCPの実装・非対象範囲を取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Addressables/UnityAddressablesMcp.cs",
+      "source_blob_sha": "8e9b9a9c18924944bdea58eed4d3e7db0a1d3f18",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_addressables_mcp",
+      "legacy_tool": "addressables.inspect",
+      "responsibility": "Addressables Package、Settings、Profile、GroupをRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Addressables/UnityAddressablesMcp.cs",
+      "source_blob_sha": "8e9b9a9c18924944bdea58eed4d3e7db0a1d3f18",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_addressables_mcp",
+      "legacy_tool": "addressables.prepare_entry",
+      "responsibility": "Asset GUID、Group、Address、Labelを検証し、承認待ちEntry Mutation Planを作成します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Addressables/UnityAddressablesMcp.cs",
+      "source_blob_sha": "8e9b9a9c18924944bdea58eed4d3e7db0a1d3f18",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.cancel_execution",
+      "responsibility": "Running中のAgent Executionを次の安全なStep境界より前に協調Cancelします。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.compile_graph",
+      "responsibility": "検証済みWorkflowをProduct Runtime GraphへCompileします。Unity状態は変更しません。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.get_error_catalog",
+      "responsibility": "Agent Control Planeの構造化Error Catalogを取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.get_execution_history",
+      "responsibility": "永続化済みAgent Execution Historyを取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.get_execution_status",
+      "responsibility": "Agent Executionの現在状態とStep Resultを取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.inspect_capabilities",
+      "responsibility": "利用可能なDomain、Tool Group、実行可否をCatalogからRead-onlyで取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.preview_execution",
+      "responsibility": "Compiled GraphのStep、Side Effect、必要ApprovalをRead-onlyでPreviewします。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.start_execution",
+      "responsibility": "RevisionとApprovalを再検証して協調Executionを開始します。StepはEditor Update境界でDomain Toolへ委譲し、Control PlaneはUnity APIを直接Mutationしません。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.submit_approval",
+      "responsibility": "Preview済みGraphのSide Effect Groupを明示承認し、一時Approval Tokenを発行します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_agent_mcp",
+      "legacy_tool": "agent.validate_workflow",
+      "responsibility": "Workflow StepのDomain、Tool Group、Tool、依存関係をRead-onlyで検証します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Agent/UnityAgentMcpTools.cs",
+      "source_blob_sha": "4815558401cac5bfe7f8ee49a4724b4ef07f762a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_animation_mcp",
+      "legacy_tool": "animation.apply_parameter",
+      "responsibility": "承認済みPlanでAnimatorController Parameterを追加します。State／Transition／Clipは変更しません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Animation/UnityAnimationMcpTools.cs",
+      "source_blob_sha": "ebd788122e9f3e1a6594b02d8b9a743c231cb217",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_animation_mcp",
+      "legacy_tool": "animation.get_support_matrix",
+      "responsibility": "Animation MCPの実装・非対象・未検証範囲を取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Animation/UnityAnimationMcpTools.cs",
+      "source_blob_sha": "ebd788122e9f3e1a6594b02d8b9a743c231cb217",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_animation_mcp",
+      "legacy_tool": "animation.inspect",
+      "responsibility": "Loaded SceneのAnimatorと参照AnimatorController／ClipをRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Animation/UnityAnimationMcpTools.cs",
+      "source_blob_sha": "ebd788122e9f3e1a6594b02d8b9a743c231cb217",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_animation_mcp",
+      "legacy_tool": "animation.prepare_parameter",
+      "responsibility": "既存AnimatorControllerへのParameter追加をExact Previewし、承認Tokenを発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Animation/UnityAnimationMcpTools.cs",
+      "source_blob_sha": "ebd788122e9f3e1a6594b02d8b9a743c231cb217",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_animation_mcp",
+      "legacy_tool": "animation.validate",
+      "responsibility": "Animator Controller欠落、無効Parameter、Clip EventをRead-onlyで検証します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Animation/UnityAnimationMcpTools.cs",
+      "source_blob_sha": "ebd788122e9f3e1a6594b02d8b9a743c231cb217",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_audio_mcp",
+      "legacy_tool": "audio.apply_source",
+      "responsibility": "承認済みAudioSource PlanをUndo対応で適用します。Clip／Mixer Assetは変更しません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Audio/UnityAudioMcp.cs",
+      "source_blob_sha": "7acf77d465c88dfbf33119baaa109af91f54cce9",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_audio_mcp",
+      "legacy_tool": "audio.get_support_matrix",
+      "responsibility": "Audio MCPの実装・未検証範囲を取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Audio/UnityAudioMcp.cs",
+      "source_blob_sha": "7acf77d465c88dfbf33119baaa109af91f54cce9",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_audio_mcp",
+      "legacy_tool": "audio.inspect",
+      "responsibility": "Loaded SceneのAudioSource、AudioClip、Mixer RoutingをRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Audio/UnityAudioMcp.cs",
+      "source_blob_sha": "7acf77d465c88dfbf33119baaa109af91f54cce9",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_audio_mcp",
+      "legacy_tool": "audio.prepare_source",
+      "responsibility": "AudioSourceのVolume、Pitch、Spatial Blend、Loop、Mute変更をExact Previewします。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Audio/UnityAudioMcp.cs",
+      "source_blob_sha": "7acf77d465c88dfbf33119baaa109af91f54cce9",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_audio_mcp",
+      "legacy_tool": "audio.validate",
+      "responsibility": "AudioSourceのClip、Volume、Pitch、Spatial DistanceをRead-onlyで検証します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Audio/UnityAudioMcp.cs",
+      "source_blob_sha": "7acf77d465c88dfbf33119baaa109af91f54cce9",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_cinematic_mcp",
+      "legacy_tool": "cinematic.apply_director",
+      "responsibility": "承認済みPlayableDirector PlanをUndo対応で適用します。Playable AssetとBindingは変更しません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Cinematic/UnityCinematicMcp.cs",
+      "source_blob_sha": "68f2cac147c3478f84a0d22c224762e79938519b",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_cinematic_mcp",
+      "legacy_tool": "cinematic.get_support_matrix",
+      "responsibility": "Cinematic MCPのCore Playables対応とOptional Package範囲を取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Cinematic/UnityCinematicMcp.cs",
+      "source_blob_sha": "68f2cac147c3478f84a0d22c224762e79938519b",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_cinematic_mcp",
+      "legacy_tool": "cinematic.inspect",
+      "responsibility": "Loaded SceneのPlayableDirector、Playable Asset、Output BindingをRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Cinematic/UnityCinematicMcp.cs",
+      "source_blob_sha": "68f2cac147c3478f84a0d22c224762e79938519b",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_cinematic_mcp",
+      "legacy_tool": "cinematic.prepare_director",
+      "responsibility": "PlayableDirectorのInitial Time、Update Mode、Wrap Mode、Play On Awake変更をExact Previewします。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Cinematic/UnityCinematicMcp.cs",
+      "source_blob_sha": "68f2cac147c3478f84a0d22c224762e79938519b",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_cinematic_mcp",
+      "legacy_tool": "cinematic.validate",
+      "responsibility": "Playable Asset欠落、Binding欠落、Time範囲をRead-onlyで検証します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Cinematic/UnityCinematicMcp.cs",
+      "source_blob_sha": "68f2cac147c3478f84a0d22c224762e79938519b",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.apply_environment_plan",
+      "responsibility": "承認済みEnvironment Planを一つのUnity Undo Transactionとして適用します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Mutation/EnvironmentMutation.cs",
+      "source_blob_sha": "fa7aaeb4149b5a1de12210f3e9b43aceeaeff050",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.apply_plan",
+      "responsibility": "prepare_light_planでPreview・承認されたExecutable Planを、一つのUnity Undo Transactionとして適用します。自動保存とBakeは行いません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.apply_save_plan",
+      "responsibility": "prepare_save_planで固定・承認された一つのDirty Sceneだけを明示的に保存します。Save Asと自動保存は行いません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/SaveTools.cs",
+      "source_blob_sha": "e10055bde4dcde314450ee05ab37a39abb243dbf",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.bake_dependencies",
+      "responsibility": "prepare_bake_planで固定・承認されたDependencyだけを同期Bakeします。自動Save、全Scene BakeへのFallback、Undo保証は行いません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/BakeTools.cs",
+      "source_blob_sha": "77974f2dbf8c51da9f6a7ffed7034df70599c7fd",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.cancel_apv_bake",
+      "responsibility": "APV Bake JobへCancellationを要求し、停止後も生成済みOutputをPartial Resultとして記録します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.cancel_execution",
+      "responsibility": "Active Executionへ協調Cancellationを要求します。安全なCancellation Pointで停止します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/ExecutionTools.cs",
+      "source_blob_sha": "8b2b0c371116670e16420722efc1214c88912607",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.capture_evaluation",
+      "responsibility": "指定CameraからColor PNGをLibrary配下へ取得し、TargetTexture、Active RenderTexture、Scene Dirty状態を必ず復元します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/SaveTools.cs",
+      "source_blob_sha": "e10055bde4dcde314450ee05ab37a39abb243dbf",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.capture_evidence",
+      "responsibility": "指定CameraからColor、Linear Depth、Object IDを選択してCapture Evidence BundleをLibrary配下へ原子的に生成します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CaptureTools.cs",
+      "source_blob_sha": "569b3344918c767897e3b8c6a7ad89faa43cbd5a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.compile_direction",
+      "responsibility": "構造化Visual Intentと対象Project事実から、Pipeline非依存のDirection PlanをRead-onlyで生成します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.evaluate_capture",
+      "responsibility": "Capture EvidenceをAcceptance Profileと外部Measurementで評価し、不合格理由をObject IDとPerformance Budgetへ関連付けます。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.get_apv_bake_status",
+      "responsibility": "APV Bake Jobの進行、出力差分、Partial Result、失敗理由、Cancellation状態を返します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.get_error_catalog",
+      "responsibility": "Hardening Error Code、再試行可能性、再実行開始点、復旧手順を取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/ExecutionTools.cs",
+      "source_blob_sha": "8b2b0c371116670e16420722efc1214c88912607",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.get_execution_history",
+      "responsibility": "保持中のTool実行履歴、構造化結果、DurationとMemory計測を取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/ExecutionTools.cs",
+      "source_blob_sha": "8b2b0c371116670e16420722efc1214c88912607",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.get_execution_status",
+      "responsibility": "Execution IDから進捗、Cancellation状態、Timeout、Trace参照先を取得します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/ExecutionTools.cs",
+      "source_blob_sha": "8b2b0c371116670e16420722efc1214c88912607",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.get_support_matrix",
+      "responsibility": "Unity Version、Render Pipeline、Capability、Execution Recoveryの固定Support Matrixを取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/ExecutionTools.cs",
+      "source_blob_sha": "8b2b0c371116670e16420722efc1214c88912607",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.inspect_project",
+      "responsibility": "対象Unity Projectの検出済み事実と、今回要求されたTargetを分離してRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.inspect_scene",
+      "responsibility": "Loaded SceneのCamera、Light、Probe、Renderer、Material、Volume等をRead-onlyでSnapshot化し、Pagingして返します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_acceptance_profile",
+      "responsibility": "Visual Acceptanceの評価項目、Weight、最低合格値、Critical Failure、Reference Capture、Performance Budgetを固定します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_apv_bake_plan",
+      "responsibility": "APV Baking Set、Lighting Scenario、Scene集合、Pipeline Capability、Output RootをRead-onlyで固定します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_bake_plan",
+      "responsibility": "現在SessionのDirty Dependency SetからScene限定Lightmapまたは明示Reflection ProbeのExact Bake Planと別Approval Tokenを発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/BakeTools.cs",
+      "source_blob_sha": "77974f2dbf8c51da9f6a7ffed7034df70599c7fd",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_environment_plan",
+      "responsibility": "Camera、Reflection Probe、Volumeの明示操作を正確な差分へ変換し、承認TokenをRead-onlyで発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Mutation/EnvironmentMutation.cs",
+      "source_blob_sha": "fa7aaeb4149b5a1de12210f3e9b43aceeaeff050",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_light_plan",
+      "responsibility": "Direction Planへ明示的なLIGHT_CREATE / LIGHT_UPDATEを関連付け、正確な差分と承認TokenをRead-onlyで発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.prepare_save_plan",
+      "responsibility": "一つのDirty Loaded SceneをRead-onlyで固定し、永続化用のExact Diffと一時承認Tokenを発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/SaveTools.cs",
+      "source_blob_sha": "e10055bde4dcde314450ee05ab37a39abb243dbf",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.preview_plan",
+      "responsibility": "保存済みDirection Planが生むCreated / Modified / Dirty / Bake / Unsupported / Unverified候補を、Unity状態を変更せずに返します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.refine_direction",
+      "responsibility": "Capture Evidenceに対する明示的なHuman Reviewだけを用いて、次IterationのDirection PlanをRead-onlyで作成します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/SaveTools.cs",
+      "source_blob_sha": "e10055bde4dcde314450ee05ab37a39abb243dbf",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.refine_from_evaluation",
+      "responsibility": "FAILEDまたはINCOMPLETEのVisual Evaluationを、問題箇所、Object ID、Performance Budgetを含む次Direction Planへ変換します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.refine_from_visual_review",
+      "responsibility": "REJECTEDまたはNEEDS_ADJUSTMENTで確定したVisual Reviewだけを用いて、次IterationのDirection PlanをRead-onlyで作成します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CaptureTools.cs",
+      "source_blob_sha": "569b3344918c767897e3b8c6a7ad89faa43cbd5a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.start_apv_bake",
+      "responsibility": "承認済みAPV Bake Planを開始し、Job IDを返します。長時間処理はStatus Toolで追跡します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/VisualAcceptanceTools.cs",
+      "source_blob_sha": "769c8a4046a1f956526bfffef0e134c874e471d7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.submit_visual_review",
+      "responsibility": "Capture Evidence DigestへHuman Reviewを一度だけ確定し、ACCEPTED時は明示Confirmationを要求します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CaptureTools.cs",
+      "source_blob_sha": "569b3344918c767897e3b8c6a7ad89faa43cbd5a",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.undo_last_environment_transaction",
+      "responsibility": "対象StateとUndo Groupが適用直後から変化していない場合だけ、直近Environment Mutation Transactionを一括Undoします。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Mutation/EnvironmentMutation.cs",
+      "source_blob_sha": "fa7aaeb4149b5a1de12210f3e9b43aceeaeff050",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.undo_last_transaction",
+      "responsibility": "直近のMyUnityMCP Light TransactionがUndo Stackの最新で、適用後状態から変化していない場合だけUnity Undoで復元します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_graphics_mcp",
+      "legacy_tool": "graphics.validate_scene",
+      "responsibility": "Loaded SceneのGraphics不整合をRead-onlyで検証し、Invariant、Policy、Heuristicを区別して返します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Tools/CoreTools.cs",
+      "source_blob_sha": "474b065cb58526b197ad1a58a557c117e16bd7a3",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.cancel_capture",
+      "responsibility": "Running中のProfiler Captureを協調Cancelします。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.compare_baseline",
+      "responsibility": "同一EnvironmentのCapture SummaryをBaselineと比較します。異なる環境は拒否します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.get_capture_status",
+      "responsibility": "Profiler Captureの進捗とCounter状態を取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.inspect_counters",
+      "responsibility": "MyUnityMCPが対応するProfilerRecorder Counterの現在利用可否をRead-onlyで検査します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.inspect_environment",
+      "responsibility": "Profiler Capture環境をRead-onlyで取得します。Editor値をTarget Device性能として表現しません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.prepare_capture",
+      "responsibility": "Warmup、Sample数、Counterを検証し、Capture PlanをRead-onlyで作成します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.start_capture",
+      "responsibility": "承認済みProfiler Capture Planを開始します。Project Assetは変更しません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_profiler_mcp",
+      "legacy_tool": "profiler.summarize_capture",
+      "responsibility": "完了済みCaptureをMedian、p95、maxへ集計します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/Profiler/UnityProfilerMcp.cs",
+      "source_blob_sha": "24711ad65909954c489d0aed8f5c0c6b2c16d7d4",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_ui_mcp",
+      "legacy_tool": "ui.apply_rect_transform",
+      "responsibility": "承認済みRectTransform PlanをUndo対応で適用します。Saveは行いません。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/UI/UnityUiMcp.cs",
+      "source_blob_sha": "7ceb342b19dd8fa3170a9f9e9006a73f12699ce7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_ui_mcp",
+      "legacy_tool": "ui.get_support_matrix",
+      "responsibility": "UI MCPのUGUI／UI Toolkit対応範囲を取得します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/UI/UnityUiMcp.cs",
+      "source_blob_sha": "7ceb342b19dd8fa3170a9f9e9006a73f12699ce7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_ui_mcp",
+      "legacy_tool": "ui.inspect",
+      "responsibility": "Loaded SceneのCanvas、RectTransform、UIDocumentをRead-onlyで取得します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/UI/UnityUiMcp.cs",
+      "source_blob_sha": "7ceb342b19dd8fa3170a9f9e9006a73f12699ce7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_ui_mcp",
+      "legacy_tool": "ui.prepare_rect_transform",
+      "responsibility": "RectTransformのAnchored Position、Size、Anchor、PivotをExact Previewし、承認Tokenを発行します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/UI/UnityUiMcp.cs",
+      "source_blob_sha": "7ceb342b19dd8fa3170a9f9e9006a73f12699ce7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "unity_ui_mcp",
+      "legacy_tool": "ui.validate",
+      "responsibility": "Canvas重複、無効なRectTransform、UIDocument設定不足をRead-onlyで検証します。",
+      "decision": "FUTURE_SPEC_ARCHIVED",
+      "migration_status": "LEGACY_PORT_NOT_ADOPTED_ARCHIVED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/UI/UnityUiMcp.cs",
+      "source_blob_sha": "7ceb342b19dd8fa3170a9f9e9006a73f12699ce7",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "world_creator",
+      "legacy_tool": "world.compile_workflow",
+      "responsibility": "Visual Goalを既存GraphicsMCPのRead-only Preflight Graphと、後続の承認制制作Handoffへ変換します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/WorldCreator/UnityWorldCreatorMcp.cs",
+      "source_blob_sha": "16ac00c405a1c6484f35b0a39ef954426d2153c5",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "world_creator",
+      "legacy_tool": "world.create_review_handoff",
+      "responsibility": "World Preflight結果と制作意図を、人間が合否・修正指示を返せるReview Handoffへ変換します。",
+      "decision": "KNOWLEDGE_ARCHIVED",
+      "migration_status": "KNOWLEDGE_ARCHIVED_RUNTIME_NOT_ADOPTED",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/WorldCreator/UnityWorldCreatorMcp.cs",
+      "source_blob_sha": "16ac00c405a1c6484f35b0a39ef954426d2153c5",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    },
+    {
+      "legacy_module": "world_creator",
+      "legacy_tool": "world.start_preflight",
+      "responsibility": "World WorkflowのRead-only Graphics PreflightをAgent経由で実行します。",
+      "decision": "RETIRED",
+      "migration_status": "RETIRED_LEGACY_API",
+      "historical_source": "Legacy/MyUnityMCP-1.1.1/Package/Editor/Operational/WorldCreator/UnityWorldCreatorMcp.cs",
+      "source_blob_sha": "16ac00c405a1c6484f35b0a39ef954426d2153c5",
+      "documentation": "Design/legacy-capability-salvage-audit.md"
+    }
+  ]
+}
