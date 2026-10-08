@@ -1,93 +1,75 @@
-# Specialist Expansion: Legacy Capability Salvage Audit
+# Legacy Capability Salvage Audit
 
-## 結論と調査範囲
+## Decision
 
-**FACT（Source inventory）:** `Legacy/MyUnityMCP-1.1.1/Package/Editor/**/*.cs` の `[McpForUnityTool]` 宣言は77件で、名前の重複はありません。内訳はGraphics 32、Agent 10、WorldCreator 3、Profiler 8、Addressables 4、UI 5、Animation 5、Audio 5、Cinematic 5です。`Tests/Hub/test_legacy_salvage.py` がSourceと[全件Matrix](legacy-capability-salvage.csv)の一致を検査します。
+MyUnityMCP v1.1.1 の77 Toolは、現行ProductへLegacy APIとして移植しない。
 
-**FACT（現行依存）:** UnityAgentの `Runtime/Tooling/provider_registry.yaml` は `myunitymcp` Providerを登録し、`Runtime/Tooling/Providers/MyUnityMcp/capability_mapper.py` はLegacy名のToolを選択します。従って旧Tool宣言が存在することと、独立した後継実装が存在することは同義ではありません。Legacyの削除条件「active Legacy path dependencies = 0」は現在未成立です。
-
-**AUDIT DECISION:** 50件をPORT、12件をKNOWLEDGE、15件をRETIREと分類しました。REPLACEDは0件です。これは「現行AdapterがLegacy Tool名を利用している」状態を、置換済みと誤認しない保守的な分類です。PORTは実装完了を意味しません。全PORTの実装・Eval・置換Evidenceは未完了です。
-
-**KNOWLEDGE移管の現状:** WorldCreator 2件は現行[Plan契約](../SubAgents/world_creator_subagent/README.md)へ、Addressables 1件はUnityAgent Content Skillへ、Visual Direction 4件はUnityAgent Visual Direction Skillへ移しました。旧Domain Support Matrix 5件は[対応境界のDocumentation](legacy-domain-support-boundaries.md)へ回収しました。12件のKnowledge内容をRepositoryレベルで記録しています。旧Toolの実行機能の置換、active caller移行、Live parityを証明したものではありません。各行の移管先と未検証事項はMatrixに記載します。
+Legacy実装を残す条件を「旧APIとのParity」には置かない。現行Product Surfaceは、現行Manifest・Runtime resolution・Contract・Test・Evidenceを正本とし、Legacy APIの互換層を正本へ昇格しない。
 
 | Decision | 件数 | 意味 |
 |---|---:|---|
-| REPLACED | 0 | 独立した後継実装と動作Evidenceを確認済み |
-| PORT | 50 | 有用なCapabilityを適切なOwnerへ回収する候補 |
-| KNOWLEDGE | 12 | Skill、Policy、Context rule、静的Contractへ翻訳する候補 |
-| RETIRE | 15 | 旧Control Plane、実行Frontend、内部Status等を移植しない |
-| UNRESOLVED | 0 | 分類自体が未決定のTool |
+| `FUTURE_SPEC_ARCHIVED` | 50 | 旧PORT候補。不採用。将来の新機能設計時に参考情報としてのみ利用 |
+| `KNOWLEDGE_ARCHIVED` | 12 | Skill / Documentation / Contractへ判断知識のみ保存。Runtime APIは不採用 |
+| `RETIRED` | 15 | 旧Control Plane / Frontend /内部実行Surface。再導入しない |
+| `PORT` | 0 | Legacy移植対象なし |
+| `REPLACED` | 0 | Legacy API parityをProduct要件にしないため使用しない |
 
-## Owner判断
+機械可読な全77件の記録は [legacy-capability-salvage.csv](legacy-capability-salvage.csv) を正本とする。
 
-- GraphicsのVisual Direction、Scene演出、Lighting、Capture、BakeはArtist側のCapability候補です。RenderGraph、Shaderの実装正当性をGraphicsSubAgentへ誤配分しません。現行UnityArtistCLIの高水準コマンドは確認できますが、旧32操作との完全な意味・入力・Evidence互換は未検証です。
-- Profiler 8件はPerformanceSubAgentの計測Loopと決定論的Capture Toolへ回収する候補です。ProfilerSubAgentは作りません。Editor計測値をTarget Device Evidenceへ昇格しません。
-- AddressablesはContentのSkill / Tool Pilotへ。最初はRead-only AnalyzeとPlanを対象とし、旧 `apply_entry` の自動移植はしません。
-- UI、Animation、AudioSourceの既存Scene操作は、Import最適化のContent Domainと混同せず、UnityAgentの決定論的Tool候補とします。CinematicはArtistの既存Timeline契約との意味差を検証します。
-- Agent 10件は旧Control Plane入口なのでRETIRE候補です。UnityAgentのOrchestration、Runtime、Persistence、Operationsで責務を保持し、旧MCP FrontendをCanonical pathへ復活させません。
-- WorldCreatorの `compile_workflow` と `create_review_handoff` のPlanningとHuman Reviewの知識は現行契約へ移管しました。`world.start_preflight` は旧UnityAgentMcpRuntimeへのExecution FrontendなのでRETIREです。WorldCreatorからSubAgentを直接Dispatchしません。
+## Current Product Surface
 
-## Safety invariant照合
+以下はLegacy APIの移植結果ではなく、現行Architectureで独立して成立しているProduct Surfaceである。
 
-| Legacy rule | 現行確認先 | 判定 |
-|---|---|---|
-| read-only prepare | `Runtime/Tooling/Providers/MyUnityMcp/myunitymcp_provider.py` | Legacy Adapterでは確認。新Tool共通Contractへの移管は未検証 |
-| expected revision for mutation | `Runtime/Contracts/mutation-evidence.schema.yaml`; MyUnityMcp Provider | 現行のMutation Evidenceに存在。各PORT先では再検証が必要 |
-| approval token for mutation | `Policy/Approval/approval-policy.yaml`; `Runtime/Guardrails/tool_runtime_guard.py` | PolicyとGuardに存在。新Toolの実行経路で要E2E |
-| one-time plan | MyUnityMcp Provider / Legacy source | Legacy固有。新ToolではPlan再利用拒否を個別検証 |
-| automatic save prohibited | `Policy/Security/tool-trust.yaml` | Policyに存在。新Backendの実動作を要検証 |
-| automatic full bake prohibited | Legacy `Catalog/production-surface-contract.yaml` | 現行全Providerでの一律適用は未確認。Bake追加時に明示Gateを要する |
-| generic serialized property mutation prohibited | Legacy contract | 新Toolで型付きAllowlistを確認するまで移管済みとしない |
-| silent fallback prohibited | `Policy/Security/tool-trust.yaml`; `Runtime/Permissions/mcp-activation.yaml` | Policyに存在。ToolBrokerの失敗伝播を要検証 |
-| automatic visual acceptance prohibited | `Policy/Approval/approval-policy.yaml` | Human Review要求を確認。Visual E2Eは未実施 |
-| automatic execution resume prohibited | Legacy contract | 新ExecutionモデルのResume policyを別途監査する |
+- GraphicsSubAgent: `graphics.inspect`, `graphics.diagnose`, `graphics.validate`
+- ArtistSubAgent: `artist.camera.inspect`, `artist.camera.refine`, `visual.capture`
+- PerformanceSubAgent: `performance.analyze` + Production `profiler.observe`
+- WorldCreatorSubAgent: `world.plan`
 
-この表は静的なコード・Contract照合です。Unity Editor、Player、Target Deviceでの動作成功を示しません。
+Backend内部に実装が存在しても、Manifest / Runtime resolution / Contract / Test / Evidenceまで揃っていない機能はProduct Surfaceとして扱わない。
 
-## Legacy detachment gate
+## Archive policy
 
-### 現行Sourceのactive dependency再確認（2026-09-29）
+### Knowledge archive
 
-- UnityAgent `Runtime/Tooling/provider_registry.yaml`には`myunitymcp`のCapability bindingが残る。ただし`production_enabled: false`で、`Runtime/Tooling/capability_resolver.py`はProduction解決候補から除外する。従って「Production実行中」と「Sourceに依存経路が残る」は区別する。
-- UnityAgent `Runtime/Tooling/Providers/MyUnityMcp/`には旧Tool名のMaterialization、Result正規化、Project binding、Mutation prepare／approval／revision経路が残る。これはPORT各件の独立実装・Parityを証明する後継Surfaceではない。
-- UnityAgent `Runtime/Tooling/Environment/discovery.py`と`Runtime/Contracts/environment-snapshot.schema.yaml`は`myunitymcp`の可用性を環境Factとして扱う。Legacy Providerを削除する場合、これらのContractと関連Runtime TestsもMigration対象になる。
-- Hubの現行`Registry/`、`Schemas/`、`SubAgents/`に`Legacy/` Sourceを実行時importする参照は確認されない。Hubの`Tests/Hub/test_legacy_salvage.py`はLegacy Source Inventoryに依存する監査Testなので、Sourceを撤去する際はTest目的を再設計する必要がある。
+価値のある判断境界は次へ保持する。
 
-**判定:** Production Resolverでは旧Providerは選出されないが、UnityAgentのRegistry、Environment Contract、Adapter、関連Testの残存により「active dependency = 0」は証明できない。PORTの独立実装・Live parityも未成立。`LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE`を維持する。
+- [Legacy domain support boundaries](legacy-domain-support-boundaries.md)
+- UnityAgent Visual Direction Skill
+- UnityAgent Content Import Analysis Skill
+- WorldCreator planning contract
+- 77件のresponsibility / risk / historical sourceを保持するMatrix
 
-- [x] 77 ToolをSourceから再Inventoryし、全件分類
-- [x] PORT 50件は実装完了または機能群ごとの明示的Evidence延期へ確定
-- [x] KNOWLEDGE 12件の知識移管完了（旧実行機能の置換は未確認）
-- [ ] REPLACEDの動作Evidence整備（REPLACED=0を維持）
-- [x] RETIRE候補15件のProduction active-path scan完了（物理Source撤去は未実施）
-- [ ] active Legacy path dependencies = 0
-- [x] Legacy sourceと公開履歴を保持
+### Future feature archive
 
-**判定:** Legacy Detachmentは禁止。旧MCP Transport、AutoRegister、Unity 2022.3対応は新Architectureに持ち込まない。
+旧PORT 50件は `FUTURE_SPEC_ARCHIVED` とする。
 
-### Finalization decision（2026-09-29）
+これは「後で実装する約束」ではない。将来同じProblemをProduct要件として採用する場合だけ、Legacy実装をコピーせず、現行Architecture・Unity Version・Safety Contract・Evidence Contractから新規設計する。
 
-PORT 50件を「未整理の保留」のまま残さない。2件のProfiler observationは部分回収状態を維持し、残り48件は各Ownerごとに必要なLive/Runtime Evidenceが未取得であるため、以下の明示的延期へ確定した。Evidenceが無い項目をREPLACEDへ昇格しない。
+### Retired API
 
-| Target Owner | 件数 | Finalization state | 再開条件 |
-|---|---:|---|---|
-| ArtistSubAgent / UnityArtistCLI | 27 | `DEFERRED_ARTIST_LIVE_PARITY_REQUIRED` | 旧Visual/Lighting/Cinematic/Bake操作との意味・Approval・Mutation・Undo・Live Evidence parity |
-| PerformanceSubAgent + deterministic capture tool | 6 deferred + 2 partial | `DEFERRED_PROFILER_SESSION_PARITY_REQUIRED` / 2件partial | bounded capture/session、比較、Player/Target timing、Live measurement parity |
-| Content Skill + deterministic Addressables tool | 3 | `DEFERRED_ADDRESSABLES_LIVE_PARITY_REQUIRED` | 実Package/Settings/Group上のinspect/prepare/applyとApproval parity |
-| UnityAgent deterministic animation tool | 4 | `DEFERRED_ANIMATION_TYPED_TOOL_PARITY_REQUIRED` | typed Animator inspection/prepare/apply/validateのLive parity |
-| UnityAgent deterministic AudioSource tool | 4 | `DEFERRED_AUDIO_SCENE_TOOL_PARITY_REQUIRED` | typed AudioSource inspection/prepare/apply/validateのLive parity |
-| UnityAgent deterministic scene tool | 4 | `DEFERRED_UI_TYPED_TOOL_PARITY_REQUIRED` | typed UI inspection/RectTransform mutation/validationのLive parity |
+旧Agent Control Plane、旧Execution Frontend、旧内部Status API等は `RETIRED` とし、Current Productへ復活させない。
 
-これはScope縮小による「完了扱い」ではない。各行は引き続きPORTであり、再開条件を満たすまでREPLACEDではない。一方、元Goalの「PORT完了または明示的な機能別延期判断」はこれで満たす。
+## Detachment policy
 
-RETIRE 15件についてUnityAgent current mainの旧Tool名を個別検索した。7件は検索結果なし、7件はProduction disabledな `Runtime/Tooling/Providers/MyUnityMcp/capability_mapper.py` のみ、`world.start_preflight` はEval用のWorldCreator pilot instructionにだけ残る。Production-enabled Provider / Orchestration route / current Specialist RegistryからRETIRE名を呼ぶactive callerは確認されなかった。従ってProduction active pathは切替済みと判定する。ただしLegacy Adapter、Environment Fact、関連TestsのSource-level依存が残るため物理的なLegacy source removalは行わない。
+Legacy削除を阻害する条件は、今後次の3点だけとする。
 
-**Repository Productionization上の最終判定:** Legacy分類・Knowledge移管・PORT延期判断・RETIRE active-path scanは完了した。Legacy Runtimeの物理Detachmentだけはreplacement/live parity不足のため `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。これはFull Runtime Verification / Legacy physical removalの未完了であり、既存Goalで許容されたEvidence blockerである。
+1. Current Product codeがLegacy SourceをRuntime実行に必要としている
+2. Current CI/TestがLegacy Source Treeを直接Fixtureとして必要としている
+3. Historical provenanceがGit tag / immutable fixtureへ固定されていない
 
-### 77件の移行状態更新（2026-09-29）
+Legacy API parity不足は削除Blockerにしない。
 
-Matrixに `replacement_contract`、`migration_status`、`active_dependency`、`tests`、`documentation`、`runtime_evidence_requirement` を追加した。旧Tool名34件がUnityAgentの `MyUnityMcp/capability_mapper.py` に直接現れるが、Providerは `production_enabled: false` である。この34件はSource-level参照数であり、Production実行件数ではない。残り43件についても、旧Adapter全体の削除条件を満たした意味にはならない。
+## Next steps
 
-`profiler.inspect_environment` と `profiler.inspect_counters` の2件は、新しいUnity CLI / Pipeline `profiler.observe` に計測条件・メモリ値・FrameTimingの一部が重なるため `PARTIAL_PRODUCTION_OBSERVATION_PARITY_UNVERIFIED` と記録した。旧ProfilerRecorder Counter一覧との厳密な互換、Capture制御、Live Editor結果は未確認である。`profiler.summarize_capture` を含む他6件は `DEFERRED_PROFILER_SESSION_PARITY_REQUIRED` とし、8件ともREPLACEDへ変更しない。
+1. UnityAgentのProduction-disabled `MyUnityMcp` Adapterを削除する
+2. Legacy Source Inventoryをimmutable Fixture / Git tag provenanceへ変換する
+3. HubのLegacy Source直接参照をFixtureへ切り替える
+4. `Legacy/MyUnityMCP-1.1.1/` をmainから削除する
+5. 公開済み `v1.1.1` tagとGit履歴は変更しない
 
-KNOWLEDGE 12件は既存のSkill・Documentationへの移管済み状態を維持し、旧Runtime機能の置換とは分離した。RETIRE 15件はProduction active callerが無いことを再確認済みだが、Legacy Adapter / Environment Contract /監査TestのSource-level撤去は未完了である。従って77件の分類は `PORT=50 / KNOWLEDGE=12 / RETIRE=15 / REPLACED=0 / UNRESOLVED=0` を維持し、判定は `LEGACY_DETACHMENT_BLOCKED_BY_EVIDENCE` とする。
+## Non-goals
+
+- Legacy 50 PORT候補の再実装
+- MyUnityMCP transportの復活
+- Legacy API compatibility layerの維持
+- Backend内部の未公開機能をLegacy削除のためだけにProduction昇格すること
