@@ -10,7 +10,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "Legacy/MyUnityMCP-1.1.1/Package/Editor"
 MATRIX = ROOT / "Design/legacy-capability-salvage.csv"
-TOOL = re.compile(r'\\[McpForUnityTool\\(\\s*"([^"]+)"')
+TOOL = re.compile(r'\[McpForUnityTool\(\s*"([^"]+)"')
 EXPECTED = {"graphics": 32, "agent": 10, "world": 3, "profiler": 8, "addressables": 4, "ui": 5, "animation": 5, "audio": 5, "cinematic": 5}
 DECISIONS = {"FUTURE_SPEC_ARCHIVED", "KNOWLEDGE_ARCHIVED", "RETIRED"}
 
