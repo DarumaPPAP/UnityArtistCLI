@@ -55,7 +55,7 @@ Current Production Contractは各Manifestの `capability_contract_ref` を参照
 - Backend追加とSpecialist追加を同一Identityとして扱わない
 - Registry登録をinstalled / available / eligible / Production Verifiedと書かない
 - Current docsへHistorical Support Matrixを混在させない
-- Legacy sourceはactive dependencyとdetachment gateが0になるまで削除しない
+- MyUnityMCP v1.1.1のHistorical sourceはmainへ戻さず、Frozen FixtureとGit tag `v1.1.1` をprovenance正本として維持する
 
 ## Distribution boundary
 

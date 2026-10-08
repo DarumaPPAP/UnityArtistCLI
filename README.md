@@ -17,6 +17,8 @@
   <a href="#branch-workflow">Branch Workflow</a> ·
   <a href="Design/subagent-hub-architecture.md">Architecture</a> ·
   <a href="docs/README.md">Docs Index</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a> ·
+  <a href="SECURITY.md">Security</a> ·
   <a href="docs/references/unity-cli-reference.md">Unity CLI Reference</a>
 </p>
 

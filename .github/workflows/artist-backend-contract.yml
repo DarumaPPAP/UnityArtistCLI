@@ -19,7 +19,7 @@ on:
       - scripts/install.sh
       - scripts/verify-external-cli.ps1
       - .agents/skills/artist-subagent-*/**
-      - skills/unity-artist-unity-api-compatibility/**
+      - .agents/skills/unity-artist-unity-api-compatibility/**
       - .github/workflows/artist-backend-contract.yml
   push:
     branches: [main]
@@ -32,6 +32,8 @@ on:
       - Tests/Backend/**
       - Tests/Compatibility/**
       - Tests/Minimal/**
+      - .agents/skills/artist-subagent-*/**
+      - .agents/skills/unity-artist-unity-api-compatibility/**
       - .github/workflows/artist-backend-contract.yml
 
 permissions:

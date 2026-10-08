@@ -52,7 +52,7 @@ python Tests/Compatibility/verify-unity-api-compatibility.py
 python Tests/Backend/verify_portable_paths.py
 ```
 
-Compatibility-sensitive Artist code and API changes must apply `skills/unity-artist-unity-api-compatibility/SKILL.md`.
+Compatibility-sensitive Artist code and API changes must apply `.agents/skills/unity-artist-unity-api-compatibility/SKILL.md`.
 
 Direct Unity Editor, License, Pipeline, and visual end-to-end evidence must be distinguished from static host validation. Unknown observations must not be recorded as successful evidence.
 
