@@ -1,20 +1,22 @@
 # Legacy Capability Salvage Audit
 
-## Decision
+## Final decision
 
 MyUnityMCP v1.1.1 の77 Toolは、現行ProductへLegacy APIとして移植しない。
 
-Legacy実装を残す条件を「旧APIとのParity」には置かない。現行Product Surfaceは、現行Manifest・Runtime resolution・Contract・Test・Evidenceを正本とし、Legacy APIの互換層を正本へ昇格しない。
+Legacy API parityはCurrent Productの完了条件でもLegacy Source保持条件でもない。現行Product Surfaceは、現行Manifest・Runtime resolution・Contract・Test・Evidenceを正本とする。
 
 | Decision | 件数 | 意味 |
 |---|---:|---|
-| `FUTURE_SPEC_ARCHIVED` | 50 | 旧PORT候補。不採用。将来の新機能設計時に参考情報としてのみ利用 |
+| `FUTURE_SPEC_ARCHIVED` | 50 | 旧PORT候補。不採用。将来の新機能設計時の参考情報のみ |
 | `KNOWLEDGE_ARCHIVED` | 12 | Skill / Documentation / Contractへ判断知識のみ保存。Runtime APIは不採用 |
-| `RETIRED` | 15 | 旧Control Plane / Frontend /内部実行Surface。再導入しない |
+| `RETIRED` | 15 | 旧Control Plane / Frontend / 内部実行Surface。再導入しない |
 | `PORT` | 0 | Legacy移植対象なし |
 | `REPLACED` | 0 | Legacy API parityをProduct要件にしないため使用しない |
 
-機械可読な全77件の記録は [legacy-capability-salvage.csv](legacy-capability-salvage.csv) を正本とする。
+機械可読な77件のCurrent Decisionは [legacy-capability-salvage.csv](legacy-capability-salvage.csv) を正本とする。
+
+Historical Source provenanceは `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json` とGit tag `v1.1.1` に固定する。
 
 ## Current Product Surface
 
@@ -25,47 +27,56 @@ Legacy実装を残す条件を「旧APIとのParity」には置かない。現�
 - PerformanceSubAgent: `performance.analyze` + Production `profiler.observe`
 - WorldCreatorSubAgent: `world.plan`
 
-Backend内部に実装が存在しても、Manifest / Runtime resolution / Contract / Test / Evidenceまで揃っていない機能はProduct Surfaceとして扱わない。
+Backend内部にコードが存在するだけではProduct Surfaceとみなさない。Manifest / Runtime resolution / Contract / Test / Evidenceまで揃ったCurrent Surfaceだけを現行機能として扱う。
 
 ## Archive policy
 
 ### Knowledge archive
 
-価値のある判断境界は次へ保持する。
+再利用価値のある判断境界は次へ保持する。
 
 - [Legacy domain support boundaries](legacy-domain-support-boundaries.md)
+- [Legacy Knowledge Archive](legacy-knowledge-archive.md)
 - UnityAgent Visual Direction Skill
 - UnityAgent Content Import Analysis Skill
 - WorldCreator planning contract
-- 77件のresponsibility / risk / historical sourceを保持するMatrix
+- 77件のresponsibility / risk / historical sourceを保持するMatrixとFrozen Fixture
 
 ### Future feature archive
 
 旧PORT 50件は `FUTURE_SPEC_ARCHIVED` とする。
 
-これは「後で実装する約束」ではない。将来同じProblemをProduct要件として採用する場合だけ、Legacy実装をコピーせず、現行Architecture・Unity Version・Safety Contract・Evidence Contractから新規設計する。
+これは将来実装の約束ではない。将来同じProblemをProduct要件として採用する場合だけ、Legacy実装をコピーせず、現行Architecture・Unity Version・Safety Contract・Evidence Contractから新規設計する。
 
 ### Retired API
 
 旧Agent Control Plane、旧Execution Frontend、旧内部Status API等は `RETIRED` とし、Current Productへ復活させない。
 
-## Detachment policy
+## Detachment status
 
-Legacy削除を阻害する条件は、今後次の3点だけとする。
+Legacy Source削除のGateは完了した。
 
-1. Current Product codeがLegacy SourceをRuntime実行に必要としている
-2. Current CI/TestがLegacy Source Treeを直接Fixtureとして必要としている
-3. Historical provenanceがGit tag / immutable fixtureへ固定されていない
+- [x] 50 PORT候補を不採用化し `FUTURE_SPEC_ARCHIVED` へ移行
+- [x] Knowledge 12件を `KNOWLEDGE_ARCHIVED` として保存
+- [x] Retired 15件を明示
+- [x] UnityAgentのProduction-disabled `MyUnityMcp` Runtime Adapterを削除
+- [x] 77 Tool inventory / package metadata / source blob SHAをFrozen Fixtureへ固定
+- [x] Hub CI/TestのLegacy Source Tree直接依存をFrozen Fixtureへ切替
+- [x] Repository AuthorityをLegacy Source RootからFrozen Provenanceへ変更
+- [x] `Legacy/MyUnityMCP-1.1.1/` Source Treeをcurrent branchから削除
+- [x] 公開済みGit tag `v1.1.1` とGit履歴を保持
 
-Legacy API parity不足は削除Blockerにしない。
+Current Matrixの `active_dependency` は、34件を `legacy_adapter_removed`、43件を `no_active_legacy_runtime_dependency` として記録する。
 
-## Next steps
+## Frozen provenance
 
-1. UnityAgentのProduction-disabled `MyUnityMcp` Adapterを削除する
-2. Legacy Source Inventoryをimmutable Fixture / Git tag provenanceへ変換する
-3. HubのLegacy Source直接参照をFixtureへ切り替える
-4. `Legacy/MyUnityMCP-1.1.1/` をmainから削除する
-5. 公開済み `v1.1.1` tagとGit履歴は変更しない
+- Git tag: `v1.1.1`
+- Annotated tag object: `f74d6f86f65178492aee1eaac5c01acb7ba5514a`
+- Release commit: `ea437f11bcf5b46b6a7575f9d2f9b81a9c02da7c`
+- Frozen fixture: `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/`
+- Archived tool count: 77
+
+旧Sourceそのものが必要な場合はGit tag / release commitから取得する。main branchへLegacy Source Treeを戻すことをKnowledge保存手段にしない。
 
 ## Non-goals
 

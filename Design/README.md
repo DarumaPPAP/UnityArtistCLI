@@ -27,4 +27,4 @@ Graphics / WorldCreator / Performanceの `contracts/capability-contracts.yaml` �
 
 ## Legacyとの区別
 
-`Legacy/MyUnityMCP-1.1.1/Design/`は旧MyUnityMCPの設計記録です。現在のHub ContractやUnityAgentのProduction Architectureとして読み替えないでください。
+旧MyUnityMCPの設計記録はGit tag `v1.1.1`から参照します。mainには旧Design treeを保持しません。現在のHub ContractやUnityAgentのProduction Architectureとして読み替えないでください。

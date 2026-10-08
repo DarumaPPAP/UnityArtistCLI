@@ -10,7 +10,7 @@
 | `Templates/AcceptanceProfiles/balanced-graphics.json` | DELETE | No active repository or UnityAgent reference was found. Scores and budgets are project evaluation policy, not registry metadata. |
 | Eight forwarding scripts in `Tests/Release/` | DELETE | Each only imported `verify_unity_artist_contract.main`; no active workflow or non-Legacy source referenced their filenames. The canonical validator remains. |
 | Artist package, CLI, compatibility tests, local install scripts and backend skills | KEEP co-located | They are Specialist source owned by the Hub repository boundary. Hub does not dispatch them. Public distribution is owned by UnityAgent, which pins an exact Hub commit and packages required backend assets into the UnityAgent release. |
-| `Legacy/MyUnityMCP-1.1.1/` | MIGRATION CANDIDATE; retain for now | `Tests/Backend/verify_artist_backend_contract.py` reads `Legacy/MyUnityMCP-1.1.1/Package/package.json` as an active release gate. Remove that dependency before detaching the tree. |
+| MyUnityMCP v1.1.1 Source Tree | REMOVED FROM MAIN | Release/capability provenance was frozen under `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` and Git tag `v1.1.1`; current validators no longer read the Legacy source tree. |
 
 ## Contract decisions
 

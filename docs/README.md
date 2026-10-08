@@ -36,7 +36,7 @@ Artist backend implementationは移行上このRepositoryに同居していま�
 ## Historical / migration records
 
 - [Migration from MyUnityMCP](../MIGRATION_FROM_MYUNITYMCP.md)
-- `Legacy/MyUnityMCP-1.1.1/` — immutable historical source / current detachment evidence source
+- `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` + Git tag `v1.1.1` — frozen historical provenance / detachment evidence
 - `Design/DecisionLog/` — dated decisions
 - `Design/legacy-capability-salvage-audit.md` — Legacy 77 Capabilityの回収・延期・削除Gate
 - `Tests/Compatibility/*evidence*` — 時点Evidence

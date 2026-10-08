@@ -56,7 +56,7 @@ Hub ManifestはRuntime Context値やTaskごとのSkill選択を所有しませ�
 3. UnityAgentが新しいCapability semanticsを扱えるか別に確認します。Consumer Profileが必要ならUnityAgent側でImport Migrationを実施します。
 4. 廃止時はLifecycleを`deprecated`、`retired`または`revoked`へ変更します。既存利用・配布URL・Consumer参照を監査し、履歴が不要になるまでIdentityを再利用しません。
 
-`Legacy/MyUnityMCP-1.1.1/`は現在のHubまたはBackend Runtimeではありません。現行Release Validatorが一部を参照するため、参照を移行するまでmainからの除去を保留します。公開TagとGit履歴は変更しません。
+MyUnityMCP v1.1.1 Source Treeは現行Hub/Backend RuntimeからDetachment済みで、mainには保持しません。監査はFrozen Fixtureと公開Tag `v1.1.1` を使用し、公開TagとGit履歴は変更しません。
 
 ## Execution Contract v5
 

@@ -8,7 +8,7 @@ authorities:
   registry_schema: Schemas/subagent-registry.schema.json
   manifest_schema: Schemas/subagent-manifest.schema.json
   architecture: Design/subagent-hub-architecture.md
-  legacy_root: Legacy
+  legacy_provenance: Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1
   artist_backend_version:
     source: SubAgents/artist_subagent/manifest.yaml
     mirrors:
@@ -30,4 +30,4 @@ rules:
 
 notes:
   - This file maps authority and mirrors; it does not replace specialist manifests or Registry/subagents.yaml.
-  - Historical files under Legacy are not current authority.
+  - MyUnityMCP historical source is not kept on main; provenance is frozen under Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1 and Git tag v1.1.1.

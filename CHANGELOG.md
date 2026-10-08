@@ -35,7 +35,7 @@
 ### Changed
 
 - Generic Unity operations are delegated to the official Unity CLI; no second Player framework or MCP transport is added
-- MyUnityMCP v1.1.1 package and client templates are preserved under `Legacy/MyUnityMCP-1.1.1/`
+- MyUnityMCP v1.1.1 history is preserved by Git tag `v1.1.1`; frozen provenance is stored under `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/`
 - Unity 2022.3 URP/HDRP and Unity 2023 are rejected before mutation
 
 ### Verification

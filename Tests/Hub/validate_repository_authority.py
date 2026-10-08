@@ -70,7 +70,7 @@ def validate_repository() -> list[str]:
         "registry_schema",
         "manifest_schema",
         "architecture",
-        "legacy_root",
+        "legacy_provenance",
     )
     for key in required_paths:
         value = authorities.get(key)
@@ -166,6 +166,9 @@ def validate_repository() -> list[str]:
 
     if (ROOT / "VERSION").exists():
         errors.append("root VERSION is prohibited because Hub has no independent public release version")
+
+    if (ROOT / "Legacy").exists():
+        errors.append("Legacy source tree must not be restored to current main; use frozen provenance and Git tag v1.1.1")
 
     return errors
 
