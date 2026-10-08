@@ -11,7 +11,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 COMPATIBILITY = ROOT / "Packages/com.darumappap.artist-subagent/Editor/Compatibility/ArtistCompatibility.cs"
 COMPATIBILITY_TESTS = ROOT / "Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs"
-SKILL = ROOT / "skills/unity-artist-unity-api-compatibility/SKILL.md"
+SKILL = ROOT / ".agents/skills/unity-artist-unity-api-compatibility/SKILL.md"
 SPEC = ROOT / "Specs/Compatibility/unity-api-compatibility.md"
 AGENTS = ROOT / "AGENTS.md"
 MATRIX = ROOT / "Tests/Compatibility/support-matrix.yaml"
@@ -56,7 +56,7 @@ def main() -> int:
         fail("compatibility skill must preserve package .meta and identity rules")
     if "BASE" not in spec or "UNITY_6000_7" not in spec:
         fail("compatibility spec is incomplete")
-    if "skills/unity-artist-unity-api-compatibility/SKILL.md" not in agents:
+    if ".agents/skills/unity-artist-unity-api-compatibility/SKILL.md" not in agents:
         fail("AGENTS.md must require the current compatibility skill")
 
     actual = {(str(row.get("unity_version")), str(row.get("render_pipeline"))) for row in matrix.get("rows", []) if isinstance(row, dict)}
