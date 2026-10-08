@@ -16,7 +16,7 @@ This repository owns the SubAgent registry, shared schemas, per-specialist manif
 - `artist_subagent` and `unity_artist_cli` are different identities. Never route a SubAgent request by substituting its backend id.
 - UnityAgent owns all runtime resolution and execution. Hub validators inspect metadata and referenced files only.
 - Manifests and committed evidence use repository-relative paths. Never commit machine-specific paths or live installation state.
-- Do not change `Legacy/MyUnityMCP-1.1.1/` or rewrite its published tag.
+- Do not rewrite the published MyUnityMCP `v1.1.1` tag or mutate `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` without explicit provenance migration.
 
 ## Git workflow
 
