@@ -1,6 +1,6 @@
 # Migration from MyUnityMCP v1.1.1
 
-The repository now maintains the UnitySubAgentHub registry and contract surface. ArtistSubAgent is its first registered specialist; its existing CLI and Unity package remain the implementation backend during this transition. The published MyUnityMCP v1.1.1 tag and `Legacy/MyUnityMCP-1.1.1/` remain unchanged as migration references.
+The repository now maintains the UnitySubAgentHub registry and contract surface. ArtistSubAgent is its first registered specialist; its existing CLI and Unity package remain the implementation backend during this transition. MyUnityMCP v1.1.1 source is no longer kept on main; migration provenance is frozen in Git tag `v1.1.1` and `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/`.
 
 | Responsibility | Current owner |
 |---|---|
