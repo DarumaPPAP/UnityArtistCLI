@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "product": "MyUnityMCP",
+  "release": "v1.1.1",
+  "annotated_tag_object_sha": "f74d6f86f65178492aee1eaac5c01acb7ba5514a",
+  "release_commit_sha": "ea437f11bcf5b46b6a7575f9d2f9b81a9c02da7c",
+  "archived_tool_count": 77,
+  "decision_counts": {
+    "FUTURE_SPEC_ARCHIVED": 50,
+    "KNOWLEDGE_ARCHIVED": 12,
+    "RETIRED": 15
+  },
+  "source_tree_policy": "Historical source is recovered from the immutable Git tag/commit, not from main.",
+  "current_product_policy": "Legacy APIs are not adopted as current Product Surface."
+}
