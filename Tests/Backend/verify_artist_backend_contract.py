@@ -281,10 +281,16 @@ def check_agent_distribution(errors: list[str]) -> None:
 
 
 def check_legacy_anchor(errors: list[str]) -> None:
-    package = ROOT / "Legacy/MyUnityMCP-1.1.1/Package/package.json"
-    value = read_json(errors, package)
-    if value.get("version") != "1.1.1":
-        error(errors, "Legacy MyUnityMCP v1.1.1 package anchor is missing or changed")
+    fixture_root = ROOT / "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1"
+    package = read_json(errors, fixture_root / "package-metadata.json")
+    provenance = read_json(errors, fixture_root / "provenance.json")
+    package_value = package.get("package") if isinstance(package, dict) else {}
+    if not isinstance(package_value, dict) or package_value.get("version") != "1.1.1":
+        error(errors, "frozen Legacy package metadata must remain MyUnityMCP v1.1.1")
+    if provenance.get("release") != "v1.1.1":
+        error(errors, "frozen Legacy provenance release must remain v1.1.1")
+    if provenance.get("release_commit_sha") != "ea437f11bcf5b46b6a7575f9d2f9b81a9c02da7c":
+        error(errors, "frozen Legacy release commit drifted")
     completed = subprocess.run(
         ["git", "rev-parse", "--verify", "refs/tags/v1.1.1"],
         cwd=ROOT,
