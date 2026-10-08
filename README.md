@@ -205,7 +205,7 @@ GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Close
 
 ## Legacy
 
-`Legacy/MyUnityMCP-1.1.1/` は旧MCP Packageの移行記録です。現在のHub RuntimeでもArtistSubAgent Backendでもありません。公開済みLegacy Tagは変更しません。
+MyUnityMCP v1.1.1 の旧Sourceはmainから削除済みです。履歴は公開済みGit tag `v1.1.1` と `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` のFrozen Evidenceで参照します。現在のHub RuntimeでもArtistSubAgent Backendでもありません。
 
 ## License
 
