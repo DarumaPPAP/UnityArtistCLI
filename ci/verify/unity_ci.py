@@ -135,7 +135,8 @@ def run(args):
     output.mkdir(parents=True, exist_ok=True)
     # Never reuse a previous test result as evidence of this execution.
     for name in ('results.xml', 'editor.log', 'editor-version.txt', 'evidence.json',
-                 'packages-lock.json', 'manifest.json', 'requested-manifest.json', 'srp-selection.json'):
+                 'packages-lock.json', 'manifest.json', 'requested-manifest.json', 'srp-selection.json',
+                 'editor.stdout.log', 'editor.stderr.log', 'pipeline-smoke.png', 'graphics-device.json'):
         (output / name).unlink(missing_ok=True)
     evidence = dict(status='BLOCKED_NOT_RUN', observation='not_observed', fixture=fixture['id'],
                     project=fixture['project'], pipeline=fixture['pipeline'],
@@ -153,8 +154,12 @@ def run(args):
         manifest = json.loads((source / 'Packages/manifest.json').read_text())
         evidence['packages'] = manifest['dependencies'].copy()
         (output / 'requested-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+        if fixture.get('version_provenance'):
+            evidence['version_provenance'] = fixture['version_provenance']
         if os.getenv('UNITY_LICENSE_READY') != 'true':
             raise RuntimeError('Prelicensed runner required: set UNITY_LICENSE_READY=true only after licensing')
+        if fixture.get('requires_graphics') and os.getenv('UNITY_GRAPHICS_READY') != 'true':
+            raise RuntimeError('Graphics smoke requires provisioned GPU/display: UNITY_GRAPHICS_READY=true')
         executable = os.getenv('UNITY_EDITOR', '')
         if not executable:
             executable = str(Path(os.getenv('UNITY_EDITOR_ROOT', '/opt/unity')) / version / 'Editor/Unity')
@@ -202,13 +207,24 @@ def run(args):
         (project / 'Packages/manifest.json').write_text(json.dumps(manifest, indent=2))
         (project / 'ProjectSettings/ProjectVersion.txt').write_text('m_EditorVersion: ' + version + '\n')
         results, log = output / 'results.xml', output / 'editor.log'
-        command = [str(editor), '-batchmode', '-nographics', '-projectPath', str(project), '-runTests',
+        command = [str(editor), '-batchmode', '-projectPath', str(project), '-runTests',
                    '-testPlatform', 'EditMode', '-testResults', str(results), '-logFile', str(log)]
+        if not fixture.get('requires_graphics'):
+            command.insert(2, '-nographics')
         if fixture.get('test_filter'):
             command.extend(['-testFilter', fixture['test_filter']])
         evidence['status'] = 'FAIL'
         evidence['observation'] = 'observed'
-        completed = subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=3600)
+        process_env = dict(os.environ, UNITY_CI_ARTIFACTS=str(output))
+        with (output / 'editor.stdout.log').open('w') as stdout, (output / 'editor.stderr.log').open('w') as stderr:
+            completed = subprocess.run(command, stdout=stdout, stderr=stderr, env=process_env, timeout=3600)
+        evidence['editor_exit_code'] = completed.returncode
+        diagnostic_logs = ''.join((output / name).read_text(errors='replace')
+                                  for name in ('editor.log', 'editor.stdout.log', 'editor.stderr.log')
+                                  if (output / name).exists())
+        if 'UNITY_CI_GRAPHICS_UNAVAILABLE' in diagnostic_logs:
+            evidence['status'], evidence['observation'] = 'BLOCKED_NOT_RUN', 'not_observed'
+            raise RuntimeError('Measured Editor graphics device unavailable; see Editor logs')
         if completed.returncode:
             # Unity license faults mean no test execution, not an assertion failure.
             contents = log.read_text(errors='replace') if log.exists() else ''
@@ -229,6 +245,21 @@ def run(args):
             resolved = evidence['resolved_packages'].get(package, {}).get('version')
             if not resolved or (not requested.startswith('file:') and resolved != requested):
                 raise ValueError('Resolved package lock does not match requested exact dependency: ' + package)
+        for name in fixture.get('required_artifacts', []):
+            artifact = output / name
+            if not artifact.is_file() or artifact.stat().st_size == 0:
+                raise ValueError('Required smoke artifact missing: ' + name)
+        if fixture.get('requires_graphics'):
+            graphics = json.loads((output / 'graphics-device.json').read_text())
+            if graphics.get('deviceType') == 'Null':
+                evidence['status'], evidence['observation'] = 'BLOCKED_NOT_RUN', 'not_observed'
+                raise RuntimeError('Measured graphics device unavailable in readback metadata')
+            if (graphics.get('editorVersion') != version or not graphics.get('deviceType')
+                    or float(graphics.get('pixelVariation', 0)) <= 0.1):
+                raise ValueError('Measured graphics/readback evidence does not satisfy render smoke')
+            if not (output / 'pipeline-smoke.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n'):
+                raise ValueError('Render smoke screenshot is not a PNG')
+            evidence['graphics_observation'] = graphics
         evidence['status'], evidence['reason'], code = 'PASS', 'Nonempty EditMode tests passed', 0
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
         evidence['reason'] = str(error)
@@ -243,6 +274,9 @@ def run(args):
             shutil.rmtree(project)
         if not (output / 'editor.log').exists():
             (output / 'editor.log').write_text('BLOCKED_NOT_RUN: ' + evidence['reason'] + '\n')
+        for name in ('editor.stdout.log', 'editor.stderr.log'):
+            if not (output / name).exists():
+                (output / name).write_text('BLOCKED_NOT_RUN: no Editor test process executed; ' + evidence['reason'] + '\n')
         evidence['artifact_hashes'] = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                                       for path in output.iterdir() if path.is_file()}
         (output / 'evidence.json').write_text(json.dumps(evidence, indent=2) + '\n')

@@ -61,6 +61,7 @@ jobs:
       UNITY_EDITOR_ROOT: ${{ vars.UNITY_EDITOR_ROOT }}
       UNITY_EDITOR: ${{ vars.UNITY_EDITOR }}
       UNITY_LICENSE_READY: ${{ vars.UNITY_LICENSE_READY }}
+      UNITY_GRAPHICS_READY: ${{ vars.UNITY_GRAPHICS_READY }}
       UNITY_ALLOW_EDITOR_DOWNLOAD: ${{ vars.UNITY_ALLOW_EDITOR_DOWNLOAD }}
     steps:
       - uses: actions/checkout@v4

@@ -92,26 +92,52 @@ class RunnerTests(unittest.TestCase):
             (project / 'ProjectSettings/ProjectVersion.txt').write_text('m_EditorVersion: 6000.6.0f1')
             matrix = root / 'matrix.yaml'
             matrix.write_text(json.dumps({'canonical_editor':'6000.6.0f1','package_policy':'test',
-                'fixtures':[{'id':'fake','project':'fixture','pipeline':'builtin','editor':'6000.6.0f1'}]}))
+                'fixtures':[dict(id='fake',project='fixture',pipeline='builtin',editor='6000.6.0f1',
+                    requires_graphics=mode.startswith('render-'),
+                    required_artifacts=['pipeline-smoke.png','graphics-device.json'] if mode.startswith('render-') else [])]}))
             output = root / 'artifacts'; output.mkdir()
             # A prior successful result must never satisfy a new run.
             (output / 'results.xml').write_text('<test-run result="Passed" total="1" passed="1"><test-case result="Passed"/></test-run>')
             def execute(command, **kwargs):
                 if '-version' in command:
                     return subprocess.CompletedProcess(command,0,'6000.6.0f1','')
+                kwargs['stdout'].write('Editor stdout evidence\n'); kwargs['stdout'].flush()
+                kwargs['stderr'].write('Editor stderr evidence\n'); kwargs['stderr'].flush()
                 log = Path(command[command.index('-logFile')+1])
                 if mode == 'license':
                     log.write_text('No valid license found')
                     return subprocess.CompletedProcess(command,1)
+                if mode == 'graphics':
+                    log.write_text('UNITY_CI_GRAPHICS_UNAVAILABLE: graphicsDeviceType=Null')
+                    return subprocess.CompletedProcess(command, 0)
                 log.write_text('Editor test execution')
-                if mode == 'pass':
+                if mode.startswith('render-'):
+                    self.assertNotIn('-nographics',command)
+                else:
+                    self.assertIn('-nographics',command)
+                if mode == 'pass' or mode.startswith('render-'):
                     Path(command[command.index('-testResults')+1]).write_text('<test-run result="Passed" total="1" passed="1"><test-case result="Passed"/></test-run>')
                     copied = Path(command[command.index('-projectPath')+1])
                     (copied / 'Packages/packages-lock.json').write_text('{"dependencies":{"com.unity.test-framework":{"version":"1.3.9"}}}')
+                if mode in {'render-valid','render-null'}:
+                    (output/'pipeline-smoke.png').write_bytes(b'\x89PNG\r\n\x1a\nHOST_TEST_ONLY')
+                    (output/'graphics-device.json').write_text(json.dumps({'editorVersion':'6000.6.0f1','deviceType':'Null' if mode=='render-null' else 'Vulkan','pixelVariation':0.7}))
                 return subprocess.CompletedProcess(command,0)
-            with patch.object(ci,'ROOT',root), patch.object(ci,'MATRIX',matrix), patch.object(ci.subprocess,'run',side_effect=execute), patch.dict(os.environ,{'UNITY_EDITOR':'/bin/true','UNITY_LICENSE_READY':'true'}):
+            with patch.object(ci,'ROOT',root), patch.object(ci,'MATRIX',matrix), patch.object(ci.subprocess,'run',side_effect=execute), patch.dict(os.environ,{'UNITY_EDITOR':'/bin/true','UNITY_LICENSE_READY':'true','UNITY_GRAPHICS_READY':'true'}):
                 code = ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False))
-            return code, json.loads((output / 'evidence.json').read_text())
+            evidence = json.loads((output / 'evidence.json').read_text())
+            evidence['_stdout'] = (output / 'editor.stdout.log').read_text()
+            evidence['_stderr'] = (output / 'editor.stderr.log').read_text()
+            return code, evidence
+    def test_render_requires_readback_artifacts(self):
+        code,evidence=self.run_fake('render-missing')
+        self.assertEqual(code,1);self.assertEqual(evidence['status'],'FAIL')
+    def test_render_null_device_metadata_blocks_without_log_marker(self):
+        code,evidence=self.run_fake('render-null')
+        self.assertEqual(code,2);self.assertEqual(evidence['status'],'BLOCKED_NOT_RUN')
+    def test_graphics_host_state_machine_checks_metadata_and_png(self):
+        code,evidence=self.run_fake('render-valid')
+        self.assertEqual(code,0);self.assertIn('graphics_observation',evidence)
     def test_stale_result_is_removed(self):
         code,evidence=self.run_fake('missing-results')
         self.assertEqual(code,1);self.assertEqual(evidence['status'],'FAIL')
@@ -123,8 +149,29 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(code,0);self.assertEqual(evidence['tests_passed'],1)
         self.assertEqual(evidence['observed_editor'],'6000.6.0f1')
         self.assertIn('packages-lock.json',evidence['artifact_hashes'])
+        self.assertIn('editor.stdout.log',evidence['artifact_hashes'])
+        self.assertIn('editor.stderr.log',evidence['artifact_hashes'])
+        self.assertIn('Editor stdout evidence',evidence['_stdout'])
+        self.assertIn('Editor stderr evidence',evidence['_stderr'])
+    def test_stdout_and_stderr_survive_editor_failure(self):
+        code,evidence=self.run_fake('license')
+        self.assertEqual(code,2)
+        self.assertIn('Editor stdout evidence',evidence['_stdout'])
+        self.assertIn('Editor stderr evidence',evidence['_stderr'])
+    def test_measured_null_graphics_blocks_even_zero_exit(self):
+        code,evidence=self.run_fake('graphics')
+        self.assertEqual(code,2);self.assertEqual(evidence['status'],'BLOCKED_NOT_RUN')
 
 class FixtureTests(unittest.TestCase):
+    def test_63_fixture_exact_official_provenance_and_narrow_compile_scope(self):
+        config=json.loads(ci.MATRIX.read_text())
+        row=next(row for row in config['fixtures'] if row['id']=='minimal-6000.3')
+        self.assertEqual(row['editor'],'6000.3.12f1')
+        self.assertEqual(row['version_provenance']['commit'],'2d2e78cc9d6254bc6e7c9c5552cea053508e86cb')
+        manifest=json.loads((ci.ROOT/row['project']/'Packages/manifest.json').read_text())
+        self.assertNotIn('com.unity.pipeline',manifest['dependencies'])
+        self.assertEqual(row['scope'],'compile-import')
+
     def test_fixtures_have_tests_scene_metadata_and_correct_local_package_path(self):
         config=json.loads(ci.MATRIX.read_text())
         for row in config['fixtures'][1:]:
@@ -140,5 +187,12 @@ class FixtureTests(unittest.TestCase):
                 self.assertIn('m_Name: Main Camera',scene)
                 self.assertIn('m_Name: FovSubject',scene)
                 self.assertIn('m_Name: Key Light',scene)
+                script=(project/'Assets/Editor/SmokeTests.cs').read_text()
+                self.assertIn('ReadPixels',script)
+                self.assertIn('graphicsDeviceType == GraphicsDeviceType.Null',script)
+                self.assertIn('Assert.Greater(maximum - minimum',script)
+                self.assertTrue(row['requires_graphics'])
+                self.assertIn('pipeline-smoke.png',row['required_artifacts'])
+                if row['pipeline']!='builtin':self.assertIn('RenderPipeline.SubmitRenderRequest',script)
 
 if __name__=='__main__': unittest.main()
