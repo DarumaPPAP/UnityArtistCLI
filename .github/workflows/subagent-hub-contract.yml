@@ -8,14 +8,20 @@ on:
     paths:
       - AGENTS.md
       - README.md
-      - Design/**
-      - Specs/**
+      - docs/architecture/**
+      - docs/references/**
+      - docs/decisions/**
+      - ci/verify/**
+      - ci/evidence/**
+      - Hub/Tools/**
+      - Hub/repository-authority.yaml
+      - Hub/specialist-execution-admission.yaml
       - Hub/Registry/**
       - Hub/Schemas/**
       - Hub/SubAgents/**
       - Packages/com.darumappap.artist-subagent/**
-      - src/UnityArtist.Cli/**
-      - Tests/Compatibility/support-matrix.yaml
+      - cli/artist/**
+      - ci/compatibility/support-matrix.yaml
       - Hub/Tests/**
       - docs/development/branch-policy.md
       - .github/branch-policy.json
@@ -62,8 +68,21 @@ jobs:
           set -euo pipefail
           hub_commit="$(git rev-parse HEAD)"
           git -C .tmp-unityagent-consumer rev-parse HEAD
+          # Explicit dual-read transition for the Agent P5 tools rename.
+          consumer_root=.tmp-unityagent-consumer
+          importer_candidates=()
+          for candidate in "$consumer_root/Tools/import_subagent_catalog.py" "$consumer_root/tools/import_subagent_catalog.py"; do
+            if [[ -f "$candidate" ]]; then
+              importer_candidates+=("$candidate")
+            fi
+          done
+          if [[ ${#importer_candidates[@]} -ne 1 ]]; then
+            echo "Expected exactly one known UnityAgent Consumer importer path; unknown or ambiguous checkout" >&2
+            exit 1
+          fi
+          consumer_importer="${importer_candidates[0]}"
           snapshot_hash="$(sha256sum "$RUNNER_TEMP/subagent-catalog.yaml" | cut -d ' ' -f 1)"
-          python .tmp-unityagent-consumer/Tools/import_subagent_catalog.py \
+          python "$consumer_importer" \
             --snapshot "$RUNNER_TEMP/subagent-catalog.yaml" \
             --source-ref "github://DarumaPPAP/UnitySubAgentHub/development/$hub_commit/Hub/Tools/export_snapshot.py" \
             --expected-sha256 "$snapshot_hash" > "$RUNNER_TEMP/hub-consumer-import-plan.json"

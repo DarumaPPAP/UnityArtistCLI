@@ -5,10 +5,10 @@
 ## Current Hub contract
 
 - [Repository README](../README.md)
-- [Hub Architecture](../Design/subagent-hub-architecture.md)
-- [Design Records](../Design/README.md)
+- [Hub Architecture](architecture/subagent-hub-architecture.md)
+- [Design Records](architecture/README.md)
 - [Registry](../Hub/Registry/subagents.yaml)
-- [Manifest / Snapshot Schemas](../Hub/Schemas/)
+- [Manifest / Snapshot Schemas](../Hub/Schemas)
 - [Specialist Execution Admission](../Hub/specialist-execution-admission.yaml)
 
 HubはRegistry / Manifest / Schema / Validationを所有します。Runtime resolution、Policy、Approval、Project binding、Execution、Retry、Evidence normalizationはUnityAgentが所有します。
@@ -29,17 +29,17 @@ Current manifests are v5 and current exported Snapshot is v3.
 Artist backend implementationは移行上このRepositoryに同居していますが、Hub Runtimeではありません。
 
 - [Artist Unity Package](../Packages/com.darumappap.artist-subagent/Documentation~/README.md)
-- [ArtistSubAgent Specification](../Specs/ArtistSubAgent/spec.md)
-- [Unity API Compatibility](../Specs/Compatibility/unity-api-compatibility.md)
-- [Compatibility Tests](../Tests/Compatibility/README.md)
+- [ArtistSubAgent Specification](architecture/artist-subagent-spec.md)
+- [Unity API Compatibility](references/unity-api-compatibility.md)
+- [Compatibility Tests](../ci/compatibility/README.md)
 
 ## Historical / migration records
 
-- [Migration from MyUnityMCP](../MIGRATION_FROM_MYUNITYMCP.md)
-- `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` + Git tag `v1.1.1` — frozen historical provenance / detachment evidence
-- `Design/DecisionLog/` — dated decisions
-- `Design/legacy-capability-salvage-audit.md` — Legacy 77 Capabilityの回収・延期・削除Gate
-- `Tests/Compatibility/*evidence*` — 時点Evidence
+- [Migration from MyUnityMCP](migration/MIGRATION_FROM_MYUNITYMCP.md)
+- `tests/fixtures/legacy/MyUnityMCP-v1.1.1/` + Git tag `v1.1.1` — frozen historical provenance / detachment evidence
+- `docs/decisions/` — dated decisions
+- `docs/architecture/legacy-capability-salvage-audit.md` — Legacy 77 Capabilityの回収・延期・削除Gate
+- `ci/evidence/artist/historical/` — preserved historical records; current Editor validation is not_observed
 
 Historical Unity 2022.3 EvidenceはCurrent Production Supportを意味しません。Current manifestsが宣言する対象はUnity 6.x+のBuilt-in / URP / HDRPです。
 

@@ -1,3 +1,7 @@
+"""Inventory both historical pre-consolidation and current roots at an explicit Git revision.
+
+Old roots are historical lookup vocabulary, never current execution dependencies.
+"""
 import argparse
 from collections import Counter, defaultdict
 import hashlib
@@ -15,13 +19,13 @@ def git(*args):
     return subprocess.check_output(['git', '-C', str(a.root), *args])
 sha = git('rev-parse', a.revision + '^{commit}').decode().strip()
 files = git('ls-tree', '-r', '--name-only', '-z', sha).decode().split('\0')[:-1]
-roots = ('Context', 'ControlPlane', 'Operations', 'Orchestration', 'Persistence', 'Policy', 'Runtime', 'Eval', 'Tests', 'Tools', 'Prompt', 'SkillReferences', 'Templates', 'Specs', 'Registry', 'Schemas', 'SubAgents', 'Design', 'TestProjects', 'src/UnityArtist.Cli')
+roots = ('Context', 'ControlPlane', 'Operations', 'Orchestration', 'Persistence', 'Policy', 'Runtime', 'Eval', 'Tests', 'Tools', 'Prompt', 'SkillReferences', 'Templates', 'Specs', 'Registry', 'Schemas', 'SubAgents', 'Design', 'TestProjects', 'src/UnityArtist.Cli', 'Hub', 'cli', 'ci', 'tests', 'docs')
 pattern = re.compile(r'(?<![\w/])(?:' + '|'.join(re.escape(x) for x in roots) + r')/[A-Za-z0-9_./*{}~-]+')
 blobs, refs, groups = [], [], defaultdict(list)
 for path in files:
     data = git('show', sha + ':' + path)
     digest = hashlib.sha256(data).hexdigest()
-    history = path.startswith('Tests/Fixtures/Legacy/') or path.startswith('TestProjects/UnityArtistVerification-2022.3/')
+    history = path.startswith(('Tests/Fixtures/Legacy/', 'TestProjects/UnityArtistVerification-2022.3/', 'tests/fixtures/legacy/', 'ci/unity-projects/historical/', 'ci/evidence/artist/historical/'))
     blobs.append({'path': path, 'bytes': len(data), 'sha256': digest, 'classification': 'protected_history' if history else 'active_or_review_required'})
     if data and not path.endswith('.meta'):
         groups[digest].append(path)

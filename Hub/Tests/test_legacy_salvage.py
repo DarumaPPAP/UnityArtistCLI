@@ -8,10 +8,10 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FIXTURE_ROOT = ROOT / "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1"
+FIXTURE_ROOT = ROOT / "tests/fixtures/legacy/MyUnityMCP-v1.1.1"
 CAPABILITIES = FIXTURE_ROOT / "capabilities.json"
 PROVENANCE = FIXTURE_ROOT / "provenance.json"
-MATRIX = ROOT / "Design/legacy-capability-salvage.csv"
+MATRIX = ROOT / "docs/architecture/legacy-capability-salvage.csv"
 EXPECTED = {"graphics": 32, "agent": 10, "world": 3, "profiler": 8, "addressables": 4, "ui": 5, "animation": 5, "audio": 5, "cinematic": 5}
 DECISIONS = {"FUTURE_SPEC_ARCHIVED", "KNOWLEDGE_ARCHIVED", "RETIRED"}
 

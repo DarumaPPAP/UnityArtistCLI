@@ -35,10 +35,10 @@ python Hub/Tools/export_snapshot.py --output /tmp/subagent-catalog.yaml
 Artist backend:
 
 ```sh
-python Tests/Backend/verify_artist_backend_contract.py
-python Tests/Compatibility/verify-unity-api-compatibility.py
-python Tests/Backend/verify_portable_paths.py
-dotnet build src/UnityArtist.Cli/UnityArtist.Cli.csproj --configuration Release
+python ci/verify/verify_artist_backend_contract.py
+python ci/verify/verify-unity-api-compatibility.py
+python ci/verify/verify_portable_paths.py
+dotnet build cli/artist/UnityArtist.Cli.csproj --configuration Release
 ```
 
 ## Specialist changes
@@ -60,4 +60,4 @@ Keep Unity implementation and EditMode compatibility tests in the same change. D
 
 ## Historical provenance
 
-Do not restore the removed MyUnityMCP source tree to `main`. Use Git tag `v1.1.1` and `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` for historical provenance.
+Do not restore the removed MyUnityMCP source tree to `main`. Use Git tag `v1.1.1` and `tests/fixtures/legacy/MyUnityMCP-v1.1.1/` for historical provenance.

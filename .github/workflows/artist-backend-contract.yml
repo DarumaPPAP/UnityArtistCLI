@@ -4,39 +4,8 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main]
-    paths:
-      - AGENTS.md
-      - Packages/com.darumappap.artist-subagent/**
-      - src/UnityArtist.Cli/**
-      - Hub/SubAgents/artist_subagent/**
-      - Specs/ArtistSubAgent/**
-      - Specs/Compatibility/**
-      - Tests/Backend/**
-      - Tests/Compatibility/**
-      - Tests/Minimal/**
-      - Tests/UnityArtist.Cli.Tests/**
-      - TestProjects/UnityArtistVerification/**
-      - scripts/install.ps1
-      - scripts/install.sh
-      - scripts/verify-external-cli.ps1
-      - .agents/skills/artist-subagent-*/**
-      - .agents/skills/unity-artist-unity-api-compatibility/**
-      - .github/workflows/artist-backend-contract.yml
   push:
     branches: [main]
-    paths:
-      - Packages/com.darumappap.artist-subagent/**
-      - src/UnityArtist.Cli/**
-      - Hub/SubAgents/artist_subagent/**
-      - Specs/ArtistSubAgent/**
-      - Specs/Compatibility/**
-      - Tests/Backend/**
-      - Tests/Compatibility/**
-      - Tests/Minimal/**
-      - Tests/UnityArtist.Cli.Tests/**
-      - .agents/skills/artist-subagent-*/**
-      - .agents/skills/unity-artist-unity-api-compatibility/**
-      - .github/workflows/artist-backend-contract.yml
 
 permissions:
   contents: read
@@ -63,23 +32,25 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install --disable-pip-version-check pyyaml
       - name: Validate Artist backend contract
-        run: python Tests/Backend/verify_artist_backend_contract.py
+        run: python ci/verify/verify_artist_backend_contract.py
       - name: Validate Unity API compatibility
-        run: python Tests/Compatibility/verify-unity-api-compatibility.py
+        run: python ci/verify/verify-unity-api-compatibility.py
       - name: Validate semantic naming
-        run: python Tests/Compatibility/verify-semantic-names.py
+        run: python ci/verify/verify-semantic-names.py
       - name: Validate portable paths
-        run: python Tests/Backend/verify_portable_paths.py
-      - name: Validate checked-in compatibility evidence
+        run: python ci/verify/verify_portable_paths.py
+      - name: Validate preserved historical compatibility records
         run: |
-          python Tests/Compatibility/verify-primary-urp-evidence.py
-          python Tests/Compatibility/verify-cinematic-evidence.py
-          python Tests/Compatibility/verify-hdrp-primary-evidence.py
-          python Tests/Compatibility/verify-hdrp-cinematic-evidence.py
-          python Tests/Compatibility/verify-cli-pipeline-gate-evidence.py
+          python ci/verify/verify-historical-evidence.py
+          python ci/verify/verify-2022-3-bounded-fallback-evidence.py
+          python ci/verify/verify-primary-urp-evidence.py
+          python ci/verify/verify-cinematic-evidence.py
+          python ci/verify/verify-hdrp-primary-evidence.py
+          python ci/verify/verify-hdrp-cinematic-evidence.py
+          python ci/verify/verify-cli-pipeline-gate-evidence.py
       - name: Validate minimal smoke contract
-        run: python -m unittest Tests/Minimal/test_minimal_smoke_contract.py
+        run: python -m unittest tests/integration/test_minimal_smoke_contract.py
       - name: Build Artist host CLI
-        run: dotnet build src/UnityArtist.Cli/UnityArtist.Cli.csproj --configuration Release
+        run: dotnet build cli/artist/UnityArtist.Cli.csproj --configuration Release
       - name: Test Artist CLI host contracts
-        run: python -m unittest discover -s Tests/UnityArtist.Cli.Tests -p 'test_*.py' -v
+        run: python -m unittest discover -s cli/artist/tests -p 'test_*.py' -v

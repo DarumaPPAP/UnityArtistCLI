@@ -4,7 +4,7 @@
 
 Security reports may cover the UnitySubAgentHub registry, schemas, validators, ArtistSubAgent backend source, Unity package, CLI, CI workflows, and repository automation.
 
-Historical MyUnityMCP source is not part of the current product surface. Its provenance is frozen under `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` and Git tag `v1.1.1`.
+Historical MyUnityMCP source is not part of the current product surface. Its provenance is frozen under `tests/fixtures/legacy/MyUnityMCP-v1.1.1/` and Git tag `v1.1.1`.
 
 ## Reporting a vulnerability
 

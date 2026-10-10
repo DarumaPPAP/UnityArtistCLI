@@ -16,7 +16,7 @@ This repository owns the SubAgent registry, shared schemas, per-specialist manif
 - `artist_subagent` and `unity_artist_cli` are different identities. Never route a SubAgent request by substituting its backend id.
 - UnityAgent owns all runtime resolution and execution. Hub validators inspect metadata and referenced files only.
 - Manifests and committed evidence use repository-relative paths. Never commit machine-specific paths or live installation state.
-- Do not rewrite the published MyUnityMCP `v1.1.1` tag or mutate `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` without explicit provenance migration.
+- Do not rewrite the published MyUnityMCP `v1.1.1` tag or mutate `tests/fixtures/legacy/MyUnityMCP-v1.1.1/` without explicit provenance migration.
 
 ## Git workflow
 
@@ -47,9 +47,9 @@ The Hub workflow validates that a consumer-neutral static Manifest snapshot can 
 Keep the existing Artist gates green when changing its linked contracts:
 
 ```sh
-python Tests/Backend/verify_artist_backend_contract.py
-python Tests/Compatibility/verify-unity-api-compatibility.py
-python Tests/Backend/verify_portable_paths.py
+python ci/verify/verify_artist_backend_contract.py
+python ci/verify/verify-unity-api-compatibility.py
+python ci/verify/verify_portable_paths.py
 ```
 
 Compatibility-sensitive Artist code and API changes must apply `.agents/skills/unity-artist-unity-api-compatibility/SKILL.md`.
@@ -58,6 +58,8 @@ Direct Unity Editor, License, Pipeline, and visual end-to-end evidence must be d
 
 ## Artist backend compatibility
 
-The first specialist's implementation remains in `Packages/com.darumappap.artist-subagent/` and `src/UnityArtist.Cli/` during this Hub transition. Its backend contract and detailed workflow specification remain linked from `Hub/SubAgents/artist_subagent/manifest.yaml`.
+The first specialist's implementation is owned by `Packages/com.darumappap.artist-subagent/` and `cli/artist/`. Its backend contract and detailed workflow specification remain linked from `Hub/SubAgents/artist_subagent/manifest.yaml`.
 
 Preserve its bounded typed-argument CLI, explicit project targeting, allowlisted commands, Unity Undo, no automatic save, no arbitrary evaluation, and concrete-gate-only fallback behavior. Compatibility-sensitive changes must keep the Editor implementation and EditMode tests together. These Artist-specific rules do not define additional Hub runtime behavior.
+
+The Artist host workflow runs on every PR and preserves its required job name. `cli/artist/artist-backend-contract.yaml` owns the host backend contract; `ci/compatibility/support-matrix.yaml` owns declared support. `ci/evidence/artist/historical/index.json` labels preserved session records and their original byte hashes. Historical `passed` fields never certify current Editor/Pipeline/visual results. Run `python ci/verify/verify-historical-evidence.py` to check archive and fixture integrity.

@@ -8,7 +8,7 @@ UnitySubAgentHubはRuntimeやBackendを実行しない。ここで管理するUn
 - [Unity CLIリファレンス](https://docs.unity.com/en-us/unity-cli/unity-cli-reference)
 - [Unity CLIリリースノート](https://docs.unity.com/en-us/unity-cli/release-notes)
 - [Unity Pipeline package](https://docs.unity.com/en-us/unity-production-pipeline/local-tools-cli/unity-pipeline-package)
-- 機械検証用の監査契約: [`Tests/Compatibility/unity-cli-reference-audit.yaml`](../../Tests/Compatibility/unity-cli-reference-audit.yaml)
+- 機械検証用の監査契約: [`ci/evidence/artist/historical/unity-cli-reference-audit.yaml`](../../ci/evidence/artist/historical/unity-cli-reference-audit.yaml)
 
 最終確認日: 2026-09-21  
 公式資料上の最新CLIリリース: `1.0.0-beta.10`  
