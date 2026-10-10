@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "repository": "DarumaPPAP/UnitySubAgentHub",
+  "authority_map": "Hub/repository-authority.yaml",
+  "allowed_roots": {
+    ".agents": "specialist skill guidance",
+    ".github": "CI and branch policy",
+    ".editorconfig": "editor settings",
+    ".gitattributes": "Git text policy",
+    ".gitignore": "generated-file exclusions",
+    "AGENTS.md": "repository instructions",
+    "CHANGELOG.md": "product history",
+    "CONTRIBUTING.md": "contribution process",
+    "LICENSE": "license",
+    "README.md": "entry documentation",
+    "SECURITY.md": "security process",
+    "Hub": "metadata authority and static contracts",
+    "Packages": "unchanged Unity UPM product",
+    "ci": "compatibility fixtures, host validation and evidence",
+    "cli": "Artist CLI source and host tests",
+    "docs": "human architecture, references and migration history",
+    "tests": "integration contracts and frozen Legacy provenance",
+    "repository-layout.json": "layout ownership contract",
+    ".devcontainer": "optional future developer container; directory need not exist"
+  },
+  "canonical_paths": {
+    "Hub/repository-authority.yaml": "domain authority map",
+    "Hub/Registry/subagents.yaml": "canonical registry",
+    "Hub/Schemas": "registry/manifest schemas",
+    "Hub/SubAgents": "specialist manifests/contracts",
+    "Hub/Tools": "static Hub validation/export",
+    "Hub/Tests": "Hub contract tests",
+    "Hub/specialist-execution-admission.yaml": "declarative admission contract",
+    "Packages/com.darumappap.artist-subagent/package.json": "Artist UPM identity",
+    "cli/artist/UnityArtist.Cli.csproj": "Artist CLI project",
+    "ci/compatibility/support-matrix.yaml": "single compatibility matrix",
+    "ci/unity-matrix.yaml": "fixture and Editor CI scopes",
+    "ci/unity-projects/artist-e2e": "preserved canonical full project",
+    "ci/unity-projects/historical/2022.3": "historical unsupported fixture",
+    "ci/verify": "host-only evidence/compatibility validation",
+    "tests/fixtures/legacy/MyUnityMCP-v1.1.1": "immutable frozen Legacy inventory",
+    "repository-layout.json": "layout contract"
+  },
+  "forbidden_roots": [
+    "Registry",
+    "Schemas",
+    "SubAgents",
+    "Tests",
+    "TestProjects",
+    "Design",
+    "Specs",
+    "src",
+    "scripts",
+    "Legacy"
+  ],
+  "forbidden_directory_names": [
+    "backends"
+  ],
+  "intentional_exceptions": {
+    ".devcontainer": "Future development container root is allowed without creating an empty directory.",
+    "generated_ignored_files": "Git-ignored Unity/.NET/build outputs are not authored root ownership; forbidden directory names are still checked outside generated caches.",
+    "historical_references": "p0-inventory, p4-path-map, immutable legacy fixture and historical evidence preserve original source paths; these do not designate current runtime authority.",
+    "Agent importer compatibility": "CI temporarily supports exactly one known old/new Agent importer; unknown or ambiguous layouts fail closed. Remove old variant only after all retained supported sources no longer need it."
+  }
+}
