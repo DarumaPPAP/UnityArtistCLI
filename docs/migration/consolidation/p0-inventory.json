@@ -1,0 +1,4823 @@
+{
+  "schema_version": "1.0",
+  "revision": "aa6275c8673fa7a38d5d6a8aabbef5507ee96ad1",
+  "classification_note": "Only frozen Legacy and 2022.3 fixture references are classified historical. Other references require owner review; duplicate bytes alone never authorize deletion.",
+  "file_count": 199,
+  "root_counts": {
+    ".agents": 4,
+    ".editorconfig": 1,
+    ".gitattributes": 1,
+    ".github": 5,
+    ".gitignore": 1,
+    "AGENTS.md": 1,
+    "CHANGELOG.md": 1,
+    "CONTRIBUTING.md": 1,
+    "Design": 20,
+    "LICENSE": 1,
+    "MIGRATION_FROM_MYUNITYMCP.md": 1,
+    "Packages": 39,
+    "README.md": 1,
+    "Registry": 1,
+    "SECURITY.md": 1,
+    "Schemas": 5,
+    "Specs": 4,
+    "SubAgents": 22,
+    "TestProjects": 25,
+    "Tests": 53,
+    "docs": 4,
+    "scripts": 4,
+    "src": 3
+  },
+  "blobs": [
+    {
+      "path": ".agents/skills/artist-subagent-backend-setup/SKILL.md",
+      "bytes": 1969,
+      "sha256": "24fb95fec5a282c37948a39de00815c4845c84dce2ab1d9de33ac97cd60e213a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".agents/skills/artist-subagent-cinematic-evidence/SKILL.md",
+      "bytes": 1057,
+      "sha256": "f22b34083a3ab0a1fd1fe86f4731ab92b40bd7c41ba6fb4e0ed3125b0684775a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".agents/skills/artist-subagent-lookdev-refine/SKILL.md",
+      "bytes": 1185,
+      "sha256": "ef1e2163f51d3f997a8b6477919095cb0fb1a9b2599fcf2e51c61c0bb156f191",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".agents/skills/unity-artist-unity-api-compatibility/SKILL.md",
+      "bytes": 1391,
+      "sha256": "f4a45fd0c3664700bb9040b9068b9b9e99ae0ccc4a458d86c68c65a8ad1667c1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".editorconfig",
+      "bytes": 292,
+      "sha256": "a1f5decfe490d226c98ed028309f0fe2e0e2e842124f9c1a86a8df317ae0a91d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 468,
+      "sha256": "885efaec892f077f70e6fe3cdf8855ef25cd5e235aacb36d2eb92e655e501a70",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".github/branch-policy.json",
+      "bytes": 950,
+      "sha256": "7401d402fb720dc519c98c1ec097ce8cf3b0cc1eb682f8519b7e393ba2248201",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 946,
+      "sha256": "7b87ccf12c838778d037b8ba827f8d6172468b5bfee9f7c287314fe1af7eeae9",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".github/workflows/artist-backend-contract.yml",
+      "bytes": 3136,
+      "sha256": "9bf4d00d14c8bbac8f3e9507d186f222badb7b9b6d7aa24c2acb1d6c5a89d188",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".github/workflows/branch-policy.yml",
+      "bytes": 715,
+      "sha256": "06dc25c862bd59767392153e095a2845aab6867885c46acda98c7f8e90a685e4",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".github/workflows/subagent-hub-contract.yml",
+      "bytes": 3387,
+      "sha256": "75b16474c830f3282938ac82acf26272415756565f570328e7b015f06184e662",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 3759,
+      "sha256": "08d7fa89d3f978cf8b7e0c4594eebef76856475de473bbadfc115b239fb73df3",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 5752,
+      "sha256": "371e33357b9583029f024d5e35616caae61f41ecd1d349b232ed225c39df94a2",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 7748,
+      "sha256": "fa79d3f7a6b0fadcbe019479503d9162f0315a92012c7deb37270b82e5b72eb5",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 2365,
+      "sha256": "169dca1944dc5380efed242870ff29c7fb2cd4f4d185706265bc1e176ed72337",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-10-cinemachine-timeline-api.md",
+      "bytes": 1989,
+      "sha256": "fb615496f817a3e84b178cd65d3d6e40009c3a2d050a02d3aab6a888465603fe",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-10-hdrp-native-volume-adapter.md",
+      "bytes": 1133,
+      "sha256": "446a469743e7e6fabd89384517c88c1e1400dcb10efbd05a8191ef05d17f30f7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-10-minimal-live-smoke.md",
+      "bytes": 914,
+      "sha256": "39a193ed33fd44510443cdb0020a4ed81cdfaf43d6af14332de88d826a6625c0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-10-unity-cli-pipeline-gate.md",
+      "bytes": 2305,
+      "sha256": "627fb46c0f7d6f466ae8958795115d38abe242be4e326243aee8038d208d2f16",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-10-urp-native-volume-adapter.md",
+      "bytes": 1394,
+      "sha256": "02340b9fce8cae7016ded69d56c740b89d68c48f3cb50b4cbb86e814061ba6e7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-11-beta-product-version.md",
+      "bytes": 943,
+      "sha256": "f4d99920c82974e663cb83f61e5b0beccd42d85a50d00466ef55e28926b00a51",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-11-hdrp-primary-visual-evidence.md",
+      "bytes": 1702,
+      "sha256": "a0093f48ebd70dccc92500f1bd97f35e5f5df5435477d70fd2bce9486b66d3c0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-11-portable-project-paths.md",
+      "bytes": 2482,
+      "sha256": "fd7088005c802a4c7db53ea6e00cd8600b91d2a88d85b3f7b00f9a4a13731b7e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-11-remote-bootstrap-installer.md",
+      "bytes": 1911,
+      "sha256": "ce905ac89c7ffc225c3784d9503a0b9ef37423d7d9ba8ace813140845cae218e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-11-unity2022-3-bounded-fallback.md",
+      "bytes": 2221,
+      "sha256": "f1031bd10bda40f29ab3e14021b0f00275e2ee9ff560ee53f99c63a8d164e39f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/DecisionLog/2026-09-27-specialist-execution-contract.md",
+      "bytes": 1894,
+      "sha256": "052dbe5d59e536b8e007e626519f01d81d5651d0152083f15723d2457091e5ee",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/README.md",
+      "bytes": 2210,
+      "sha256": "3ff04efe785382a2d2bf2b6a18a967033d40579d857ed94ed2e9d0f24ec51e25",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/authority-cleanup-audit.md",
+      "bytes": 3967,
+      "sha256": "eacc2c85412ef72fe2757c72741c74ff9715fc38952f2d9475dadf1236b0b549",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/legacy-capability-salvage-audit.md",
+      "bytes": 4176,
+      "sha256": "35ff44aa472299ff3d835483cb594d71413d561d98052c4ff270ed86540f1702",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/legacy-capability-salvage.csv",
+      "bytes": 75710,
+      "sha256": "51972bb1c376dbdb57ab79286eb11ff3514768a3dbace01e6e5919dfe35c139f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/legacy-domain-support-boundaries.md",
+      "bytes": 3282,
+      "sha256": "af84884027d4c981fca8c89a8a83fc80516ec21627f43f68f37137611cbd2acd",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/legacy-knowledge-archive.md",
+      "bytes": 2047,
+      "sha256": "c2333bd8338d1566d49c4ce853a62bafeff6eb44f55b5cae878c71899412f1e7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/specialist-execution-admission.yaml",
+      "bytes": 2767,
+      "sha256": "e65c54438e761caba1434e9a6e7b026aa0e9d166a3ce4c712fff536fe7db323c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/specialist-expansion-architecture.md",
+      "bytes": 6489,
+      "sha256": "bca3072e89f464cdb6cc70f67adc74cc71ed45ef04e108ac1f7803e0efb6d5e5",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Design/subagent-hub-architecture.md",
+      "bytes": 6328,
+      "sha256": "6750b949429cfa0a500d866cd14691b95110d13ebb3cd157c3e12761ef958599",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1063,
+      "sha256": "7e8bb5a4d60e6c9054b3ff70ea84f26e628310056d7772a319bcd35975197b3f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "MIGRATION_FROM_MYUNITYMCP.md",
+      "bytes": 1967,
+      "sha256": "96aa23e718da4896adb0813202381276556bc2241de73c6e46e08ac91ed2309a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Documentation~.meta",
+      "bytes": 169,
+      "sha256": "0052ec4633b78bc8188184ce0a9664627cecec5474aeb569953008858b95238c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Documentation~/README.md",
+      "bytes": 2976,
+      "sha256": "6db5c40e233f090b12bf2a8f71aace060219ce74cb16959df2af14c5930150e3",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Documentation~/README.md.meta",
+      "bytes": 155,
+      "sha256": "d2428a1b369a0489612985394dadd78d29ac59eabf5de9de42d5a7c3b3962b5f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor.meta",
+      "bytes": 169,
+      "sha256": "ad422808902dc920bc88d4a3f3d9927606ee759b5b7cdf2cb6af3bb66982d3d1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/AssemblyInfo.cs",
+      "bytes": 113,
+      "sha256": "f8615a707a4b559f9386e7a83eaa2de494e846714606568ed89b61d6ccc6a348",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/AssemblyInfo.cs.meta",
+      "bytes": 240,
+      "sha256": "5b2d70fc25a4d051680696dfb0e78d88084e7bc1469a714eadc17eec40efecd2",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Batch.meta",
+      "bytes": 169,
+      "sha256": "350fb8659fb182c0d244e23d0056ec84944742e8276f1a9f28d3c795210be86f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Batch/UnityArtistBatchCommands.cs",
+      "bytes": 6536,
+      "sha256": "fbaffd33ad1c41885f7814fa2a8bbdf618ff19add738f488d852288cc2c444d7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Batch/UnityArtistBatchCommands.cs.meta",
+      "bytes": 240,
+      "sha256": "72e920551701cb3ae6f140798ccb5cacae558083cf98085c4b9e99b647795462",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Capture.meta",
+      "bytes": 172,
+      "sha256": "7b3c68b952f91ebc9f03d8d92f65e9bea3b68593b3f908bcf8647b2d8bc8fc09",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Cinematic.meta",
+      "bytes": 172,
+      "sha256": "ce9a51c4e634d7b63b86a45f71b5a7a2175264fc9b95269756711d830fb6c68a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Commands.meta",
+      "bytes": 169,
+      "sha256": "c62b06ff3de9d2ee1128091bbe248d20bfa6bddb7aaa9090cf7266b441217423",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Commands/ArtistPipelineCommands.cs",
+      "bytes": 65441,
+      "sha256": "3ab609b36b126c6e1a34f910441ddbcb6a480eb255d639f14f709029093ef13e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Commands/ArtistPipelineCommands.cs.meta",
+      "bytes": 240,
+      "sha256": "4570d8e95b0839718218d3c6ba83ceb05b7249b1e50c9d0373a4c789ca645a41",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Compatibility.meta",
+      "bytes": 169,
+      "sha256": "6e95e0831cf917ea4bb72a5a4283a47c3864925d4d67c5cbf0718cacce19aac6",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Compatibility/ArtistCompatibility.cs",
+      "bytes": 1089,
+      "sha256": "3c873a7ce67aaf3d7a6573c3d7670c88d93d948cc28e237f8b999904c6afc63d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Compatibility/ArtistCompatibility.cs.meta",
+      "bytes": 240,
+      "sha256": "9277d9ad0801afa456512f3078e59204edb02b52c24180da9575fe096fd208fa",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Environment.meta",
+      "bytes": 172,
+      "sha256": "705d4f8927e142b4a1391a6ccc37a7f7dc9effa21e6fc67ab2e4a1d1a443d50c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Lighting.meta",
+      "bytes": 172,
+      "sha256": "ac2b6984259cf0be531e6a502ee19c2acf3340d97b2a08c0010b610c70caecf6",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/LookDev.meta",
+      "bytes": 172,
+      "sha256": "a077ec6a0c3e99f761dfb88cddd2be6ca5d60d6e7574af2eb209b547c326ea68",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Pipeline.meta",
+      "bytes": 169,
+      "sha256": "656745fb5727d4db13dd6503b0137d97a135bd5c801ace8b770643c061de192a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Pipeline/ArtistPipelineCommandRegistration.cs",
+      "bytes": 3678,
+      "sha256": "30397265b3a47ba8f98ca7a46558fae1992d048e11dd43679a28b6481eeaa6d9",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Pipeline/ArtistPipelineCommandRegistration.cs.meta",
+      "bytes": 240,
+      "sha256": "6d514d93937e25dc66df9c2a3a5b91edc089780fe149f48c6b9f8c1bc5eb2741",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Pipeline/UnityArtist.Pipeline.Editor.asmdef",
+      "bytes": 587,
+      "sha256": "53e1d304763e5732198024db3e2c9905b9eacce9d8af70b50c1ee4f48f275ecf",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Pipeline/UnityArtist.Pipeline.Editor.asmdef.meta",
+      "bytes": 163,
+      "sha256": "cddae2c3681195ee1ae75897eacfdb4b65bec427db14c14f67ca08d65d9a0ddf",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Reference.meta",
+      "bytes": 169,
+      "sha256": "cc46f2acafaade73d0cea843332b1db6dba0fa0e68032298413c23a65ed9c903",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Reference/CameraFovWorkflowAdapter.cs",
+      "bytes": 3480,
+      "sha256": "ef23e6738df378b7de2e7b2a3770ef2c1d59650e692647d31409573e4ca1632c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Reference/CameraFovWorkflowAdapter.cs.meta",
+      "bytes": 240,
+      "sha256": "bc55473e4805e2de60bc56ce9744a81ba0c62da7cf230fd031459e3290664218",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/Timeline.meta",
+      "bytes": 172,
+      "sha256": "9806d2d569b46c3869d7b5ceca16bcee0f283d54f16b99acf9f0bbec327358dc",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/UnityArtist.Editor.asmdef",
+      "bytes": 366,
+      "sha256": "30b31b32825bef619ee4a9412f24146fe47618017f7762f350915a86307c9f1f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Editor/UnityArtist.Editor.asmdef.meta",
+      "bytes": 163,
+      "sha256": "0d413ca8606de4a1d91f375634ebb04a793b5d8e4b45bb3231859c06aaa359d2",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/LICENSE.md",
+      "bytes": 272,
+      "sha256": "895fdcb1ad6b58b316de4ea530dfd8a468bad70056ebe3862802dab06871d13a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/LICENSE.md.meta",
+      "bytes": 155,
+      "sha256": "e74e9b7064843c418173189f8a99554c04a76337c93aac6b4d0491814c2167fe",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Tests.meta",
+      "bytes": 169,
+      "sha256": "34cfc4e66b3a6b975ae5394057411eaf827215c26ce79c07b14dce5765db4294",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Tests/Editor.meta",
+      "bytes": 169,
+      "sha256": "96baed0f948dc82e82a51cebced45aef7643b2a57cba13edf78592dc21c5a339",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs",
+      "bytes": 855,
+      "sha256": "e889d4c2c7d92f0aee88c34349ab956f75905b4d63c30aef92b7cb4249eda1e0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/Tests/Editor/ArtistCompatibilityTests.cs.meta",
+      "bytes": 240,
+      "sha256": "168a1f325bc2e62dff181a4e16c3ab588b16ad6ebb9b6f2c63cc39c53b7d85ff",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/package.json",
+      "bytes": 568,
+      "sha256": "2309ae79e7146210c00c7aa12d9498e4b1aa917ba9dba04acb78e30f6944bba7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Packages/com.darumappap.artist-subagent/package.json.meta",
+      "bytes": 155,
+      "sha256": "c657447c0ebc05421e10a1a3d1e367b4bb192ccb9706ca1946f00f7e281980dd",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "README.md",
+      "bytes": 12882,
+      "sha256": "bcab2e6a623c89681b2fa293c0b262f8f7b5d9b302d69056ee91eed080e283ff",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Registry/subagents.yaml",
+      "bytes": 277,
+      "sha256": "942313ab0467f023283d23715840cb8baa8ddc3ea3e352e53dfd9ab7d8322ae0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 1424,
+      "sha256": "83b0b3857153fe68823d16319256e352402162779751f912ab3aa5345abbd103",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Schemas/subagent-catalog-snapshot-v2.schema.json",
+      "bytes": 1104,
+      "sha256": "cc817cdcc1c42da6085f1efc699b9e7acef0469ff1fc7a801a577ccc00490582",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Schemas/subagent-catalog-snapshot.schema.json",
+      "bytes": 1104,
+      "sha256": "7e70aef24e0471421683a0c6a02eccb52bf49a96b1bdf35074f844bdf9439e99",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Schemas/subagent-manifest-v4.schema.json",
+      "bytes": 6371,
+      "sha256": "4af5cc26a6e6972ee406ab00f8196db08efcf7aed4e1a5d09b32c738c784dfde",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Schemas/subagent-manifest.schema.json",
+      "bytes": 8478,
+      "sha256": "ee698997e62347cc73a2ea5bffee183ae87a989a6f5ac0f3bc74bfaf0976767e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Schemas/subagent-registry.schema.json",
+      "bytes": 875,
+      "sha256": "683861cc6b719aec63702e15bed340c41730f4252fc75a91d2cffa7b78139577",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Specs/ArtistSubAgent/spec.md",
+      "bytes": 6372,
+      "sha256": "d37b42a71c4b2296397872d393693f56d09fad0debf4cb4eeab37bfaeccea1d5",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Specs/Compatibility/unity-api-compatibility.md",
+      "bytes": 1671,
+      "sha256": "23d987664e4876b292c019c31ce00f27e6d515a4f47e949ba324aca7a2e2bf6c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Specs/UnityArtistCLI/spec.md.meta",
+      "bytes": 155,
+      "sha256": "e6ba5be7b8a675fed7b26bf11622b6c11ea7a64aaa3e87fc37e3b033ef9b8e39",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Specs/repository-authority-map.yaml",
+      "bytes": 1239,
+      "sha256": "1bf259736aeb48ffe7814ecf9d80768fa3e9a91ed8d7fe866dfc4863e98e795d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/artist_subagent/README.md",
+      "bytes": 3072,
+      "sha256": "227ea11f9aea962888fe9cc2f144a719c62d035f451620dd2fbda58202e24bbc",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/artist_subagent/contracts/backend-surface-contract.yaml",
+      "bytes": 473,
+      "sha256": "7f0b2d6162d7756964c86e9e059f15184d54e512ab9f3a49f6a223ac73fb6c7f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/artist_subagent/contracts/capability-contracts.yaml",
+      "bytes": 2701,
+      "sha256": "980f7792d5396b4bf0d3c0f0412cdae798571c634f00b5d97cdc80eaad99e2e5",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/artist_subagent/manifest.yaml",
+      "bytes": 1716,
+      "sha256": "a7a3d149b5a6720d2ea4e7f581c0cfa9f6ed370f9c404fcf99690637b219c2df",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/README.md",
+      "bytes": 1069,
+      "sha256": "4ba01e69433a144e637ba628d77176bcc4f0c573c65408aad8a96b6f03eb41f0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/contracts/capability-contracts.yaml",
+      "bytes": 1685,
+      "sha256": "b15c34f6493b750be1d367aaeb41bdffea83af4bf782a3f503924988edc463c0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/contracts/graphics-analysis-result.schema.json",
+      "bytes": 2961,
+      "sha256": "fcaa1707cc01c7b385e0a6029b7ffc6e6d7b00bacb7019ee3c4afa22cfb75beb",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/contracts/production-capability-contract.yaml",
+      "bytes": 759,
+      "sha256": "6fd64fbde33bb344016c97a62782c14f26e500167816a79de4aef2345020c79c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/instructions.md",
+      "bytes": 2802,
+      "sha256": "1b2d0784e1fe537bc0522fafddca925a0eab1f17f5eb79fd97cb65a5b7c87051",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/graphics_subagent/manifest.yaml",
+      "bytes": 1443,
+      "sha256": "5df38a1afe7fbe69901528d9bcd47784de2fcbf13bae72af310c861aa9f7321f",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/README.md",
+      "bytes": 1286,
+      "sha256": "e0f2ac769e34f5c27605db348941f3636e0519c4db1b6810ecb0ed4eef15b507",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/contracts/capability-contracts.yaml",
+      "bytes": 1271,
+      "sha256": "d12a294bfbe6d1082bcd06be8668d5a070d60b370eb5f6c6f94b538e732d06bf",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/contracts/performance-analysis-result.schema.json",
+      "bytes": 9308,
+      "sha256": "cbad76dceaa8e2ca7e2228e8e6db6e650c19ef88c2d811f1e39244488790db12",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/contracts/production-capability-contract.yaml",
+      "bytes": 715,
+      "sha256": "9cc0bf2a484aab1b8cf80910f662aff131eda1d8e1e376402d6c81adf748cf05",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/instructions.md",
+      "bytes": 1816,
+      "sha256": "95e334bfcb3d3e914da6b1989c8a8dec290523838a970497bf2f658f6d6bb5bb",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/performance_subagent/manifest.yaml",
+      "bytes": 1479,
+      "sha256": "f9d4ad78699ed1f1655664a9dc4202f035f3d04c17f601af5ce34ef9c7faa777",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/README.md",
+      "bytes": 2057,
+      "sha256": "a5c21a2d3a9d1d475f1aa3af387968229a9d954d5a7609e1c8e1de8257d3ec7a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/contracts/capability-contracts.yaml",
+      "bytes": 921,
+      "sha256": "c6e28ff7d0ad43444a4d7dc6d35e257e9a0c0d3c9040e384f54c8d4c674afaee",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/contracts/production-capability-contract.yaml",
+      "bytes": 682,
+      "sha256": "41b808fa98f5a8aaa4bee24ebde9a7d760f834e67231f671d1be829070c5eea3",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/contracts/world-plan-result.schema.json",
+      "bytes": 3943,
+      "sha256": "3bc6ac276ef9ae53df993f7b318b849e4a1dfbd2160a8e309b35a25ea2178b7c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/instructions.md",
+      "bytes": 3098,
+      "sha256": "4b861401b3678bbd0b4320681637272805ffb80b25101d9c7dcf86fb43b178ca",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "SubAgents/world_creator_subagent/manifest.yaml",
+      "bytes": 1382,
+      "sha256": "fb433902790ebd736daccb28726186481e09f096e61e410a1c2d96411e092b12",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/.keep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Editor.meta",
+      "bytes": 169,
+      "sha256": "ae07f9caf32bb85eca90bf683fb337841a685ce81545e05e3892165df0a9560c",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Editor/UnityArtist2022FixtureBootstrap.cs",
+      "bytes": 1961,
+      "sha256": "6994aa0b310f6e48602a913ac2b11314908279f238a8ccfa77a93ea625224ec9",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Editor/UnityArtist2022FixtureBootstrap.cs.meta",
+      "bytes": 240,
+      "sha256": "4004754759f0c037575eebb73a9c67315948f8a0d63e753fe66e87fda528a6f0",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Scenes.meta",
+      "bytes": 169,
+      "sha256": "d5a1537e8153289e7ed4387c6cb58ccfd6f2ad2416a2aa90197bc8b426c88d04",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Scenes/.keep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Scenes/ArtistVerification.unity",
+      "bytes": 16554,
+      "sha256": "a8337580e5c55809bb319c9bb93b8d2fe96606338d7802a9dad83e77086a245c",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Assets/Scenes/ArtistVerification.unity.meta",
+      "bytes": 152,
+      "sha256": "fea3cdb827062308b06d872d762f29acf20bfa28d790c1c6e117dc1b0c040cd2",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/Packages/manifest.json",
+      "bytes": 164,
+      "sha256": "a301e37154db8dcd4775dc1a87d083e7a26047354c0b8e487d0939beda631763",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/ProjectSettings/ProjectVersion.txt",
+      "bytes": 85,
+      "sha256": "0599d0a5e5f574ce3aaf02f6f98a477bd75b97ddd6a1cf9a9466c603c3d7b6ca",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification-2022.3/README.md",
+      "bytes": 728,
+      "sha256": "c39331df9b94d2e4125e9de86ab34fd55d4e7a9de657931ec169e05ec2c1909d",
+      "classification": "protected_history"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets.meta",
+      "bytes": 169,
+      "sha256": "d5b8b9c318a4c925959c05fdb967ea3091830e1c8051aef69a2befe75d28c569",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/.keep",
+      "bytes": 44,
+      "sha256": "b370e66df387e2f863a488ca3c648476ff1573fb7bd010ba9b74970949d30142",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/Editor.meta",
+      "bytes": 172,
+      "sha256": "9cf511a5cee17ddc80ff411799151ccf5ca24af35b304bbb617ff8c24e945258",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/Editor/UnityArtistReferenceFixtureBootstrap.cs",
+      "bytes": 1805,
+      "sha256": "163a67af59a7c6710dfe593908c613b034d40892a3e03127f06fb229906d696d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/Editor/UnityArtistReferenceFixtureBootstrap.cs.meta",
+      "bytes": 60,
+      "sha256": "2dc2617192df91f80be00661832ce5b0ff15db1252bbdd8678520d1ac105467e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/ReferenceCameraFovGolden.unity",
+      "bytes": 10964,
+      "sha256": "cf78d2d4d10df6c2a90a821b7d9bcb38bee48ac76a2fc64c83f85e3dd221d9b6",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Assets/ReferenceCameraFovGolden.unity.meta",
+      "bytes": 155,
+      "sha256": "1bad6287122a68e22bafacebbe13836196f829b63906f5d0eba91cc76d71fc2c",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Packages.meta",
+      "bytes": 169,
+      "sha256": "00c62e04c2cb871c700b1e0383d37153cadba1cfe31a738fa32094ad49343b32",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Packages/manifest.json",
+      "bytes": 204,
+      "sha256": "cb74a444b77cae1c5bcca8360b2853dd376ca55f39b20c20be1eebfa3ca57915",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/Packages/packages-lock.json",
+      "bytes": 3100,
+      "sha256": "3c4bb7b3db2f7a8b12fa449f2b335121e5a5ed196289112671137a611c122005",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/ProjectSettings.meta",
+      "bytes": 169,
+      "sha256": "5ee280966d57d49b80f2d0930aeb6390f10bedf98df01ffb629397346222122e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/ProjectSettings/ProjectVersion.txt",
+      "bytes": 83,
+      "sha256": "39584c3e6c1e571d53a79ef2dd6ea91c0568ac086792cc435e86401a0ba824ed",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/README.md",
+      "bytes": 513,
+      "sha256": "39a7649af3240881d18bc827bd5a7e3fc5f7e8fe39a1259608cc2c20aef23403",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "TestProjects/UnityArtistVerification/README.md.meta",
+      "bytes": 155,
+      "sha256": "24df1dee6b89b9d2e3a933f42f6df33cd156107353af1674eae1ae289d3d53c7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Backend/artist-backend-contract.yaml",
+      "bytes": 688,
+      "sha256": "a3ad5b8a16b51e6762016d26258aa3b88635b2e7f53d4e1b08d8b8f8e6adf969",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Backend/verify_artist_backend_contract.py",
+      "bytes": 16717,
+      "sha256": "568bebafa23b824531d865f1874ce563dc6c396d36affd322a9cb9d99cd90473",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Backend/verify_portable_paths.py",
+      "bytes": 1394,
+      "sha256": "a3920d240517c2e2c149cd4db7377443ad0ce4b23e296c0ea89a69831c5378f8",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/2026-09-10-final-acceptance-audit.md",
+      "bytes": 7002,
+      "sha256": "46c1ea2a623e384caddfd48c449086b4d2f8bd0a3fa9a96ea2081dc48f59bd53",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/README.md",
+      "bytes": 2288,
+      "sha256": "bb413bde3646dcdcbbe32944f07cb3c44aa31bab915d22806cc1728680f47991",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "bytes": 4385,
+      "sha256": "921f50899b2724169fe786f19c9da4b5925ec1b10093deb0feba0016b85145f7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "bytes": 2373,
+      "sha256": "755b577a1d87213e791de4aea7a9450c45b7f311b7541b39953e98e6629e0d24",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/production-validation-evidence.yaml",
+      "bytes": 2255,
+      "sha256": "e7fb3b33c30ce6c0c84ad7e70c9e7c8b33712cf2c98895bf6b0249cdd24551cd",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/release-verification.yaml",
+      "bytes": 1590,
+      "sha256": "04cece6a0c4dd768bdc9af2896a79fcd1b988ef8cde95805f6e2e64004803ddf",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/support-matrix.yaml",
+      "bytes": 1222,
+      "sha256": "193e36a5cd4c4a71010facb35398c20e818e70380d5f896b509983eb70875999",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity-cli-reference-audit.yaml",
+      "bytes": 990,
+      "sha256": "6efb190b17abf36d43a30e296890c9c53595202493aa89e4390af0728e05769e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "bytes": 4972,
+      "sha256": "29bf0398c5ffe76e66cf0a999f32ef44cdaf85eab4b261e0194e8a8e440da508",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "bytes": 2701,
+      "sha256": "6c0c41723348582e6979850f6fd5a04be1ac994c41b1b7ee9ddb9a38f3490d75",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-builtin-minimal-smoke-evidence.yaml",
+      "bytes": 1331,
+      "sha256": "4c698dfe55fd92f5d3a2ceb0f4953bedc8e6851bd8aab0fba0ca25493c002709",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "bytes": 5146,
+      "sha256": "75cf7459f3c8f412a9255ad1cd4ae1f420d2b56c805b8586b221ee28c426c606",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-hdrp-minimal-smoke-evidence.yaml",
+      "bytes": 2252,
+      "sha256": "e43063570d4b78d5ffb633b71b8a21c28d12b4cdfd9a8cc5bb703008a15bf2b9",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "bytes": 6370,
+      "sha256": "2721c0447faddc04afe3c7eb14e93eaec3a9ec1f9528c938f72d61fb2dd46726",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "bytes": 5126,
+      "sha256": "48005434f09cfd432c5ec6f4f1486c2f91b95a9ffc42ffc5888c0bbfcd47d969",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-urp-minimal-smoke-evidence.yaml",
+      "bytes": 1773,
+      "sha256": "93ed086f2b6b6e54a65ed9f275e21bc70355572f3a33bfb1d86d077aeffd98f7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "bytes": 5999,
+      "sha256": "0f6e53c95ecfd99262ae5e3398d96c53d2fe54a11fb83fef9681fc91a9cf8030",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-2022-3-bounded-fallback-evidence.py",
+      "bytes": 3774,
+      "sha256": "6d47bf78234e76df231e0b7004d9b07439ecc44b0a9311b4517dcfec8ed25464",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-cinematic-evidence.py",
+      "bytes": 3759,
+      "sha256": "891b402dc3abcaaa6714767f1e50f08598da6d36f9d997d8a2585c62e98ca438",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-cli-pipeline-gate-evidence.py",
+      "bytes": 3201,
+      "sha256": "288c9fd984d9182bc4517349fbabd08accf10f97ef540b2f81c5f768383023c7",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-hdrp-cinematic-evidence.py",
+      "bytes": 3787,
+      "sha256": "5731b7eda95a9c13c819f0ec0fd3b60db011675bdaf5b8ab97b8418bac148136",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-hdrp-primary-evidence.py",
+      "bytes": 5486,
+      "sha256": "bc1f88711890b4005d0324727d255a2363f63c08ba306725a5e2eff75074adc2",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-primary-urp-evidence.py",
+      "bytes": 4573,
+      "sha256": "9bf3caceacf30980c1269ee607b14921de64c31cb675e50cc57da775d9dadbf4",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-semantic-names.py",
+      "bytes": 1044,
+      "sha256": "d1d8ff6b4439847c49ace4d1f002862d54690770e2d5184bab9f9149eae8f9ad",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "bytes": 3294,
+      "sha256": "6a9000775c99fbf13bdcd16db8480c0f62b6d80c5d0f59ca9aa6c024cb1c635d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/README.md",
+      "bytes": 644,
+      "sha256": "1cf3eda363b56dc35385c9ec1503be264894816c42158cdf963d19f119759d9b",
+      "classification": "protected_history"
+    },
+    {
+      "path": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "bytes": 44675,
+      "sha256": "040518b3f8464c905808d28e6c631cb1aa402177cdeae77542809627266ff78b",
+      "classification": "protected_history"
+    },
+    {
+      "path": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/package-metadata.json",
+      "bytes": 813,
+      "sha256": "2669206e5418d1795239ffb0421fd56bb866e428da4c4c3cd0c88454c2f63ab2",
+      "classification": "protected_history"
+    },
+    {
+      "path": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/provenance.json",
+      "bytes": 554,
+      "sha256": "0316b5529a906061e78783f91f600767051eb86e5fb580676be521c00b32641b",
+      "classification": "protected_history"
+    },
+    {
+      "path": "Tests/Hub/export_agent_snapshot.py",
+      "bytes": 4118,
+      "sha256": "6ecb9ec60a9215fb92fb23af384a31f866dc3d1e7068f206ff07d3c6acb30cc8",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_execution_admission.py",
+      "bytes": 1922,
+      "sha256": "e14c43173960c73a6506e1046e197685be107ea8321715dde72b02788ce4a7ee",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_graphics_candidate_contract.py",
+      "bytes": 1436,
+      "sha256": "e6eee8cea0a24cd25285d4fb6feaaa43851ad92eac34e95886683ef4b92472c0",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_legacy_salvage.py",
+      "bytes": 4157,
+      "sha256": "6b08998fb27a5d35ec48e2b097623b0ebf7e176768f33860130dd74470244105",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_performance_candidate_contract.py",
+      "bytes": 1691,
+      "sha256": "a29452e65005064207f79eb9169169566a4e418c3bca518b230897c937043388",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_production_specialists.py",
+      "bytes": 1374,
+      "sha256": "8a3758b874b14a6eeaf03d5c81fea96206e20423559b48b36489daf4be8ec7c4",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_registry_validator.py",
+      "bytes": 20420,
+      "sha256": "54d22fc3589784210605b514dd6288cb5f1a1cd01d0890c561f7a8bb68e73606",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/test_world_creator_candidate_contract.py",
+      "bytes": 1661,
+      "sha256": "bd5bd90fb76e42f79fed2139ab459748487c053e699d9c95219334f7a93b2dc9",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/validate_branch_policy.py",
+      "bytes": 4783,
+      "sha256": "30492ec2db873213f4d7d406325c130a6f205960a9c98ab367c77783fe185c71",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/validate_registry.py",
+      "bytes": 18647,
+      "sha256": "579b959db8c3823f5580c8911de79869a8b979f8a05550435a3db102f56b2742",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Hub/validate_repository_authority.py",
+      "bytes": 7627,
+      "sha256": "644b19b79cc043f35512c530abdc787ce9045bbc119c26b7060cad639e7a3bb8",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Minimal/README.md",
+      "bytes": 1400,
+      "sha256": "5f539779fbc57c011e70aed35f4c0ff83a4e1d64dae662f97de33c9fcc51dcf6",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/Minimal/test_minimal_smoke_contract.py",
+      "bytes": 1441,
+      "sha256": "11636a9e4030069ca49fa3de3a5e7a436eb13447c001ac63a4aca78ab34ebba1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/README.md",
+      "bytes": 560,
+      "sha256": "9887aef3cf0e7cf31658535b7effbba801e21ddee5bc8e72c05999f35dc972ce",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-builtin/Assets/.keep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-builtin/Packages/manifest.json",
+      "bytes": 69,
+      "sha256": "d2463f5afbe1ad9b9ac72a9888d3e69ff8c6fac05f1c156bc5b248c466997971",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-builtin/ProjectSettings/ProjectVersion.txt",
+      "bytes": 29,
+      "sha256": "f97cbce8b76bf2099f32772b9925c04cb85aee05d5a0db91451150c4c28edf12",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-urp/Assets/.keep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-urp/Packages/manifest.json",
+      "bytes": 124,
+      "sha256": "1af82a121a26a41062edc55392d6a3d0f2d2920ef907b506615b8cd91960ea28",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-urp/ProjectSettings/ProjectVersion.txt",
+      "bytes": 29,
+      "sha256": "f97cbce8b76bf2099f32772b9925c04cb85aee05d5a0db91451150c4c28edf12",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "Tests/UnityArtist.Cli.Tests/test_cli_contract.py",
+      "bytes": 7724,
+      "sha256": "4871841d119ea30415b2aa51984e625d12a5c5c7650b678f1c379503d6c5ea42",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 3632,
+      "sha256": "e4c79ac19adf1c9259a5a45f4f1db67b7da80b418832d847e818f011432e022b",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "docs/development/branch-policy.md",
+      "bytes": 2313,
+      "sha256": "538552c917bc95366ebea69c4c8317874fb2b05e3f205eb7347534bab931076b",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "docs/migration/artist-subagent-package-id.md",
+      "bytes": 857,
+      "sha256": "076ea694585735175f7a3a98b459f279d84303bbc23651713586aceb38763d6e",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "docs/references/unity-cli-reference.md",
+      "bytes": 2654,
+      "sha256": "c9f51d5317c13e36fd4e7f8cbff228b5d88971eaeeb5eab24b3ad2bd42ab0c0a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "scripts/install.ps1",
+      "bytes": 823,
+      "sha256": "b469b2b12d9f950409f009f97c34c3bafc260a757fec30adff8dfc1b1b601c84",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "scripts/install.sh",
+      "bytes": 495,
+      "sha256": "67f08d48271c2ac98b624ac5366a3332f24f3f2d91fd111b5386fe111a73a56a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "scripts/run_minimal_live_smoke.py",
+      "bytes": 10749,
+      "sha256": "45ab50e99d5ff263279e34fbbcc8bb7cc790fcc130f1d3efa935f37bfa0ef07d",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "scripts/verify-external-cli.ps1",
+      "bytes": 4127,
+      "sha256": "40308ba5a8c63d257179529cddf1adeb07c7208940526055830fb182dd966e73",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "src/UnityArtist.Cli/Program.cs",
+      "bytes": 28447,
+      "sha256": "41af78d7cd906c4281ef6c865dac2b73b85d1512679f19caa5154a34b8deb252",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "src/UnityArtist.Cli/SpecialistSurface.cs",
+      "bytes": 2706,
+      "sha256": "34cbdb33c75464a9feb697ccdb6a653ac799fa3d5d78614a5e29caec0ffa0d9a",
+      "classification": "active_or_review_required"
+    },
+    {
+      "path": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "bytes": 482,
+      "sha256": "fcafc0c30c41e1f688257bb3fbe181370b999342c8de661a6d374f31208942a8",
+      "classification": "active_or_review_required"
+    }
+  ],
+  "path_references": [
+    {
+      "file": ".agents/skills/unity-artist-unity-api-compatibility/SKILL.md",
+      "line": 10,
+      "reference": "Specs/Compatibility/unity-api-compatibility.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".agents/skills/unity-artist-unity-api-compatibility/SKILL.md",
+      "line": 10,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 10,
+      "reference": "src/UnityArtist.Cli/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 11,
+      "reference": "SubAgents/artist_subagent/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 12,
+      "reference": "Specs/ArtistSubAgent/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 13,
+      "reference": "Specs/Compatibility/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 14,
+      "reference": "Tests/Backend/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 15,
+      "reference": "Tests/Compatibility/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 16,
+      "reference": "Tests/Minimal/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 17,
+      "reference": "Tests/UnityArtist.Cli.Tests/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 18,
+      "reference": "TestProjects/UnityArtistVerification/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 29,
+      "reference": "src/UnityArtist.Cli/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 30,
+      "reference": "SubAgents/artist_subagent/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 31,
+      "reference": "Specs/ArtistSubAgent/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 32,
+      "reference": "Specs/Compatibility/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 33,
+      "reference": "Tests/Backend/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 34,
+      "reference": "Tests/Compatibility/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 35,
+      "reference": "Tests/Minimal/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 36,
+      "reference": "Tests/UnityArtist.Cli.Tests/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 66,
+      "reference": "Tests/Backend/verify_artist_backend_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 68,
+      "reference": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 70,
+      "reference": "Tests/Compatibility/verify-semantic-names.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 72,
+      "reference": "Tests/Backend/verify_portable_paths.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 75,
+      "reference": "Tests/Compatibility/verify-primary-urp-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 76,
+      "reference": "Tests/Compatibility/verify-cinematic-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 77,
+      "reference": "Tests/Compatibility/verify-hdrp-primary-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 78,
+      "reference": "Tests/Compatibility/verify-hdrp-cinematic-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 79,
+      "reference": "Tests/Compatibility/verify-cli-pipeline-gate-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 81,
+      "reference": "Tests/Minimal/test_minimal_smoke_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 83,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/artist-backend-contract.yml",
+      "line": 85,
+      "reference": "Tests/UnityArtist.Cli.Tests",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/branch-policy.yml",
+      "line": 32,
+      "reference": "Tests/Hub/validate_branch_policy.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 11,
+      "reference": "Design/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 12,
+      "reference": "Specs/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 13,
+      "reference": "Registry/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 14,
+      "reference": "Schemas/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 15,
+      "reference": "SubAgents/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 17,
+      "reference": "src/UnityArtist.Cli/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 18,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 19,
+      "reference": "Tests/Hub/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 41,
+      "reference": "Tests/Hub/validate_branch_policy.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 43,
+      "reference": "Tests/Hub/validate_repository_authority.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 45,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 47,
+      "reference": "Tests/Hub",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".github/workflows/subagent-hub-contract.yml",
+      "line": 49,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": ".gitignore",
+      "line": 47,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 7,
+      "reference": "Specs/repository-authority-map.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 7,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 19,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 30,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 30,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 39,
+      "reference": "Tests/Hub/validate_repository_authority.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 40,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 41,
+      "reference": "Tests/Hub",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 42,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 50,
+      "reference": "Tests/Backend/verify_artist_backend_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 51,
+      "reference": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 52,
+      "reference": "Tests/Backend/verify_portable_paths.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "AGENTS.md",
+      "line": 61,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "line": 38,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "line": 44,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 29,
+      "reference": "Tests/Hub/validate_repository_authority.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 30,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 31,
+      "reference": "Tests/Hub",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 32,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 38,
+      "reference": "Tests/Backend/verify_artist_backend_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 39,
+      "reference": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 40,
+      "reference": "Tests/Backend/verify_portable_paths.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 41,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 49,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "line": 63,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-10-unity-cli-pipeline-gate.md",
+      "line": 20,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-10-unity-cli-pipeline-gate.md",
+      "line": 29,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-hdrp-primary-visual-evidence.md",
+      "line": 17,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-hdrp-primary-visual-evidence.md",
+      "line": 18,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-hdrp-primary-visual-evidence.md",
+      "line": 19,
+      "reference": "Tests/Compatibility/verify-hdrp-primary-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-hdrp-primary-visual-evidence.md",
+      "line": 20,
+      "reference": "Tests/Compatibility/verify-hdrp-cinematic-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-unity2022-3-bounded-fallback.md",
+      "line": 20,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-11-unity2022-3-bounded-fallback.md",
+      "line": 46,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/DecisionLog/2026-09-27-specialist-execution-contract.md",
+      "line": 5,
+      "reference": "Design/specialist-execution-admission.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/README.md",
+      "line": 7,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/README.md",
+      "line": 21,
+      "reference": "SubAgents/artist_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/README.md",
+      "line": 22,
+      "reference": "SubAgents/graphics_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/README.md",
+      "line": 23,
+      "reference": "SubAgents/world_creator_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/README.md",
+      "line": 24,
+      "reference": "SubAgents/performance_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 7,
+      "reference": "SubAgents/*/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 7,
+      "reference": "Tests/Hub/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 8,
+      "reference": "Tests/Routing/cases.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 8,
+      "reference": "Orchestration/Routing/task-routes.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 9,
+      "reference": "SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 10,
+      "reference": "Templates/AcceptanceProfiles/balanced-graphics.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 11,
+      "reference": "Tests/Release/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/authority-cleanup-audit.md",
+      "line": 13,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage-audit.md",
+      "line": 19,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage-audit.md",
+      "line": 76,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 2,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 2,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Tools/ContentPilot/content_analysis.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Tests/ContentPilot/test_content_analysis.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Tools/ContentPilot/content_analysis.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Tests/ContentPilot/test_content_analysis.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 3,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 4,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 4,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 5,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 5,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 6,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 6,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 7,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 7,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 8,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 8,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 9,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 9,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 10,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 10,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 11,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 11,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 12,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 12,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 13,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 13,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 14,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 14,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 15,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 15,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 16,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 16,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 17,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 18,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 18,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 19,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 19,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 20,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 20,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 21,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 21,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 22,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 23,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 23,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 24,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 24,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 25,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 25,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 26,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 26,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 27,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 28,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 28,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 29,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 29,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 30,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 30,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 31,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 31,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 32,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 32,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 33,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 33,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 34,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 34,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 35,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 35,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 36,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 36,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 36,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 37,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 37,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 38,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 38,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 39,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 39,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 39,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 39,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 40,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 40,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 41,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 41,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 42,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 42,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 42,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 43,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 43,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 43,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 44,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 44,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 44,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 45,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 46,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 46,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 47,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 47,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 48,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 48,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 48,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 48,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 49,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 49,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 50,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 50,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 51,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 51,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 52,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 52,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 53,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 53,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 54,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 54,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 54,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 54,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 55,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 55,
+      "reference": "Tools/SkillValidator/validate_skills.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 55,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 55,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 56,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 56,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 57,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 57,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 58,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 58,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 59,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 59,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 60,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 60,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 61,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 61,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 62,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 62,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 63,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 63,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 64,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 64,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 65,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 65,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 66,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 66,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 67,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 67,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 68,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 68,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 69,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 69,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 70,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 70,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 71,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 71,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Design/legacy-domain-support-boundaries.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 72,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 73,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 73,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 74,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 74,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 75,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 75,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "SubAgents/world_creator_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "SubAgents/world_creator_subagent/instructions.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "Tests/Hub/test_production_specialists.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "SubAgents/world_creator_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "SubAgents/world_creator_subagent/instructions.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "Tests/Hub/test_production_specialists.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 76,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "SubAgents/world_creator_subagent/contracts/world-plan-result.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "SubAgents/world_creator_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "Tests/Hub/test_production_specialists.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "SubAgents/world_creator_subagent/contracts/world-plan-result.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "SubAgents/world_creator_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "Tests/Hub/test_production_specialists.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 77,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 78,
+      "reference": "Orchestration/Routing/task-routes.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 78,
+      "reference": "Tests/Hub/test_legacy_salvage.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-capability-salvage.csv",
+      "line": 78,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/legacy-domain-support-boundaries.md",
+      "line": 13,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/specialist-execution-admission.yaml",
+      "line": 6,
+      "reference": "Runtime/Tooling/provider_registry.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/specialist-execution-admission.yaml",
+      "line": 7,
+      "reference": "Runtime/Runner/Codex/codex_runner.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/specialist-execution-admission.yaml",
+      "line": 8,
+      "reference": "Runtime/Handoff/reasoning_runtime.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/subagent-hub-architecture.md",
+      "line": 20,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/subagent-hub-architecture.md",
+      "line": 34,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/subagent-hub-architecture.md",
+      "line": 54,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Design/subagent-hub-architecture.md",
+      "line": 55,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "MIGRATION_FROM_MYUNITYMCP.md",
+      "line": 3,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "MIGRATION_FROM_MYUNITYMCP.md",
+      "line": 8,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "MIGRATION_FROM_MYUNITYMCP.md",
+      "line": 19,
+      "reference": "Design/subagent-hub-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "MIGRATION_FROM_MYUNITYMCP.md",
+      "line": 19,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "MIGRATION_FROM_MYUNITYMCP.md",
+      "line": 19,
+      "reference": "Specs/ArtistSubAgent/spec.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 18,
+      "reference": "Design/subagent-hub-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 111,
+      "reference": "Specs/repository-authority-map.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 112,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 116,
+      "reference": "Design/subagent-hub-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 119,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 155,
+      "reference": "Runtime/ReferenceImplementation/subagent-catalog.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 161,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 165,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 169,
+      "reference": "Tests/Hub/validate_repository_authority.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 170,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 171,
+      "reference": "Tests/Hub",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 172,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 179,
+      "reference": "SubAgents/artist_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 180,
+      "reference": "SubAgents/graphics_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 181,
+      "reference": "SubAgents/world_creator_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 182,
+      "reference": "SubAgents/performance_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 183,
+      "reference": "Design/subagent-hub-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 201,
+      "reference": "Tests/Hub/validate_registry.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 202,
+      "reference": "Tests/Hub",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 203,
+      "reference": "Tests/Hub/export_agent_snapshot.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "README.md",
+      "line": 210,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Registry/subagents.yaml",
+      "line": 4,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Registry/subagents.yaml",
+      "line": 5,
+      "reference": "SubAgents/graphics_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Registry/subagents.yaml",
+      "line": 6,
+      "reference": "SubAgents/world_creator_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Registry/subagents.yaml",
+      "line": 7,
+      "reference": "SubAgents/performance_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SECURITY.md",
+      "line": 7,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 6,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 8,
+      "reference": "Schemas/subagent-registry.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 9,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 10,
+      "reference": "Design/subagent-hub-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 11,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 13,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 16,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 17,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 18,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 32,
+      "reference": "Registry/subagents.yaml.",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Specs/repository-authority-map.yaml",
+      "line": 33,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/artist_subagent/README.md",
+      "line": 43,
+      "reference": "Runtime/ReferenceImplementation/subagent-catalog.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/artist_subagent/manifest.yaml",
+      "line": 31,
+      "reference": "SubAgents/artist_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/artist_subagent/manifest.yaml",
+      "line": 56,
+      "reference": "SubAgents/artist_subagent/contracts/backend-surface-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/graphics_subagent/contracts/production-capability-contract.yaml",
+      "line": 25,
+      "reference": "SubAgents/graphics_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/graphics_subagent/manifest.yaml",
+      "line": 26,
+      "reference": "SubAgents/graphics_subagent/instructions.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/graphics_subagent/manifest.yaml",
+      "line": 27,
+      "reference": "SubAgents/graphics_subagent/contracts/graphics-analysis-result.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/graphics_subagent/manifest.yaml",
+      "line": 34,
+      "reference": "SubAgents/graphics_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/performance_subagent/contracts/production-capability-contract.yaml",
+      "line": 22,
+      "reference": "SubAgents/performance_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/performance_subagent/manifest.yaml",
+      "line": 27,
+      "reference": "SubAgents/performance_subagent/instructions.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/performance_subagent/manifest.yaml",
+      "line": 28,
+      "reference": "SubAgents/performance_subagent/contracts/performance-analysis-result.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/performance_subagent/manifest.yaml",
+      "line": 33,
+      "reference": "SubAgents/performance_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/world_creator_subagent/contracts/production-capability-contract.yaml",
+      "line": 21,
+      "reference": "SubAgents/world_creator_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/world_creator_subagent/manifest.yaml",
+      "line": 24,
+      "reference": "SubAgents/world_creator_subagent/instructions.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/world_creator_subagent/manifest.yaml",
+      "line": 25,
+      "reference": "SubAgents/world_creator_subagent/contracts/world-plan-result.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "SubAgents/world_creator_subagent/manifest.yaml",
+      "line": 30,
+      "reference": "SubAgents/world_creator_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "TestProjects/UnityArtistVerification-2022.3/README.md",
+      "line": 5,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "historical"
+    },
+    {
+      "file": "TestProjects/UnityArtistVerification/README.md",
+      "line": 5,
+      "reference": "Tests/Compatibility/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 15,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 16,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 18,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 19,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 20,
+      "reference": "Tests/Compatibility/unity-cli-reference-audit.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 21,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 22,
+      "reference": "SubAgents/artist_subagent/contracts/backend-surface-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 23,
+      "reference": "Tests/Backend/artist-backend-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Backend/verify_artist_backend_contract.py",
+      "line": 284,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/README.md",
+      "line": 3,
+      "reference": "Tests/Compatibility/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "line": 32,
+      "reference": "TestProjects/UnityArtistVerification-2022.3",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "line": 49,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "line": 62,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "line": 77,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 10,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 15,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 16,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 21,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 22,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 25,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 29,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 30,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 34,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 35,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 50,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-editor-acceptance.yaml",
+      "line": 59,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 19,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 23,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 24,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 28,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 29,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 36,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 39,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 42,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 45,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 48,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 53,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 56,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 59,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/production-validation-evidence.yaml",
+      "line": 62,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 14,
+      "reference": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 16,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 17,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 19,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 20,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 36,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/release-verification.yaml",
+      "line": 39,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "line": 25,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "line": 83,
+      "reference": "TestProjects/UnityArtistVerification-2022.3/Library/UnityArtist/Captures/artist-capture-76c514d6ef144fe98ec8709004741d1d/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-builtin-e2e-evidence.yaml",
+      "line": 62,
+      "reference": "TestProjects/UnityArtistVerification/Library/UnityArtist/Captures/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-builtin-minimal-smoke-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-builtin-minimal-smoke-evidence.yaml",
+      "line": 33,
+      "reference": "TestProjects/UnityArtistVerification/Library/UnityArtist/Captures/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-builtin-minimal-smoke-evidence.yaml",
+      "line": 38,
+      "reference": "Tests/Minimal/test_minimal_smoke_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-HDRP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "line": 159,
+      "reference": "Tests/Compatibility/verify-hdrp-cinematic-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-minimal-smoke-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-HDRP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-minimal-smoke-evidence.yaml",
+      "line": 57,
+      "reference": "TestProjects/UnityArtistVerification-HDRP/Library/UnityArtist/Captures/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-minimal-smoke-evidence.yaml",
+      "line": 71,
+      "reference": "Tests/Minimal/test_minimal_smoke_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-HDRP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "line": 77,
+      "reference": "TestProjects/UnityArtistVerification-HDRP/Library/UnityArtist/Captures/artist-capture-08e59a87a7e74844be5aeec893eb6eeb/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "line": 86,
+      "reference": "TestProjects/UnityArtistVerification-HDRP/Library/UnityArtist/Captures/artist-capture-5528433fffe549d9b1eb9552c1600ecf/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "line": 159,
+      "reference": "TestProjects/UnityArtistVerification-HDRP/Library/UnityArtist/Captures/artist-capture-b21cc5cf2c7247e1a35419969aea2b31/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "line": 170,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-URP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "line": 159,
+      "reference": "Tests/Compatibility/verify-cinematic-evidence.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-minimal-smoke-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-URP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-minimal-smoke-evidence.yaml",
+      "line": 46,
+      "reference": "TestProjects/UnityArtistVerification-URP/Library/UnityArtist/Captures/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-minimal-smoke-evidence.yaml",
+      "line": 60,
+      "reference": "Tests/Minimal/test_minimal_smoke_contract.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "line": 6,
+      "reference": "TestProjects/UnityArtistVerification-URP",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "line": 67,
+      "reference": "TestProjects/UnityArtistVerification-URP/Library/UnityArtist/Captures/artist-capture-e5b0190bc1fe46aca17de3873062e981/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "line": 76,
+      "reference": "TestProjects/UnityArtistVerification-URP/Library/UnityArtist/Captures/artist-capture-decc5d940bea4b5898dc67554846bc0b/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "line": 149,
+      "reference": "TestProjects/UnityArtistVerification-URP/Library/UnityArtist/Captures/artist-capture-3e1c74af2a2349cb83a192387c7e2332/color.png",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "line": 160,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-2022-3-bounded-fallback-evidence.py",
+      "line": 13,
+      "reference": "Tests/Compatibility/unity2022-3-builtin-bounded-fallback-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-cinematic-evidence.py",
+      "line": 12,
+      "reference": "Tests/Compatibility/unity6-urp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-cli-pipeline-gate-evidence.py",
+      "line": 12,
+      "reference": "Tests/Compatibility/cli-pipeline-gate-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-hdrp-cinematic-evidence.py",
+      "line": 12,
+      "reference": "Tests/Compatibility/unity6-hdrp-cinematic-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-hdrp-primary-evidence.py",
+      "line": 13,
+      "reference": "Tests/Compatibility/unity6-hdrp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-primary-urp-evidence.py",
+      "line": 13,
+      "reference": "Tests/Compatibility/unity6-urp-primary-visual-evidence.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "line": 15,
+      "reference": "Specs/Compatibility/unity-api-compatibility.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Compatibility/verify-unity-api-compatibility.py",
+      "line": 17,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 12,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 22,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 32,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 42,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 52,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 62,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 72,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 82,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 92,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 102,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 112,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 122,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 132,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 142,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 152,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 162,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 172,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 182,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 192,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 202,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 212,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 222,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 232,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 242,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 252,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 262,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 272,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 282,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 292,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 302,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 312,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 322,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 332,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 342,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 352,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 362,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 372,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 382,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 392,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 402,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 412,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 422,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 432,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 442,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 452,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 462,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 472,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 482,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 492,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 502,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 512,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 522,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 532,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 542,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 552,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 562,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 572,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 582,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 592,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 602,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 612,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 622,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 632,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 642,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 652,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 662,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 672,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 682,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 692,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 702,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 712,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 722,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 732,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 742,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 752,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 762,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/capabilities.json",
+      "line": 772,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "historical"
+    },
+    {
+      "file": "Tests/Hub/export_agent_snapshot.py",
+      "line": 16,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/export_agent_snapshot.py",
+      "line": 17,
+      "reference": "Schemas/subagent-catalog-snapshot.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/export_agent_snapshot.py",
+      "line": 18,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/export_agent_snapshot.py",
+      "line": 44,
+      "reference": "SubAgents/{identity}/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_execution_admission.py",
+      "line": 12,
+      "reference": "Design/specialist-execution-admission.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_execution_admission.py",
+      "line": 29,
+      "reference": "Design/specialist-expansion-architecture.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_graphics_candidate_contract.py",
+      "line": 12,
+      "reference": "SubAgents/graphics_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_graphics_candidate_contract.py",
+      "line": 13,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_graphics_candidate_contract.py",
+      "line": 21,
+      "reference": "SubAgents/graphics_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_legacy_salvage.py",
+      "line": 11,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_legacy_salvage.py",
+      "line": 14,
+      "reference": "Design/legacy-capability-salvage.csv",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_performance_candidate_contract.py",
+      "line": 12,
+      "reference": "SubAgents/performance_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_performance_candidate_contract.py",
+      "line": 13,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_performance_candidate_contract.py",
+      "line": 22,
+      "reference": "SubAgents/performance_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_performance_candidate_contract.py",
+      "line": 23,
+      "reference": "SubAgents/performance_subagent/contracts/production-capability-contract.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_production_specialists.py",
+      "line": 11,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_production_specialists.py",
+      "line": 14,
+      "reference": "SubAgents/{identity}/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_production_specialists.py",
+      "line": 24,
+      "reference": "SubAgents/performance_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 66,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 79,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 103,
+      "reference": "Design/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 104,
+      "reference": "Schemas/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 110,
+      "reference": "SubAgents/artist_subagent/**",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 114,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 122,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 123,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 140,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 154,
+      "reference": "SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 159,
+      "reference": "SubAgents/artist_subagent/README.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 163,
+      "reference": "Runtime/ReferenceImplementation/subagent-catalog.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 168,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 176,
+      "reference": "SubAgents/{subagent_id}/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 191,
+      "reference": "SubAgents/planner_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 217,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 239,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 251,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 263,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 275,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 287,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 299,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 319,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 332,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 344,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 358,
+      "reference": "SubAgents/shader_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_registry_validator.py",
+      "line": 373,
+      "reference": "SubAgents/shader_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_world_creator_candidate_contract.py",
+      "line": 12,
+      "reference": "SubAgents/world_creator_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_world_creator_candidate_contract.py",
+      "line": 13,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/test_world_creator_candidate_contract.py",
+      "line": 25,
+      "reference": "SubAgents/world_creator_subagent/contracts/capability-contracts.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 16,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 17,
+      "reference": "Schemas/subagent-registry.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 18,
+      "reference": "Schemas/subagent-manifest.schema.json",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 186,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 191,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 195,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 200,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 204,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 208,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_registry.py",
+      "line": 353,
+      "reference": "Registry/subagents.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 16,
+      "reference": "Specs/repository-authority-map.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 54,
+      "reference": "Specs/repository-authority-map.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 87,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 121,
+      "reference": "SubAgents/artist_subagent/manifest.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 134,
+      "reference": "src/UnityArtist.Cli/UnityArtist.Cli.csproj",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 143,
+      "reference": "src/UnityArtist.Cli/Program.cs",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/Hub/validate_repository_authority.py",
+      "line": 153,
+      "reference": "Tests/Compatibility/support-matrix.yaml",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "Tests/UnityArtist.Cli.Tests/README.md",
+      "line": 10,
+      "reference": "Tests/Compatibility/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 39,
+      "reference": "Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 40,
+      "reference": "Design/DecisionLog/",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 41,
+      "reference": "Design/legacy-capability-salvage-audit.md",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 42,
+      "reference": "Tests/Compatibility/*evidence*",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/development/branch-policy.md",
+      "line": 79,
+      "reference": "Tests/Hub/validate_branch_policy.py",
+      "classification": "active_or_review_required"
+    },
+    {
+      "file": "docs/references/unity-cli-reference.md",
+      "line": 11,
+      "reference": "Tests/Compatibility/unity-cli-reference-audit.yaml",
+      "classification": "active_or_review_required"
+    }
+  ],
+  "duplicate_nonempty_non_meta_groups": [
+    {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "paths": [
+        "TestProjects/UnityArtistVerification-2022.3/Assets/.keep",
+        "TestProjects/UnityArtistVerification-2022.3/Assets/Scenes/.keep",
+        "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-builtin/Assets/.keep",
+        "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-urp/Assets/.keep"
+      ]
+    },
+    {
+      "sha256": "f97cbce8b76bf2099f32772b9925c04cb85aee05d5a0db91451150c4c28edf12",
+      "paths": [
+        "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-builtin/ProjectSettings/ProjectVersion.txt",
+        "Tests/UnityArtist.Cli.Tests/fixtures/2022.3-urp/ProjectSettings/ProjectVersion.txt"
+      ]
+    }
+  ]
+}
