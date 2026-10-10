@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install YAML validator dependency
-        run: python -m pip install --disable-pip-version-check pyyaml
+        run: python -m pip install --disable-pip-version-check pyyaml jsonschema
       - name: Validate branch policy contract
         run: python Tests/Hub/validate_branch_policy.py
       - name: Validate repository authority and mirrored declarations
@@ -47,3 +47,41 @@ jobs:
         run: python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
       - name: Export and validate consumer-neutral Hub snapshot
         run: python Tests/Hub/export_agent_snapshot.py --output "$RUNNER_TEMP/subagent-catalog.yaml"
+
+      - name: Checkout UnityAgent consumer
+        uses: actions/checkout@v7
+        with:
+          repository: DarumaPPAP/UnityAgent
+          ref: main
+          path: .tmp-unityagent-consumer
+          persist-credentials: false
+
+      - name: Validate this Hub commit with the existing Consumer Import Gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          hub_commit="$(git rev-parse HEAD)"
+          git -C .tmp-unityagent-consumer rev-parse HEAD
+          snapshot_hash="$(sha256sum "$RUNNER_TEMP/subagent-catalog.yaml" | cut -d ' ' -f 1)"
+          python .tmp-unityagent-consumer/Tools/import_subagent_catalog.py \
+            --snapshot "$RUNNER_TEMP/subagent-catalog.yaml" \
+            --source-ref "github://DarumaPPAP/UnitySubAgentHub/development/$hub_commit/Tests/Hub/export_agent_snapshot.py" \
+            --expected-sha256 "$snapshot_hash" > "$RUNNER_TEMP/hub-consumer-import-plan.json"
+          python - "$RUNNER_TEMP/hub-consumer-import-plan.json" <<'PY'
+          import json
+          import sys
+
+          with open(sys.argv[1], encoding="utf-8") as stream:
+              plan = json.load(stream)
+          if plan["status"] != "no_op" or plan["apply"]["catalog_write_performed"]:
+              raise SystemExit("Hub change requires a reviewed UnityAgent consumer migration; import plan is not a read-only no-op")
+          print("Hub Development snapshot is compatible with UnityAgent main (read-only no-op).")
+          PY
+
+      - name: Upload Consumer compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: hub-consumer-import-plan
+          path: ${{ runner.temp }}/hub-consumer-import-plan.json
+          if-no-files-found: ignore
