@@ -8,7 +8,7 @@ on:
       - AGENTS.md
       - Packages/com.darumappap.artist-subagent/**
       - src/UnityArtist.Cli/**
-      - SubAgents/artist_subagent/**
+      - Hub/SubAgents/artist_subagent/**
       - Specs/ArtistSubAgent/**
       - Specs/Compatibility/**
       - Tests/Backend/**
@@ -27,7 +27,7 @@ on:
     paths:
       - Packages/com.darumappap.artist-subagent/**
       - src/UnityArtist.Cli/**
-      - SubAgents/artist_subagent/**
+      - Hub/SubAgents/artist_subagent/**
       - Specs/ArtistSubAgent/**
       - Specs/Compatibility/**
       - Tests/Backend/**

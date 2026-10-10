@@ -7,9 +7,9 @@
 - [Repository README](../README.md)
 - [Hub Architecture](../Design/subagent-hub-architecture.md)
 - [Design Records](../Design/README.md)
-- [Registry](../Registry/subagents.yaml)
-- [Manifest / Snapshot Schemas](../Schemas/)
-- [Specialist Execution Admission](../Design/specialist-execution-admission.yaml)
+- [Registry](../Hub/Registry/subagents.yaml)
+- [Manifest / Snapshot Schemas](../Hub/Schemas/)
+- [Specialist Execution Admission](../Hub/specialist-execution-admission.yaml)
 
 HubはRegistry / Manifest / Schema / Validationを所有します。Runtime resolution、Policy、Approval、Project binding、Execution、Retry、Evidence normalizationはUnityAgentが所有します。
 
@@ -17,10 +17,10 @@ HubはRegistry / Manifest / Schema / Validationを所有します。Runtime reso
 
 | Specialist | Guide | Manifest |
 |---|---|---|
-| ArtistSubAgent | [Guide](../SubAgents/artist_subagent/README.md) | [Manifest](../SubAgents/artist_subagent/manifest.yaml) |
-| GraphicsSubAgent | [Guide](../SubAgents/graphics_subagent/README.md) | [Manifest](../SubAgents/graphics_subagent/manifest.yaml) |
-| WorldCreatorSubAgent | [Guide](../SubAgents/world_creator_subagent/README.md) | [Manifest](../SubAgents/world_creator_subagent/manifest.yaml) |
-| PerformanceSubAgent | [Guide](../SubAgents/performance_subagent/README.md) | [Manifest](../SubAgents/performance_subagent/manifest.yaml) |
+| ArtistSubAgent | [Guide](../Hub/SubAgents/artist_subagent/README.md) | [Manifest](../Hub/SubAgents/artist_subagent/manifest.yaml) |
+| GraphicsSubAgent | [Guide](../Hub/SubAgents/graphics_subagent/README.md) | [Manifest](../Hub/SubAgents/graphics_subagent/manifest.yaml) |
+| WorldCreatorSubAgent | [Guide](../Hub/SubAgents/world_creator_subagent/README.md) | [Manifest](../Hub/SubAgents/world_creator_subagent/manifest.yaml) |
+| PerformanceSubAgent | [Guide](../Hub/SubAgents/performance_subagent/README.md) | [Manifest](../Hub/SubAgents/performance_subagent/manifest.yaml) |
 
 Current manifests are v5 and current exported Snapshot is v3.
 

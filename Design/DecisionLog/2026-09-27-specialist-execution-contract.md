@@ -2,7 +2,7 @@
 
 ## 判定根拠
 
-UnityAgent main `e388f19011d432513daed8d25b394a4e3019b27a` のProvider RegistryにはGraphics / Performance / WorldCreatorのSemantic Capabilityを実行するProduction Providerが存在しない。`Design/specialist-execution-admission.yaml` に3体の比較結果を記録する。
+UnityAgent main `e388f19011d432513daed8d25b394a4e3019b27a` のProvider RegistryにはGraphics / Performance / WorldCreatorのSemantic Capabilityを実行するProduction Providerが存在しない。`Hub/specialist-execution-admission.yaml` に3体の比較結果を記録する。
 
 Graphicsはreasoningとsource / project observation、Performanceはreasoningとmeasurement observation、WorldCreatorはreasoningを採用する。Performanceの `profiler.observe` は現時点で無効化されたLegacy Providerのみが提供するため、Production観測Surfaceの実装・Evidenceが昇格の残るGateとなる。
 

@@ -4,9 +4,9 @@
 
 | Surface | Decision | Evidence and ownership |
 |---|---|---|
-| `Registry/`, `Schemas/`, `SubAgents/*/manifest.yaml`, `Tests/Hub/` | KEEP | Static specialist identity, contracts and validation belong to the Hub. |
+| `Hub/Registry/`, `Hub/Schemas/`, `Hub/SubAgents/*/manifest.yaml`, `Hub/Tests/` | KEEP | Static specialist identity, contracts and validation belong to the Hub. |
 | `Tests/Routing/cases.yaml` | DELETE from Hub; MOVE routing coverage to UnityAgent | The file declared `expected_primary_route`; UnityAgent owns routes in `Orchestration/Routing/task-routes.yaml`. No Hub code referenced the fixture. |
-| `SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml` | DELETE | A fixed camera GUID, property and approval range were historical task fixtures. Only a Hub test asserted that the file existed. |
+| `Hub/SubAgents/artist_subagent/contracts/camera-fov-reference-profile.yaml` | DELETE | A fixed camera GUID, property and approval range were historical task fixtures. Only a Hub test asserted that the file existed. |
 | `Templates/AcceptanceProfiles/balanced-graphics.json` | DELETE | No active repository or UnityAgent reference was found. Scores and budgets are project evaluation policy, not registry metadata. |
 | Eight forwarding scripts in `Tests/Release/` | DELETE | Each only imported `verify_unity_artist_contract.main`; no active workflow or non-Legacy source referenced their filenames. The canonical validator remains. |
 | Artist package, CLI, compatibility tests, local install scripts and backend skills | KEEP co-located | They are Specialist source owned by the Hub repository boundary. Hub does not dispatch them. Public distribution is owned by UnityAgent, which pins an exact Hub commit and packages required backend assets into the UnityAgent release. |

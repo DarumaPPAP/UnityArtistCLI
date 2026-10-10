@@ -17,9 +17,9 @@ HubのRegistryやSnapshotはInstall状態、Project状態、現在のPlatform、
 
 | Concern | Source |
 |---|---|
-| Registry index | `Registry/subagents.yaml` |
-| Specialist静的契約 | `SubAgents/<id>/manifest.yaml` |
-| Registry / Manifest / Snapshot schema | `Schemas/` |
+| Registry index | `Hub/Registry/subagents.yaml` |
+| Specialist静的契約 | `Hub/SubAgents/<id>/manifest.yaml` |
+| Registry / Manifest / Snapshot schema | `Hub/Schemas/` |
 | Specialist固有の詳細契約 | Manifestから参照されるファイル |
 | Runtime ProfileとImport Adapter | UnityAgent |
 
@@ -31,7 +31,7 @@ Registry v2はManifest Pathのみを索引化します。Manifest v5はExecution
 
 ## Snapshot and import boundary
 
-`Tests/Hub/export_agent_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v3として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIはSnapshotを一時生成してSchema/Contractを検証しますが、Hub自身のRelease artifactとして公開しません。
+`Hub/Tools/export_snapshot.py`は登録されたManifestを`subagent_catalog_snapshot` v3として出力します。各EntryはRepository相対の`manifest_ref`と静的な`manifest`を持ちます。ExporterはHub SchemaとManifest Schemaで出力を検証します。Hub CIはSnapshotを一時生成してSchema/Contractを検証しますが、Hub自身のRelease artifactとして公開しません。
 
 ```text
 Hub Manifest → Hub Snapshot → UnityAgent Offline Import Adapter → UnityAgent Runtime Catalog
@@ -51,8 +51,8 @@ Hub ManifestはRuntime Context値やTaskごとのSkill選択を所有しませ�
 
 ## Add, deprecate and retire a specialist
 
-1. `Schemas/subagent-manifest.schema.json`に適合する`SubAgents/<id>/manifest.yaml`を作成します。IdentityとBackend IDを分け、Optional Install、`auto_install: false`、required dependency gates、対応Target組、Evidence interfaceを宣言します。
-2. Manifest PathだけをRegistryに追加し、`python Tests/Hub/validate_registry.py`、Hub Unit Tests、Snapshot exportを実行します。
+1. `Hub/Schemas/subagent-manifest.schema.json`に適合する`Hub/SubAgents/<id>/manifest.yaml`を作成します。IdentityとBackend IDを分け、Optional Install、`auto_install: false`、required dependency gates、対応Target組、Evidence interfaceを宣言します。
+2. Manifest PathだけをRegistryに追加し、`python Hub/Tools/validate_registry.py`、Hub Unit Tests、Snapshot exportを実行します。
 3. UnityAgentが新しいCapability semanticsを扱えるか別に確認します。Consumer Profileが必要ならUnityAgent側でImport Migrationを実施します。
 4. 廃止時はLifecycleを`deprecated`、`retired`または`revoked`へ変更します。既存利用・配布URL・Consumer参照を監査し、履歴が不要になるまでIdentityを再利用しません。
 
