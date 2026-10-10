@@ -63,3 +63,7 @@ Python 3.12.14, Node 24.19.0, Git and gh are present. PowerShell is unavailable 
 Preserve all P0 evidence. Receive/read the designated execution file and compare its instructions with the canonical spec and current code. Execute P1 Consumer dual-read first, then P2 Hub core move, P3 pin merged full SHA, P4 Artist consumer preparation → Hub move → final pin, P5 src packaging/wheel/installer migration, P6 caller-first cleanup/knowledge preservation, P7 version/pipeline/Canary CI, P8 layout contracts and final audits. Each phase requires green checks before squash merge. Do not disable a failing gate or replace immutable source references with HEAD/main.
 
 P1–P8 are not implemented by this P0 audit. No code/static migration completion or Editor success is claimed.
+
+## P2 Hub core move
+
+Registry, schemas and specialist contracts moved under Hub/. Static tools and tests have separate directories; unittest uses the canonical Hub/Tools importer. Snapshot source refs, registry identity-path validation, authority map, workflow triggers and Consumer entry were updated together. Old pinned source is retained by Consumer P1; Agent re-pin follows the verified Hub merge SHA. The 32 existing Hub behavioral tests and negative schema tests retain coverage; no gate removed.

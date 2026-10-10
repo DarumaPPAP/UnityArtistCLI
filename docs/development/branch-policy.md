@@ -76,7 +76,7 @@ main
 
 - Repository設定はSquash Mergeのみを許可する。
 - Merge後のhead branchはGitHubが自動削除する。
-- `Tests/Hub/validate_branch_policy.py` がPolicy定義とbranch名を検証する。
+- `Hub/Tools/validate_branch_policy.py` がPolicy定義とbranch名を検証する。
 - `Branch Policy / Validate Branch Name` が全PRでbranch名を検証する。
 - Agent / Codexはbranch作成前に用途を分類し、このPolicyに従う。
 

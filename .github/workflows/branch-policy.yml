@@ -29,4 +29,4 @@ jobs:
           python-version: "3.12"
 
       - name: Validate branch policy
-        run: python Tests/Hub/validate_branch_policy.py --branch "${{ github.head_ref || github.ref_name }}" --event "${{ github.event_name }}"
+        run: python Hub/Tools/validate_branch_policy.py --branch "${{ github.head_ref || github.ref_name }}" --event "${{ github.event_name }}"

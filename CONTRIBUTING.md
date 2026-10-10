@@ -26,10 +26,10 @@ Run the checks relevant to your change.
 Hub contract:
 
 ```sh
-python Tests/Hub/validate_repository_authority.py
-python Tests/Hub/validate_registry.py
-python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
-python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
+python Hub/Tools/validate_repository.py
+python Hub/Tools/validate_registry.py
+python -m unittest discover -s Hub/Tests -p 'test_*.py' -v
+python Hub/Tools/export_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
 Artist backend:
@@ -45,8 +45,8 @@ dotnet build src/UnityArtist.Cli/UnityArtist.Cli.csproj --configuration Release
 
 When adding or changing a specialist:
 
-1. Update its canonical `SubAgents/<id>/manifest.yaml`.
-2. Keep `Registry/subagents.yaml` as the manifest index only.
+1. Update its canonical `Hub/SubAgents/<id>/manifest.yaml`.
+2. Keep `Hub/Registry/subagents.yaml` as the manifest index only.
 3. Validate against the shared schemas.
 4. Preserve optional install and fail-closed eligibility.
 5. Keep specialist identity separate from backend / provider identity.

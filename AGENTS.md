@@ -4,7 +4,7 @@
 
 This repository owns the SubAgent registry, shared schemas, per-specialist manifests, lifecycle metadata, contract references, and validation. It is not a runtime, orchestrator, resolver, installer, or execution surface. UnityAgent is the only Control Plane and remains authoritative for policy, approval, environment discovery, binding, capability resolution, execution, retry/fallback, and evidence normalization.
 
-`Specs/repository-authority-map.yaml` is the machine-readable map of repository authority and mirrored declarations. `Registry/subagents.yaml` is the index. `SubAgents/<id>/manifest.yaml` is the source of truth for that specialist's identity, lifecycle, install mode, capabilities, compatibility, dependencies, backend references, and evidence requirements. Do not duplicate those facts in a second Hub catalog. Detailed specialist behavior may live in linked contracts.
+`Hub/repository-authority.yaml` is the machine-readable map of repository authority and mirrored declarations. `Hub/Registry/subagents.yaml` is the index. `Hub/SubAgents/<id>/manifest.yaml` is the source of truth for that specialist's identity, lifecycle, install mode, capabilities, compatibility, dependencies, backend references, and evidence requirements. Do not duplicate those facts in a second Hub catalog. Detailed specialist behavior may live in linked contracts.
 
 ## Required invariants
 
@@ -27,7 +27,7 @@ Branch運用の正本は `.github/branch-policy.json`、説明は `docs/developm
 
 ## Adding a specialist
 
-Create one `SubAgents/<id>/manifest.yaml` that satisfies `Schemas/subagent-manifest.schema.json`, then add its path to `Registry/subagents.yaml`. Keep the manifest's backend ids separate from its specialist id. Use stable resolver-visible capability ids and declare exact supported Unity-version/render-pipeline pairs, dependencies, backend refs, and evidence refs. Every required dependency must have a gate in `activation.required_before_resolution`. A new specialist may require an explicit UnityAgent import migration when the consumer has no corresponding Runtime Profile.
+Create one `Hub/SubAgents/<id>/manifest.yaml` that satisfies `Hub/Schemas/subagent-manifest.schema.json`, then add its path to `Hub/Registry/subagents.yaml`. Keep the manifest's backend ids separate from its specialist id. Use stable resolver-visible capability ids and declare exact supported Unity-version/render-pipeline pairs, dependencies, backend refs, and evidence refs. Every required dependency must have a gate in `activation.required_before_resolution`. A new specialist may require an explicit UnityAgent import migration when the consumer has no corresponding Runtime Profile.
 
 Do not add runtime dispatch, candidate ranking, local environment discovery, package installation, or project mutation to this repository's Hub validation path. New manifest paths must be covered by the shared validator and CI.
 
@@ -36,10 +36,10 @@ Do not add runtime dispatch, candidate ranking, local environment discovery, pac
 Run:
 
 ```sh
-python Tests/Hub/validate_repository_authority.py
-python Tests/Hub/validate_registry.py
-python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
-python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
+python Hub/Tools/validate_repository.py
+python Hub/Tools/validate_registry.py
+python -m unittest discover -s Hub/Tests -p 'test_*.py' -v
+python Hub/Tools/export_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
 The Hub workflow validates that a consumer-neutral static Manifest snapshot can be exported, but it does not publish a Hub release or long-lived distribution artifact. UnityAgent Release pins an exact Hub commit and owns public distribution. Overlapping active capabilities are valid Hub metadata; the current UnityAgent Import Gate rejects them until its resolver supports ranking. The snapshot does not observe runtime installation, compatibility, binding, or readiness; UnityAgent must apply those checks against its own environment facts. UnityAgent owns runtime profile fields, including default profile, audience, goal type, primary capability, reference scope and evidence producer.
@@ -58,6 +58,6 @@ Direct Unity Editor, License, Pipeline, and visual end-to-end evidence must be d
 
 ## Artist backend compatibility
 
-The first specialist's implementation remains in `Packages/com.darumappap.artist-subagent/` and `src/UnityArtist.Cli/` during this Hub transition. Its backend contract and detailed workflow specification remain linked from `SubAgents/artist_subagent/manifest.yaml`.
+The first specialist's implementation remains in `Packages/com.darumappap.artist-subagent/` and `src/UnityArtist.Cli/` during this Hub transition. Its backend contract and detailed workflow specification remain linked from `Hub/SubAgents/artist_subagent/manifest.yaml`.
 
 Preserve its bounded typed-argument CLI, explicit project targeting, allowlisted commands, Unity Undo, no automatic save, no arbitrary evaluation, and concrete-gate-only fallback behavior. Compatibility-sensitive changes must keep the Editor implementation and EditMode tests together. These Artist-specific rules do not define additional Hub runtime behavior.

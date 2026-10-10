@@ -63,7 +63,7 @@ Hubは実行経路のControl Planeではありません。Manifestは「候補�
 
 - **Optional by default** — SubAgent導入は必須ではありません。
 - **No auto-install** — Capability解決のためにSubAgentを自動Installしません。
-- **Manifest is canonical** — 各Specialistの正本は `SubAgents/<id>/manifest.yaml` です。
+- **Manifest is canonical** — 各Specialistの正本は `Hub/SubAgents/<id>/manifest.yaml` です。
 - **Fail-Closed** — 必須条件がfalse / unknown / unavailableなら候補から除外します。
 - **Lifecycle before ranking** — 新しいCapability解決では `active` のSpecialistだけを対象にします。
 - **Identity != Backend** — Specialist identityと実行Backend IDを分離します。
@@ -108,15 +108,15 @@ Canonical files:
 
 | Concern | Canonical Source |
 |---|---|
-| Repository authority / mirrored declarations | `Specs/repository-authority-map.yaml` |
-| Registry index | `Registry/subagents.yaml` |
-| Specialist identity / lifecycle / capability / compatibility / backend / evidence | `SubAgents/<id>/manifest.yaml` |
-| Registry / Manifest structure | `Schemas/` |
+| Repository authority / mirrored declarations | `Hub/repository-authority.yaml` |
+| Registry index | `Hub/Registry/subagents.yaml` |
+| Specialist identity / lifecycle / capability / compatibility / backend / evidence | `Hub/SubAgents/<id>/manifest.yaml` |
+| Registry / Manifest structure | `Hub/Schemas/` |
 | Specialist-specific behavior / acceptance | Manifestが参照する `contracts/` |
 | Architecture / addition rules | `Design/subagent-hub-architecture.md` |
 | Resolution / execution policy | [UnityAgent](https://github.com/DarumaPPAP/UnityAgent) |
 
-`Registry/subagents.yaml` はManifest PathのIndexです。環境固有のInstall状態やProject Bindingを保存しません。
+`Hub/Registry/subagents.yaml` はManifest PathのIndexです。環境固有のInstall状態やProject Bindingを保存しません。
 
 ## Eligibility
 
@@ -158,28 +158,28 @@ UnityAgent `main` は、現在Repository内の `Runtime/ReferenceImplementation/
 
 ## Add a Specialist
 
-1. `Schemas/subagent-manifest.schema.json` に従って `SubAgents/<id>/manifest.yaml` を作成します。
+1. `Hub/Schemas/subagent-manifest.schema.json` に従って `Hub/SubAgents/<id>/manifest.yaml` を作成します。
 2. Optional Install、`auto_install: false`、Lifecycle、false / unknown時のFail-Closed behaviorを定義します。
 3. Required dependencyごとに `activation.required_before_resolution` のGateを定義します。
 4. Resolver-visible Capability、supported Unity / Render Pipeline target pairs、Dependency、Backend、Evidence Contractを宣言します。
-5. Manifest Pathだけを `Registry/subagents.yaml` へ登録します。
+5. Manifest Pathだけを `Hub/Registry/subagents.yaml` へ登録します。
 6. Hub validationを実行します。
 
 ```sh
-python Tests/Hub/validate_repository_authority.py
-python Tests/Hub/validate_registry.py
-python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
-python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
+python Hub/Tools/validate_repository.py
+python Hub/Tools/validate_registry.py
+python -m unittest discover -s Hub/Tests -p 'test_*.py' -v
+python Hub/Tools/export_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
 Registryへの追加はdata-onlyです。新しいCapability semanticsを追加する場合は、UnityAgent Runtime側の対応も必要です。
 
 ## Specialist Guides
 
-- [ArtistSubAgent](SubAgents/artist_subagent/README.md) — Provider-backed。Backendは `unity_artist_cli`
-- [GraphicsSubAgent](SubAgents/graphics_subagent/README.md) — Read-only reasoning
-- [WorldCreatorSubAgent](SubAgents/world_creator_subagent/README.md) — Planning-only reasoning
-- [PerformanceSubAgent](SubAgents/performance_subagent/README.md) — Observation-backed read-only reasoning
+- [ArtistSubAgent](Hub/SubAgents/artist_subagent/README.md) — Provider-backed。Backendは `unity_artist_cli`
+- [GraphicsSubAgent](Hub/SubAgents/graphics_subagent/README.md) — Read-only reasoning
+- [WorldCreatorSubAgent](Hub/SubAgents/world_creator_subagent/README.md) — Planning-only reasoning
+- [PerformanceSubAgent](Hub/SubAgents/performance_subagent/README.md) — Observation-backed read-only reasoning
 - [Hub Architecture](Design/subagent-hub-architecture.md)
 - [Migration from MyUnityMCP](MIGRATION_FROM_MYUNITYMCP.md)
 
@@ -198,9 +198,9 @@ Registryへの追加はdata-onlyです。新しいCapability semanticsを追加�
 Hub contract:
 
 ```sh
-python Tests/Hub/validate_registry.py
-python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
-python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
+python Hub/Tools/validate_registry.py
+python -m unittest discover -s Hub/Tests -p 'test_*.py' -v
+python Hub/Tools/export_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
 GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Closed invariant、UnityAgent Consumer互換性を検証し、Import Planを検証記録として保存します。UnityAgent側ではDevelopment HEADとSource LockのPinned Commitを別々に検証します。正当な契約差分もConsumer Migrationのレビューを要求し、Catalog書込みやSource Lock更新は行いません。相手Repositoryのmainは各実行時に解決するため、横断契約変更をMergeした後にも両Gateを再実行してください。
