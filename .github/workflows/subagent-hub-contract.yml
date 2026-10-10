@@ -11,7 +11,7 @@ on:
       - docs/architecture/**
       - docs/references/**
       - docs/decisions/**
-      - ci/verify/**
+      - ci/**
       - ci/evidence/**
       - Hub/Tools/**
       - Hub/repository-authority.yaml
@@ -51,6 +51,17 @@ jobs:
         run: python Hub/Tools/validate_registry.py
       - name: Test Hub validation failures and multi-agent registration
         run: python -m unittest discover -s Hub/Tests -p 'test_*.py' -v
+      - name: Validate Unity CI fixture ownership (static only)
+        run: python ci/verify/validate_unity_fixtures.py
+      - name: Test Unity resolver and honest evidence state machine
+        run: python -m unittest discover -s ci/verify -p 'test_unity_ci.py' -v
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build Artist CLI for the required all-PR contract
+        run: dotnet build cli/artist/UnityArtist.Cli.csproj --configuration Release
+      - name: Test Artist host contracts for the required all-PR contract
+        run: python -m unittest discover -s cli/artist/tests -p 'test_*.py' -v
       - name: Export and validate consumer-neutral Hub snapshot
         run: python Hub/Tools/export_snapshot.py --output "$RUNNER_TEMP/subagent-catalog.yaml"
 

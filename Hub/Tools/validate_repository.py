@@ -45,6 +45,42 @@ def _artist_version(manifest_path: Path) -> str:
     return identity["version"]
 
 
+def public_release_workflows(workflow_root: Path) -> list[str]:
+    """Allow the named read-only observation Canary, never public publication."""
+    forbidden = []
+    publishing_actions = ("softprops/action-gh-release", "ncipollo/release-action", "actions/create-release", "actions/upload-release-asset")
+    publishing_commands = re.compile(r"\bgh\s+release\s+(?:create|upload|edit|delete)\b|\bgh\s+api\b(?=[^\n]*releases)(?=[^\n]*(?:(?:--method(?:=|\s+)|-X\s*)(?:POST|PATCH|DELETE)\b|(?:--(?:raw-)?field(?:=|\s+)|-[fF]\s*)))|\bcurl\b[^\n]*/releases", re.IGNORECASE)
+    for path in sorted((*workflow_root.glob("*.yml"), *workflow_root.glob("*.yaml"))):
+        canary = path.name == "unity-prerelease-canary.yml"
+        try:
+            workflow = yaml.safe_load(path.read_text(encoding="utf-8"))
+            if not isinstance(workflow, dict):
+                raise ValueError("workflow mapping required")
+            unsafe = "release" in path.name.lower() and not canary
+            if canary and workflow.get("permissions", {}).get("contents") != "read":
+                unsafe = True
+            def inspect(node):
+                nonlocal unsafe
+                if isinstance(node, dict):
+                    for key, value in node.items():
+                        if key == "uses" and isinstance(value, str) and value.lower().split("@")[0] in publishing_actions:
+                            unsafe = True
+                        if key == "run" and isinstance(value, str) and publishing_commands.search(value):
+                            unsafe = True
+                        if canary and key == "permissions" and (value == "write-all" or isinstance(value, dict) and value.get("contents") == "write"):
+                            unsafe = True
+                        inspect(value)
+                elif isinstance(node, list):
+                    for value in node:
+                        inspect(value)
+            inspect(workflow)
+            if unsafe:
+                forbidden.append(path.name)
+        except (OSError, ValueError, AttributeError, yaml.YAMLError):
+            forbidden.append(path.name)
+    return forbidden
+
+
 def validate_repository() -> list[str]:
     errors: list[str] = []
 
@@ -157,10 +193,7 @@ def validate_repository() -> list[str]:
     except (OSError, ValueError, yaml.YAMLError) as exc:
         errors.append(f"support-matrix.yaml: {exc}")
 
-    release_workflows = sorted(
-        path.name
-        for path in (ROOT / ".github/workflows").glob("*release*.yml")
-    )
+    release_workflows = public_release_workflows(ROOT / ".github/workflows")
     if release_workflows:
         errors.append(f"Hub must not own public release workflows: {release_workflows}")
 
