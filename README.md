@@ -148,7 +148,7 @@ CompatibilityはManifestで宣言されますが、現在のProjectが実際に�
 
 ## Snapshot Integration
 
-Hub CIは登録されたManifestを検証し、consumer-neutral Snapshotを一時生成してSchema適合性まで確認します。Hub自身はSnapshotをRelease/配布しません。UnityAgent Releaseが固定Hub commitを取得し、同じExporterからRelease provenance用Snapshotを生成します。
+Hub CIは登録されたManifestを検証し、consumer-neutral Snapshotを一時生成してSchema適合性を確認します。さらに、当該Hub CommitのSnapshotをUnityAgent mainの既存Import Gateで検証し、読取専用`no_op`だけを互換性Gateの成功とします。Import PlanはCI Evidence Artifactへ保存します。Hub自身はSnapshotをRelease/配布しません。UnityAgent Releaseが固定Hub commitを取得し、同じExporterからRelease provenance用Snapshotを生成します。
 
 SnapshotにTask Route、`goal_type`、`primary_capability`、既定Profile、現在のProject / Environment状態、選択済みProvider、実行時Evidence producerは含めません。
 
@@ -203,7 +203,7 @@ python -m unittest discover -s Tests/Hub -p 'test_*.py' -v
 python Tests/Hub/export_agent_snapshot.py --output /tmp/subagent-catalog.yaml
 ```
 
-GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Closed invariantを検証し、Snapshot Artifactを公開します。
+GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Closed invariant、UnityAgent Consumer互換性を検証し、Import Planを検証記録として保存します。UnityAgent側ではDevelopment HEADとSource LockのPinned Commitを別々に検証します。正当な契約差分もConsumer Migrationのレビューを要求し、Catalog書込みやSource Lock更新は行いません。相手Repositoryのmainは各実行時に解決するため、横断契約変更をMergeした後にも両Gateを再実行してください。
 
 ## Legacy
 
