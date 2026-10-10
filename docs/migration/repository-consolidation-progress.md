@@ -2,16 +2,18 @@
 
 P0 verified: Agent #173 `007dbc66365a8c2ca26fa12cbc89d5b544d7339a`; Hub #93 `83dcd6e7a2cba94e5bc0b4975579252da1d5e69a`. P0 inventories/import plans remain immutable historical baseline files.
 
-| Phase | Status | Branch / PR |
+| Phase | Verified producer status | PR / merge |
 |---|---|---|
-| P1 | Consumer dual-read merged | Agent #175 |
-| P2 | Hub Catalog merged | Hub main `ccd6a21` |
-| P3 | Agent final Hub core pin and Artist dual-read merged; required Canonical Green | Agent #176 `66463f54b92178a830a746b8d24e3cbe7d729605` |
-| P4 | Hub Artist/Compatibility producer migration locally verified; PR/merge pending | `chore/repository-consolidation-p4` |
-| P5 | Agent Python migration proceeds separately | Agent |
-| P6 | Hub human docs and orphan cleanup implemented with P4 | `chore/repository-consolidation-p4` |
-| P7 | Separate prepared commit; not applied to P4 | pending P4 integration |
-| P8 | Layout contract deferred until all migrations land | pending |
+| P1 | Agent Consumer dual-read merged | Agent #175 / 0138030ac5b54ed45e8c5b0892f4170f48290184 |
+| P2 | Hub Catalog migration merged | Hub #94 / ccd6a21dee753c60211c1aa947f5220366cd7229 |
+| P3 | Agent pin and Artist dual-read merged | Agent #176 / 66463f54b92178a830a746b8d24e3cbe7d729605 |
+| P4 | Artist/compatibility/docs producer merged, Agent re-pin merged | Hub #95 / 547007b11545d445d9e99a97c41a3d6f0a055d03; Agent #177 / ef6b409fab5ec5fde89ea291df1a72bb2c468f10 |
+| P5–P6 | Agent src/wheel caller migration reviewed; PR CI owner is Agent | Agent #178 |
+| P6 Hub | Human docs/orphan cleanup merged with P4; historical bytes preserved | Hub #95 |
+| P7 | Version/pipeline/Canary foundation merged; actual Editor blocked | Hub #96 / a042bf72c74ec9aa0004d5b2e12d6b7726cf4bf6 |
+| P8 Hub | Strict layout and final host audit merged; all required checks Green | Hub #97 / 7c67f71c7eebd38ca7d24d3bf9d3e7ca7bf48d50 |
+
+This table is the current producer status. The dated implementation notes below are historical stage records; their earlier pending/next statements are superseded. Agent owns its final Source Lock PR after the final Hub documentation merge; use the exact immutable SHA in that lock, never main/HEAD as a pinned source.
 
 Artist CLI, host tests and Artist scripts are now owned by `cli/artist/`. The support matrix is `ci/compatibility/support-matrix.yaml`; static verifiers are `ci/verify/`. All previously checked-in session and acceptance records contained measured assertions and are preserved byte-for-byte under `ci/evidence/artist/historical/`, with original SHA-256 and original paths in the separate historical index. There is no current measured evidence promotion. `passed` inside an archived record never proves current Editor/Pipeline/visual success.
 
