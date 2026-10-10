@@ -14,6 +14,7 @@ on:
       - Tests/Backend/**
       - Tests/Compatibility/**
       - Tests/Minimal/**
+      - Tests/UnityArtist.Cli.Tests/**
       - TestProjects/UnityArtistVerification/**
       - scripts/install.ps1
       - scripts/install.sh
@@ -32,6 +33,7 @@ on:
       - Tests/Backend/**
       - Tests/Compatibility/**
       - Tests/Minimal/**
+      - Tests/UnityArtist.Cli.Tests/**
       - .agents/skills/artist-subagent-*/**
       - .agents/skills/unity-artist-unity-api-compatibility/**
       - .github/workflows/artist-backend-contract.yml
@@ -79,3 +81,5 @@ jobs:
         run: python -m unittest Tests/Minimal/test_minimal_smoke_contract.py
       - name: Build Artist host CLI
         run: dotnet build src/UnityArtist.Cli/UnityArtist.Cli.csproj --configuration Release
+      - name: Test Artist CLI host contracts
+        run: python -m unittest discover -s Tests/UnityArtist.Cli.Tests -p 'test_*.py' -v
