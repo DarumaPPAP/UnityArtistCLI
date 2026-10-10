@@ -4,7 +4,7 @@ Hub P1–P8 implementation is merged through #97. Required branch and Hub contra
 
 Final authored directory roots: `.agents/`, `.github/`, `Hub/`, `Packages/`, `cli/`, `ci/`, `tests/`, `docs/`. Root configuration files and optional `.devcontainer` ownership are defined in `repository-layout.json`; no empty development folder was created. Domain authority remains `Hub/repository-authority.yaml`. Old Registry/Schemas/SubAgents/Tests/TestProjects/Design/Specs/src/scripts roots are absent.
 
-Host verification: 41 Hub tests, 27 Unity CI host tests, static fixture/schema/authority/snapshot/history/API validators, .NET Release build (zero warnings/errors), 11 executable Artist contracts and reverse Consumer read-only no_op. Required job names are unchanged; host contracts execute on all PRs. No Runtime/Policy/Approval/Resolver/auto-install was added to Hub.
+Host verification: 43 Hub tests, 27 Unity CI host tests, static fixture/schema/authority/snapshot/history/API validators, .NET Release build (zero warnings/errors), 11 executable Artist contracts and reverse Consumer read-only no_op. Required job names are unchanged; host contracts execute on all PRs. No Runtime/Policy/Approval/Resolver/auto-install was added to Hub.
 
 The complete 6000.6 project, 2022.3 historical project and 77-tool frozen inventory are preserved. Only relocated local UPM dependency depth changes the old project manifest/lock; no experimental dependency was silently upgraded. Package C# and .meta/GUID bytes and the v1.1.1 tag object are unchanged. Historical evidence remains hash-indexed under ci/evidence/artist/historical; prior passed assertions are not promoted to current evidence. Exact maps: consolidation/p4-path-map.json and the unchanged P0 inventory.
 

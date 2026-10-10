@@ -8,7 +8,7 @@ P0 verified: Agent #173 `007dbc66365a8c2ca26fa12cbc89d5b544d7339a`; Hub #93 `83d
 | P2 | Hub Catalog migration merged | Hub #94 / ccd6a21dee753c60211c1aa947f5220366cd7229 |
 | P3 | Agent pin and Artist dual-read merged | Agent #176 / 66463f54b92178a830a746b8d24e3cbe7d729605 |
 | P4 | Artist/compatibility/docs producer merged, Agent re-pin merged | Hub #95 / 547007b11545d445d9e99a97c41a3d6f0a055d03; Agent #177 / ef6b409fab5ec5fde89ea291df1a72bb2c468f10 |
-| P5–P6 | Agent src/wheel caller migration reviewed; PR CI owner is Agent | Agent #178 |
+| P5–P6 | Agent src/wheel caller migration merged; Canonical Green | Agent #178 / 9b6026257a2bf5cdb9e6aed367caea52f2d72731 |
 | P6 Hub | Human docs/orphan cleanup merged with P4; historical bytes preserved | Hub #95 |
 | P7 | Version/pipeline/Canary foundation merged; actual Editor blocked | Hub #96 / a042bf72c74ec9aa0004d5b2e12d6b7726cf4bf6 |
 | P8 Hub | Strict layout and final host audit merged; all required checks Green | Hub #97 / 7c67f71c7eebd38ca7d24d3bf9d3e7ca7bf48d50 |
@@ -43,4 +43,4 @@ P7 #96 Squash Merge: `a042bf72c74ec9aa0004d5b2e12d6b7726cf4bf6`. Required Hub/br
 
 Layout Contract is now `repository-layout.json`, separate from `Hub/repository-authority.yaml`, validated by `Hub/Tools/validate_layout.py` inside the unchanged all-PR required Hub check. Six rejection tests cover forbidden/unknown roots, nested prohibited directories, missing canonical paths/ownership, confinement and separate authority; `.devcontainer` is intentionally optional. All former root content is moved; empty directories left by Git transitions were removed locally. Human legacy salvage references now point at Agent's final owning paths; immutable historical source fields and fixture bytes remain unchanged.
 
-Cloud verification includes 41 Hub tests, 27 CI host tests, static fixture authority/registry/snapshot/archive/API gates and Artist host build/tests. The final Agent Source Lock is updated only after this Hub producer merges; final Development/Pinned no_op is then audited against its full SHA. Native Unity, rendering, Windows IPC and device gates require external execution. Direct official Canary metadata attempt from Cloud also returned proxy 403 (`services.api.unity.com`), recorded as BLOCKED_NOT_RUN; scheduled/manual GitHub runner commands are documented in unity-ci-foundation.md.
+Cloud verification includes 43 Hub tests, 27 CI host tests, static fixture authority/registry/snapshot/archive/API gates and Artist host build/tests. The final Agent Source Lock is updated only after this Hub producer merges; final Development/Pinned no_op is then audited against its full SHA. Native Unity, rendering, Windows IPC and device gates require external execution. Direct official Canary metadata attempt from Cloud also returned proxy 403 (`services.api.unity.com`), recorded as BLOCKED_NOT_RUN; scheduled/manual GitHub runner commands are documented in unity-ci-foundation.md.
