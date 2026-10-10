@@ -86,7 +86,7 @@ class UnityArtistCliContractTests(unittest.TestCase):
         )
         self.assertEqual(exit_code, 3)
         self.assertEqual(payload["status"], "blocked")
-        self.assertEqual(payload["errors"][0]["code"], "UNSUPPORTED_RENDER_PIPELINE_VERSION")
+        self.assertEqual(payload["errors"][0]["code"], "UNSUPPORTED_UNITY_VERSION")
 
     def test_2022_3_builtin_is_rejected_before_transport(self):
         project = FIXTURES / "2022.3-builtin"
