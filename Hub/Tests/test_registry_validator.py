@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import subprocess
 import json
 import tempfile
 import unittest
@@ -103,14 +104,41 @@ class RegistryValidatorTests(unittest.TestCase):
         push_paths = workflow["on"]["push"]["paths"]
         self.assertIn("AGENTS.md", push_paths)
         self.assertIn("README.md", push_paths)
-        self.assertIn("Design/**", push_paths)
+        self.assertIn("docs/architecture/**", push_paths)
         self.assertIn("Hub/Schemas/**", push_paths)
+
+        run = next(step["run"] for step in workflow["jobs"]["validate-hub"]["steps"]
+                   if step.get("name") == "Validate this Hub commit with the existing Consumer Import Gate")
+        resolver = run.split("consumer_root=", 1)[1].split("snapshot_hash=", 1)[0]
+        resolver = "consumer_root=" + resolver
+        self.assertIn('python "$consumer_importer"', run)
+        self.assertIn('plan["status"] != "no_op"', run)
+        for present in ((), ("Tools",), ("tools",), ("Tools", "tools")):
+            with self.subTest(consumer_paths=present), tempfile.TemporaryDirectory() as folder:
+                for directory in present:
+                    path = Path(folder) / ".tmp-unityagent-consumer" / directory / "import_subagent_catalog.py"
+                    path.parent.mkdir(parents=True)
+                    path.write_text("# read-only importer fixture\n", encoding="utf-8")
+                result = subprocess.run(["bash", "-c", resolver + '\nprintf "%s" "$consumer_importer"'],
+                                        cwd=folder, capture_output=True, text=True)
+                if len(present) == 1:
+                    self.assertEqual(0, result.returncode, result.stderr)
+                    self.assertEqual(f".tmp-unityagent-consumer/{present[0]}/import_subagent_catalog.py", result.stdout)
+                else:
+                    self.assertNotEqual(0, result.returncode)
+                    self.assertIn("unknown or ambiguous", result.stderr)
 
     def test_artist_backend_gate_covers_canonical_manifest_changes(self) -> None:
         root = Path(__file__).resolve().parents[2]
         workflow = (root / ".github/workflows/artist-backend-contract.yml").read_text(encoding="utf-8")
 
-        self.assertIn("      - Hub/SubAgents/artist_subagent/**", workflow)
+        # A stable required status must run even on unrelated PRs. The all-PR
+        # trigger covers every canonical Artist manifest change as well.
+        workflow = yaml.load(workflow, Loader=yaml.BaseLoader)
+        self.assertEqual(["main"], workflow["on"]["pull_request"]["branches"])
+        self.assertNotIn("paths", workflow["on"]["pull_request"])
+        self.assertEqual("Validate Artist backend source and compatibility",
+                         workflow["jobs"]["validate-backend"]["name"])
 
     def test_artist_manifest_does_not_define_consumer_runtime_profile(self) -> None:
         root = Path(__file__).resolve().parents[2]
@@ -123,7 +151,7 @@ class RegistryValidatorTests(unittest.TestCase):
     def test_current_artist_support_is_unity6_pipeline_only(self) -> None:
         root = Path(__file__).resolve().parents[2]
         manifest = yaml.safe_load((root / "Hub/SubAgents/artist_subagent/manifest.yaml").read_text(encoding="utf-8"))
-        matrix = yaml.safe_load((root / "Tests/Compatibility/support-matrix.yaml").read_text(encoding="utf-8"))
+        matrix = yaml.safe_load((root / "ci/compatibility/support-matrix.yaml").read_text(encoding="utf-8"))
         package = json.loads((root / "Packages/com.darumappap.artist-subagent/package.json").read_text(encoding="utf-8"))
         targets = {(item["unity_version"], item["render_pipeline"]) for item in manifest["compatibility"]["supported_targets"]}
         rows = {(item["unity_version"], item["render_pipeline"]) for item in matrix["rows"]}

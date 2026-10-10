@@ -7,7 +7,7 @@ description: Maintain UnityArtistCLI compatibility across the current Unity 6.x+
 
 Use this skill for C#, asmdef, rendering, Timeline, package, or Unity-version changes.
 
-1. Read `Specs/Compatibility/unity-api-compatibility.md` and `Tests/Compatibility/support-matrix.yaml`.
+1. Read `docs/references/unity-api-compatibility.md` and `ci/compatibility/support-matrix.yaml`.
 2. Keep exactly the maintenance buckets `BASE`, `UNITY_6000_4`, `UNITY_6000_5`, and `UNITY_6000_7`; never add a 6000.6 bucket. Roll 6.6 changes into 6000.7.
 3. Keep confirmed and planned facts separate. Do not infer Package API availability from Editor version alone.
 4. Keep `ArtistCompatibility.cs` and `ArtistCompatibilityTests.cs` in the same change.

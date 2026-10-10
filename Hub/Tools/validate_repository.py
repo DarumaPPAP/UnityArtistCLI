@@ -131,7 +131,7 @@ def validate_repository() -> list[str]:
         errors.append(f"Artist package.json: {exc}")
 
     try:
-        project_text = (ROOT / "src/UnityArtist.Cli/UnityArtist.Cli.csproj").read_text(encoding="utf-8")
+        project_text = (ROOT / "cli/artist/UnityArtist.Cli.csproj").read_text(encoding="utf-8")
         project_match = re.search(r"<Version>([^<]+)</Version>", project_text)
         project_version = project_match.group(1) if project_match else None
         if version and project_version != version:
@@ -140,7 +140,7 @@ def validate_repository() -> list[str]:
         errors.append(f"UnityArtist.Cli.csproj: {exc}")
 
     try:
-        program_text = (ROOT / "src/UnityArtist.Cli/Program.cs").read_text(encoding="utf-8")
+        program_text = (ROOT / "cli/artist/Program.cs").read_text(encoding="utf-8")
         runtime_versions = re.findall(r'private const string (?:Version|SemanticVersion) = "([^"]+)";', program_text)
         if len(runtime_versions) != 2:
             errors.append("Program.cs must declare Version and SemanticVersion exactly once")
@@ -150,7 +150,7 @@ def validate_repository() -> list[str]:
         errors.append(f"Program.cs: {exc}")
 
     try:
-        matrix = _load_yaml(ROOT / "Tests/Compatibility/support-matrix.yaml")
+        matrix = _load_yaml(ROOT / "ci/compatibility/support-matrix.yaml")
         matrix_version = matrix.get("package_version")
         if version and matrix_version != version:
             errors.append(f"support-matrix package_version {matrix_version!r} does not mirror manifest {version!r}")

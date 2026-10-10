@@ -44,7 +44,7 @@
 ExportedObj/
 .consulo/
 *.csproj
-!src/UnityArtist.Cli/UnityArtist.Cli.csproj
+!cli/artist/UnityArtist.Cli.csproj
 *.unityproj
 *.sln
 *.slnx
@@ -113,20 +113,22 @@ InitTestScene*.unity*
 /test-results.xml
 
 # Disposable UnityArtistCLI verification fixture caches
-/TestProjects/UnityArtistVerification/Library/
-/TestProjects/UnityArtistVerification/Temp/
-/TestProjects/UnityArtistVerification/UserSettings/
-/TestProjects/UnityArtistVerification/Assets/MinimalSmoke.unity*
-/TestProjects/UnityArtistVerification/ProjectSettings/*
-!/TestProjects/UnityArtistVerification/ProjectSettings/ProjectVersion.txt
+/ci/unity-projects/artist-e2e/Library/
+/ci/unity-projects/artist-e2e/Temp/
+/ci/unity-projects/artist-e2e/UserSettings/
+/ci/unity-projects/artist-e2e/Assets/MinimalSmoke.unity*
+/ci/unity-projects/artist-e2e/ProjectSettings/*
+!/ci/unity-projects/artist-e2e/ProjectSettings/ProjectVersion.txt
 # The 2022.3 bounded-fallback fixture is authored by its Editor bootstrap.
-/TestProjects/UnityArtistVerification-2022.3/Library/
-/TestProjects/UnityArtistVerification-2022.3/Temp/
-/TestProjects/UnityArtistVerification-2022.3/Logs/
-/TestProjects/UnityArtistVerification-2022.3/UserSettings/
-/TestProjects/UnityArtistVerification-2022.3/ProjectSettings/*
-!/TestProjects/UnityArtistVerification-2022.3/ProjectSettings/ProjectVersion.txt
-/TestProjects/UnityArtistVerification-2022.3/Packages/packages-lock.json
+/ci/unity-projects/historical/2022.3/Library/
+/ci/unity-projects/historical/2022.3/Temp/
+/ci/unity-projects/historical/2022.3/Logs/
+/ci/unity-projects/historical/2022.3/UserSettings/
+/ci/unity-projects/historical/2022.3/ProjectSettings/*
+!/ci/unity-projects/historical/2022.3/ProjectSettings/ProjectVersion.txt
+/ci/unity-projects/historical/2022.3/Packages/packages-lock.json
 # Temporary full-pipeline fixtures are kept out of the minimal smoke commit.
-/TestProjects/UnityArtistVerification-URP/
-/TestProjects/UnityArtistVerification-HDRP/
+/ci/unity-projects/pipelines/*/Library/
+/ci/unity-projects/pipelines/*/Temp/
+/ci/unity-projects/pipelines/*/Logs/
+/ci/unity-projects/pipelines/*/UserSettings/

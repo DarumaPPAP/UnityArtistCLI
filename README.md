@@ -15,7 +15,7 @@
   <a href="#eligibility">Eligibility</a> ·
   <a href="#add-a-specialist">Add a Specialist</a> ·
   <a href="#branch-workflow">Branch Workflow</a> ·
-  <a href="Design/subagent-hub-architecture.md">Architecture</a> ·
+  <a href="docs/architecture/subagent-hub-architecture.md">Architecture</a> ·
   <a href="docs/README.md">Docs Index</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> ·
   <a href="SECURITY.md">Security</a> ·
@@ -113,7 +113,7 @@ Canonical files:
 | Specialist identity / lifecycle / capability / compatibility / backend / evidence | `Hub/SubAgents/<id>/manifest.yaml` |
 | Registry / Manifest structure | `Hub/Schemas/` |
 | Specialist-specific behavior / acceptance | Manifestが参照する `contracts/` |
-| Architecture / addition rules | `Design/subagent-hub-architecture.md` |
+| Architecture / addition rules | `docs/architecture/subagent-hub-architecture.md` |
 | Resolution / execution policy | [UnityAgent](https://github.com/DarumaPPAP/UnityAgent) |
 
 `Hub/Registry/subagents.yaml` はManifest PathのIndexです。環境固有のInstall状態やProject Bindingを保存しません。
@@ -180,8 +180,8 @@ Registryへの追加はdata-onlyです。新しいCapability semanticsを追加�
 - [GraphicsSubAgent](Hub/SubAgents/graphics_subagent/README.md) — Read-only reasoning
 - [WorldCreatorSubAgent](Hub/SubAgents/world_creator_subagent/README.md) — Planning-only reasoning
 - [PerformanceSubAgent](Hub/SubAgents/performance_subagent/README.md) — Observation-backed read-only reasoning
-- [Hub Architecture](Design/subagent-hub-architecture.md)
-- [Migration from MyUnityMCP](MIGRATION_FROM_MYUNITYMCP.md)
+- [Hub Architecture](docs/architecture/subagent-hub-architecture.md)
+- [Migration from MyUnityMCP](docs/migration/MIGRATION_FROM_MYUNITYMCP.md)
 
 各SpecialistのIdentity / Lifecycle / Capability / Execution kindの正本は対応する `manifest.yaml` です。Graphics / WorldCreator / Performance配下の旧 `capability-contracts.yaml` はPilot時点のbaselineを比較するために残されており、Current Production Contractではありません。Current Contractは各Manifestの `capability_contract_ref` が指す `production-capability-contract.yaml` です。
 
@@ -207,7 +207,7 @@ GitHub Actionsでは `SubAgent Hub Contract` がRegistry、Manifest、Fail-Close
 
 ## Legacy
 
-MyUnityMCP v1.1.1 の旧Sourceはmainから削除済みです。履歴は公開済みGit tag `v1.1.1` と `Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1/` のFrozen Evidenceで参照します。現在のHub RuntimeでもArtistSubAgent Backendでもありません。
+MyUnityMCP v1.1.1 の旧Sourceはmainから削除済みです。履歴は公開済みGit tag `v1.1.1` と `tests/fixtures/legacy/MyUnityMCP-v1.1.1/` のFrozen Evidenceで参照します。現在のHub RuntimeでもArtistSubAgent Backendでもありません。
 
 ## License
 

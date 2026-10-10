@@ -7,15 +7,15 @@ authorities:
   manifest_root: Hub/SubAgents
   registry_schema: Hub/Schemas/subagent-registry.schema.json
   manifest_schema: Hub/Schemas/subagent-manifest.schema.json
-  architecture: Design/subagent-hub-architecture.md
-  legacy_provenance: Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1
+  architecture: docs/architecture/subagent-hub-architecture.md
+  legacy_provenance: tests/fixtures/legacy/MyUnityMCP-v1.1.1
   artist_backend_version:
     source: Hub/SubAgents/artist_subagent/manifest.yaml
     mirrors:
       upm_package: Packages/com.darumappap.artist-subagent/package.json
-      cli_project: src/UnityArtist.Cli/UnityArtist.Cli.csproj
-      cli_runtime: src/UnityArtist.Cli/Program.cs
-      support_matrix: Tests/Compatibility/support-matrix.yaml
+      cli_project: cli/artist/UnityArtist.Cli.csproj
+      cli_runtime: cli/artist/Program.cs
+      support_matrix: ci/compatibility/support-matrix.yaml
 
 external_authorities:
   runtime_and_resolution:
@@ -30,4 +30,4 @@ rules:
 
 notes:
   - This file maps authority and mirrors; it does not replace specialist manifests or Hub/Registry/subagents.yaml.
-  - MyUnityMCP historical source is not kept on main; provenance is frozen under Tests/Fixtures/Legacy/MyUnityMCP-v1.1.1 and Git tag v1.1.1.
+  - MyUnityMCP historical source is not kept on main; provenance is frozen under tests/fixtures/legacy/MyUnityMCP-v1.1.1 and Git tag v1.1.1.
