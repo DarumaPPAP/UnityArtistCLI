@@ -1,10 +1,26 @@
+# Repository Consolidation — final Hub producer audit
+
+Hub P1–P8 implementation is merged through #97. Required branch and Hub contract checks, Artist host build/contracts and compatibility host foundation are Green. This documentation follow-up corrects the stage ledger; the immutable P0 audit below remains historical. UnityAgent owns the subsequent final Source Lock pin and its final audit PR.
+
+Final authored directory roots: `.agents/`, `.github/`, `Hub/`, `Packages/`, `cli/`, `ci/`, `tests/`, `docs/`. Root configuration files and optional `.devcontainer` ownership are defined in `repository-layout.json`; no empty development folder was created. Domain authority remains `Hub/repository-authority.yaml`. Old Registry/Schemas/SubAgents/Tests/TestProjects/Design/Specs/src/scripts roots are absent.
+
+Host verification: 43 Hub tests, 27 Unity CI host tests, static fixture/schema/authority/snapshot/history/API validators, .NET Release build (zero warnings/errors), 11 executable Artist contracts and reverse Consumer read-only no_op. Required job names are unchanged; host contracts execute on all PRs. No Runtime/Policy/Approval/Resolver/auto-install was added to Hub.
+
+The complete 6000.6 project, 2022.3 historical project and 77-tool frozen inventory are preserved. Only relocated local UPM dependency depth changes the old project manifest/lock; no experimental dependency was silently upgraded. Package C# and .meta/GUID bytes and the v1.1.1 tag object are unchanged. Historical evidence remains hash-indexed under ci/evidence/artist/historical; prior passed assertions are not promoted to current evidence. Exact maps: consolidation/p4-path-map.json and the unchanged P0 inventory.
+
+Unity fixture/Canary implementation and replay commands: [unity-ci-foundation.md](unity-ci-foundation.md). Canonical 6000.6.0f1 full EditMode, 6000.6/6000.3.12f1 minimal, Built-in/URP/HDRP native camera smoke and dynamic next-stream prerelease are implemented. No licensed Editor/graphics/device execution passed in Cloud. Run 38066203244 uploaded blocked canonical/minimal evidence, artifact IDs 11674463178, 11675213275, 11674293315, expiry 2026-10-24. Pipeline, Player, Windows Named Pipe and device gates remain BLOCKED_NOT_RUN. Official Editor/UPM metadata reads from Cloud were proxy403; provision licensed Editor/graphics on the documented runner and permit official metadata endpoints before replay.
+
+Frozen source paths and archived evidence intentionally retain old paths; current catalog/layout/CI owns new paths. The Agent Consumer supports exactly the old/new approved layout for immutable historical pins. Remove compatibility only with an explicit consumer deprecation contract, not a root cleanup. No direct main push, force push, public Release or tag publication occurred.
+
+---
+
 # Repository Consolidation P0 Audit
 
 ## Scope and authority
 
 User request: implement P0–P8 across DarumaPPAP/UnityAgent and DarumaPPAP/UnitySubAgentHub, verify each phase in a PR, then squash merge after required checks succeed. No direct main push, release/tag publication, new backends directory, policy relaxation, or automatic specialist installation.
 
-Implementation specification: UnityAgent_Repository_Consolidation_Spec_v1.md, SHA-256 `fb4744860b5fc0f44f01d1c31db8df867c789ea8dccdef983a3728d797174cee`. The two received attachments have identical bytes. The separately named execution file CodexCloud_UnityAgent_Complete_Goal.md has not yet been received; do not invent its contents. Current explicit user instructions take precedence over general skill approval handoffs.
+Implementation specification: UnityAgent_Repository_Consolidation_Spec_v1.md, SHA-256 `fb4744860b5fc0f44f01d1c31db8df867c789ea8dccdef983a3728d797174cee`. The two received attachments have identical bytes. The execution Goal was subsequently fetched from UnityAgent main at docs/migration/CodexCloud_UnityAgent_Complete_Goal.md, SHA-256 76dc9cea0556a4d7c36229356cfc98c3ba93349cc88afffe149aa35ae324a4c4; its content differs from the implementation specification. Current explicit user instructions take precedence over general skill approval handoffs.
 
 Historical baseline paths in this report and inventory are deliberately preserved for migration comparison. They are not declarations of the final layout. Inventory is not a replacement for repository authority or future layout contracts.
 

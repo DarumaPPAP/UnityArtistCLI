@@ -31,4 +31,13 @@ class LayoutTests(unittest.TestCase):
         self.config['canonical_paths']['../outside']='bad';(self.root/'repository-layout.json').write_text(json.dumps(self.config));self.assertTrue(any('confined' in e for e in self.errors()))
     def test_authority_must_remain_separate(self):
         self.config['authority_map']='repository-layout.json';(self.root/'repository-layout.json').write_text(json.dumps(self.config));self.assertTrue(any('separate' in e for e in self.errors()))
+    def test_external_authored_symlink_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            (self.root/'.devcontainer').symlink_to(outside, target_is_directory=True)
+            self.assertTrue(any('confined' in e for e in self.errors(self.tracked+['.devcontainer'])))
+            (self.root/'src/linked').symlink_to(outside, target_is_directory=True)
+            self.assertTrue(any('confined' in e for e in self.errors(self.tracked+['src/linked'])))
+    def test_dangling_authored_symlink_rejected(self):
+        (self.root/'src/linked').symlink_to(self.root/'missing')
+        self.assertTrue(any('dangling' in e for e in self.errors(self.tracked+['src/linked'])))
 if __name__=='__main__':unittest.main()
