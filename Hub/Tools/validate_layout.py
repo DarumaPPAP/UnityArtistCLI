@@ -58,6 +58,11 @@ def validate(root: Path = ROOT, tracked_paths: list[str] | None = None) -> list[
         if not relative:
             continue
         path = PurePosixPath(relative)
+        authored = root / relative
+        if not authored.resolve().is_relative_to(root):
+            errors.append(f'authored path must be repository confined: {relative}')
+        if authored.is_symlink() and not authored.exists():
+            errors.append(f'dangling authored symlink: {relative}')
         if path.parts[0] not in allowed:
             errors.append(f'unknown root: {path.parts[0]} ({relative})')
         if path.parts[0] in forbidden_roots:
