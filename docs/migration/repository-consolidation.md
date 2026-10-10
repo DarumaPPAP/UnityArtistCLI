@@ -86,3 +86,7 @@ Hub Consumer CI also resolves exactly one known Agent importer path (`Tools/impo
 The preserved 6000.6 package lock also updates only the local Artist file dependency depth to match its relocated manifest; all external package version/dependency observations remain unchanged.
 
 P4 review correction: the relocated external CLI verifier now resolves the repository root through three parents, matching the PowerShell installer. Static evaluation confirms its fallback maps to `cli/artist/bin/Release/net8.0/unity-artist.exe`, rather than duplicating the CLI prefix. All four Artist script roots/default targets were inspected; PowerShell execution remains unavailable.
+
+### P7 verification boundaries
+
+See [Unity CI foundation](unity-ci-foundation.md) for exact fixture versions, official provenance, runner provisioning, commands and evidence artifacts. Required cloud validation covers fixture structure, resolver/evidence rejection, archive/contract integrity and executable Artist host tests. Rendering suites require a licensed exact Editor and measured graphics device; the Canary dynamically resolves an official next-minor prerelease. Both record nonempty test results, manifests/locks, exact Editor/pipeline/package identity, stdout/stderr, input/output SHA-256 inventories and run ID. Read-only observation does not create a Hub public release. Unavailable external gates remain `BLOCKED_NOT_RUN` and return a nonzero result; a Green host check never certifies Editor or visual success.

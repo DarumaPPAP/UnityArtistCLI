@@ -1,0 +1,83 @@
+name: Unity compatibility
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '11 3 * * *'
+permissions:
+  contents: read
+jobs:
+  host-foundation:
+    name: Unity CI host foundation (compatibility)
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      relevant: ${{ steps.matrix.outputs.relevant }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate migrated fixture structure (static only)
+        run: python ci/verify/validate_unity_fixtures.py
+      - name: Test resolver and evidence rejection
+        run: python -m unittest discover -s ci/verify -p 'test_unity_ci.py' -v
+      - name: Select fixtures and detect relevant changes inside job
+        id: matrix
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          python - <<'PYTHON'
+          import json, os, subprocess
+          from pathlib import Path
+          ids = ['canonical-full', 'minimal-6000.3', 'minimal-6000.6']
+          config = json.loads(Path('ci/unity-matrix.yaml').read_text())
+          selected = [row['id'] for row in config['fixtures'] if row['id'] in ids]
+          relevant = True
+          if os.environ['BASE'] and os.environ['HEAD']:
+              paths = subprocess.check_output(['git', 'diff', '--name-only', os.environ['BASE'], os.environ['HEAD']], text=True).splitlines()
+              relevant = any(path.startswith(('packages/', 'Packages/', 'ci/', 'TestProjects/', 'Tests/Compatibility/', '.github/workflows/unity-')) for path in paths)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
+              stream.write('matrix=' + json.dumps({'fixture': selected}) + '\n')
+              stream.write('relevant=' + str(relevant).lower() + '\n')
+          if not relevant:
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+                  stream.write('Unity Editor: NOT_APPLICABLE (no related changes); host foundation validated.\n')
+          PYTHON
+  editor:
+    name: Unity compatibility (${{ matrix.fixture }})
+    needs: host-foundation
+    if: needs.host-foundation.outputs.relevant == 'true'
+    runs-on: ${{ fromJSON(vars.UNITY_CI_RUNNER || '["ubuntu-latest"]') }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.host-foundation.outputs.matrix) }}
+    env:
+      UNITY_EDITOR_ROOT: ${{ vars.UNITY_EDITOR_ROOT }}
+      UNITY_EDITOR: ${{ vars.UNITY_EDITOR }}
+      UNITY_LICENSE_READY: ${{ vars.UNITY_LICENSE_READY }}
+      UNITY_GRAPHICS_READY: ${{ vars.UNITY_GRAPHICS_READY }}
+      UNITY_ALLOW_EDITOR_DOWNLOAD: ${{ vars.UNITY_ALLOW_EDITOR_DOWNLOAD }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run direct exact Editor and normalize evidence
+        run: python ci/verify/unity_ci.py --fixture "${{ matrix.fixture }}" --output "artifacts/${{ matrix.fixture }}"
+      - name: Upload exact versions, packages, logs and results even when blocked
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-compatibility-${{ matrix.fixture }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/${{ matrix.fixture }}
+          if-no-files-found: error
+          retention-days: 14
