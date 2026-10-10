@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import tempfile
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -128,10 +129,102 @@ def download_editor(release, target):
         raise ValueError('Official archive does not contain one Editor/Unity')
     return editors[0]
 
+def reject_symlinks(path):
+    current = Path(path).absolute()
+    for candidate in (current, *current.parents):
+        if candidate.is_symlink():
+            raise ValueError('Symlink input/output path is not permitted: ' + str(candidate))
+
+
+def confined_source(root, path):
+    reject_symlinks(root)
+    reject_symlinks(path)
+    resolved = Path(path).resolve()
+    if not resolved.is_relative_to(Path(root).resolve()):
+        raise ValueError('Input escapes repository: ' + str(path))
+    return resolved
+
+
+def prepare_paths(config, fixture, requested_output):
+    """Read-only preflight; reject all overlapping paths before writing anything."""
+    source = confined_source(ROOT, ROOT / fixture['project'])
+    manifest = json.loads(confined_source(ROOT, source / 'Packages/manifest.json').read_text())
+    local = {}
+    protected = []
+    for row in config['fixtures']:
+        candidate = confined_source(ROOT, ROOT / row['project'])
+        protected.append(candidate)
+        path = confined_source(ROOT, candidate / 'Packages/manifest.json')
+        if path.is_file():
+            dependencies = json.loads(path.read_text())['dependencies']
+            for package, value in dependencies.items():
+                if value.startswith('file:'):
+                    target = confined_source(ROOT, candidate / 'Packages' / value[5:])
+                    protected.append(target)
+                    if candidate == source:
+                        local[package] = target
+    requested = Path(requested_output).absolute()
+    reject_symlinks(requested)
+    output = requested.resolve()
+    for path in protected:
+        if output.is_relative_to(path) or path.is_relative_to(output):
+            raise ValueError('Output overlaps protected fixture/package input: ' + str(path))
+    # Validate every hashed source and reject symlinks before mkdir/unlink as well.
+    inputs = input_hashes(ROOT, source, local, MATRIX)
+    return source, manifest, local, output, inputs
+
+
+def input_hashes(root, source, local_packages, matrix):
+    """Deterministic confined source inventory, excluding generated caches."""
+    root = Path(root).absolute()
+    files = set()
+    excluded = {'Library', 'Temp', 'Logs', 'obj', 'bin', '.git', '.cache',
+                'node_modules', '__pycache__'}
+    def include(path):
+        path = confined_source(root, path)
+        if path.is_file():
+            files.add(path)
+    def tree(path):
+        path = confined_source(root, path)
+        if not path.is_dir():
+            return
+        for directory, folders, names in os.walk(path, followlinks=False):
+            folders[:] = sorted(folder for folder in folders if folder not in excluded)
+            for folder in folders:
+                confined_source(root, Path(directory) / folder)
+            for name in sorted(names):
+                include(Path(directory) / name)
+    include(matrix)
+    tree(source / 'Assets')
+    tree(source / 'ProjectSettings')
+    include(source / 'Packages/manifest.json')
+    include(source / 'Packages/packages-lock.json')
+    for package in sorted(local_packages):
+        tree(local_packages[package])
+    inventory = {path.relative_to(root.resolve()).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                 for path in sorted(files, key=lambda path: path.relative_to(root.resolve()).as_posix())}
+    digest = hashlib.sha256(json.dumps(inventory, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    return dict(algorithm='sha256', digest=digest, files=inventory)
+
+
+def commit_identity():
+    supplied = os.getenv('GITHUB_SHA', '')
+    if re.fullmatch(r'[a-fA-F0-9]{40,64}', supplied):
+        return dict(commit=supplied.lower(), source='GITHUB_SHA')
+    try:
+        commit = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'],
+                                         text=True, stderr=subprocess.DEVNULL).strip()
+        if re.fullmatch(r'[a-fA-F0-9]{40,64}', commit):
+            return dict(commit=commit, source='git-rev-parse')
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return dict(commit=None, source='unavailable')
+
+
 def run(args):
-    config = json.loads(MATRIX.read_text())
+    config = json.loads(confined_source(ROOT, MATRIX).read_text())
     fixture = next(row for row in config['fixtures'] if row['id'] == args.fixture)
-    output = Path(args.output).resolve()
+    source, manifest, local_inputs, output, initial_inputs = prepare_paths(config, fixture, args.output)
     output.mkdir(parents=True, exist_ok=True)
     # Never reuse a previous test result as evidence of this execution.
     for name in ('results.xml', 'editor.log', 'editor-version.txt', 'evidence.json',
@@ -143,6 +236,9 @@ def run(args):
                     requested_editor=fixture['editor'], packages={}, srp_package=fixture.get('srp_package'),
                     package_policy=config['package_policy'], run_id=os.getenv('GITHUB_RUN_ID', 'local'),
                     run_attempt=os.getenv('GITHUB_RUN_ATTEMPT', '1'), reason='Editor not run')
+    evidence['input_hashes'] = initial_inputs
+    evidence['source_identity'] = commit_identity()
+    workspace, project = None, None
     code = 2
     try:
         release = resolve_release(config['canonical_editor']) if args.canary else None
@@ -150,8 +246,6 @@ def run(args):
         evidence['requested_editor'] = version
         if release:
             evidence['archive_release'] = release
-        source = ROOT / fixture['project']
-        manifest = json.loads((source / 'Packages/manifest.json').read_text())
         evidence['packages'] = manifest['dependencies'].copy()
         (output / 'requested-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
         if fixture.get('version_provenance'):
@@ -174,12 +268,22 @@ def run(args):
             raise RuntimeError('Installed Editor version does not match requested exact version')
         evidence['observed_editor'] = version
         # Separate workspace copies preserve canonical source and leave no stale results.
-        project = output / 'project'
-        shutil.copytree(source, project, ignore=shutil.ignore_patterns('Library', 'Temp', 'Logs'), dirs_exist_ok=False)
+        workspace = tempfile.TemporaryDirectory(prefix='unity-ci-owned-', dir=output)
+        project = Path(workspace.name) / 'project'
+        project.mkdir()
+        for directory in ('Assets', 'ProjectSettings'):
+            if (source / directory).is_dir():
+                shutil.copytree(source / directory, project / directory)
+            else:
+                (project / directory).mkdir()
+        (project / 'Packages').mkdir()
+        for name in ('manifest.json', 'packages-lock.json'):
+            if (source / 'Packages' / name).is_file():
+                shutil.copy2(source / 'Packages' / name, project / 'Packages' / name)
         local_packages = {}
         for package, location in manifest['dependencies'].items():
             if location.startswith('file:'):
-                target = (source / 'Packages' / location[5:]).resolve()
+                target = local_inputs[package]
                 if not target.is_dir():
                     raise RuntimeError('Missing local package: ' + package)
                 local_packages[package] = target
@@ -265,13 +369,21 @@ def run(args):
         evidence['reason'] = str(error)
         code = 2 if evidence['status'] == 'BLOCKED_NOT_RUN' else 1
     finally:
-        project = output / 'project'
-        if project.exists():
+        try:
+            final_inputs = input_hashes(ROOT, source, local_inputs, MATRIX)
+            evidence['input_hashes_after'] = final_inputs
+            evidence['source_changed_during_execution'] = final_inputs != initial_inputs
+            if final_inputs != initial_inputs:
+                evidence['status'], evidence['reason'], code = 'FAIL', 'Protected inputs changed during execution', 1
+        except (OSError, ValueError) as error:
+            evidence['status'], evidence['reason'], code = 'FAIL', 'Input rehash failed: ' + str(error), 1
+        if project is not None and project.exists():
             for name in ('manifest.json', 'packages-lock.json'):
                 path = project / 'Packages' / name
                 if path.exists():
                     shutil.copy2(path, output / name)
-            shutil.rmtree(project)
+        if workspace is not None:
+            workspace.cleanup()
         if not (output / 'editor.log').exists():
             (output / 'editor.log').write_text('BLOCKED_NOT_RUN: ' + evidence['reason'] + '\n')
         for name in ('editor.stdout.log', 'editor.stderr.log'):
@@ -292,4 +404,7 @@ if __name__ == '__main__':
     parser.add_argument('--fixture', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--canary', action='store_true')
-    sys.exit(run(parser.parse_args()))
+    try:
+        sys.exit(run(parser.parse_args()))
+    except (OSError, ValueError) as error:
+        parser.error('Unsafe or invalid input/output paths: ' + str(error))

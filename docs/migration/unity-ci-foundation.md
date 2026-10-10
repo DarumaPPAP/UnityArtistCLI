@@ -107,6 +107,29 @@ summary; this is not observed Editor PASS. Pipeline smoke is scheduled/manual.
 Only the stable host foundation job is suitable as an unconditional required check;
 Editor checks require a provisioned runner. Canary stays nonblocking.
 
+Replay preflight is read-only. It rejects output directories inside, equal to, or
+above any configured fixture or local package before creating directories or
+removing old artifact files. Fixture/package/output roots and hashed files cannot
+be symlinks or escape the repository. The runner allocates a uniquely named owned
+temporary project under the accepted output directory; it cleans only that
+allocation. An unrelated preexisting `output/project` is preserved even on blocked
+runs. The disposable project copies only Assets, ProjectSettings, manifest and
+package lock; source caches and unrelated project-root content are excluded.
+Invalid or overlapping paths exit with a diagnostic before producing artifacts,
+because writing evidence to a rejected path would itself mutate protected input.
+
+Evidence includes deterministic SHA-256 input inventories and aggregate digest
+before and after execution. The inventory uses repository-relative paths and
+covers the matrix, fixture Assets/ProjectSettings/manifest/lock, and local package
+source/assets/meta/JSON. Generated cache directories are excluded. Commit identity
+comes from a validated GITHUB_SHA or measured git HEAD. Source changes, deletion,
+or symlinks introduced during execution revoke PASS and produce an explicit FAIL
+with the before/after inventories. Existing output hashes remain separately
+recorded as artifact hashes. Host regressions prove source/scene/meta/JSON changes
+alter the digest, caches do not, unsafe roots reject before writes, an unowned
+project survives blocked/successful replay, and mid-run input mutation rejects an
+otherwise passing synthetic host test run.
+
 Every Editor execution emits evidence with run ID/attempt, requested/observed
 version, exact packages, status, reason and artifact hashes. Separate Editor stdout/stderr streams, Editor log and test results
 are uploaded even on failure; blocked runs retain labeled stream diagnostics; blocked runs have a diagnostic log and
@@ -119,7 +142,7 @@ visual/transport evidence into current evidence.
 
 ## Validation performed in cloud
 
-The 19 host resolver/evidence/fixture tests pass. Fake-Editor state transitions
+The 27 host resolver/evidence/fixture tests pass. Fake-Editor state transitions
 use synthetic artifacts strictly as host test data; they are not Editor observations. The workflows parse as YAML. The local
 blocked runner path produces requested version/packages, a diagnostic log, run ID
 and `BLOCKED_NOT_RUN` evidence. Unity Editor/license, actual SRP package resolution,

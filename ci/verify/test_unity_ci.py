@@ -96,6 +96,7 @@ class RunnerTests(unittest.TestCase):
                     requires_graphics=mode.startswith('render-'),
                     required_artifacts=['pipeline-smoke.png','graphics-device.json'] if mode.startswith('render-') else [])]}))
             output = root / 'artifacts'; output.mkdir()
+            (output/'project').mkdir(); (output/'project/unowned.txt').write_text('preserve')
             # A prior successful result must never satisfy a new run.
             (output / 'results.xml').write_text('<test-run result="Passed" total="1" passed="1"><test-case result="Passed"/></test-run>')
             def execute(command, **kwargs):
@@ -115,20 +116,30 @@ class RunnerTests(unittest.TestCase):
                     self.assertNotIn('-nographics',command)
                 else:
                     self.assertIn('-nographics',command)
-                if mode == 'pass' or mode.startswith('render-'):
+                if mode in {'pass','source-mutation'} or mode.startswith('render-'):
                     Path(command[command.index('-testResults')+1]).write_text('<test-run result="Passed" total="1" passed="1"><test-case result="Passed"/></test-run>')
                     copied = Path(command[command.index('-projectPath')+1])
                     (copied / 'Packages/packages-lock.json').write_text('{"dependencies":{"com.unity.test-framework":{"version":"1.3.9"}}}')
+                if mode == 'source-mutation':
+                    (project/'ProjectSettings/ProjectVersion.txt').write_text('mutated during execution')
                 if mode in {'render-valid','render-null'}:
                     (output/'pipeline-smoke.png').write_bytes(b'\x89PNG\r\n\x1a\nHOST_TEST_ONLY')
                     (output/'graphics-device.json').write_text(json.dumps({'editorVersion':'6000.6.0f1','deviceType':'Null' if mode=='render-null' else 'Vulkan','pixelVariation':0.7}))
                 return subprocess.CompletedProcess(command,0)
-            with patch.object(ci,'ROOT',root), patch.object(ci,'MATRIX',matrix), patch.object(ci.subprocess,'run',side_effect=execute), patch.dict(os.environ,{'UNITY_EDITOR':'/bin/true','UNITY_LICENSE_READY':'true','UNITY_GRAPHICS_READY':'true'}):
+            with patch.object(ci,'ROOT',root), patch.object(ci,'MATRIX',matrix), patch.object(ci.subprocess,'run',side_effect=execute), patch.dict(os.environ,{'UNITY_EDITOR':'/bin/true','UNITY_LICENSE_READY':'true','UNITY_GRAPHICS_READY':'true','GITHUB_SHA':'f'*40}):
                 code = ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False))
+            self.assertEqual((output/'project/unowned.txt').read_text(),'preserve')
+            self.assertEqual(list(output.glob('unity-ci-owned-*')),[])
             evidence = json.loads((output / 'evidence.json').read_text())
             evidence['_stdout'] = (output / 'editor.stdout.log').read_text()
             evidence['_stderr'] = (output / 'editor.stderr.log').read_text()
             return code, evidence
+    def test_source_mutation_revokes_otherwise_passing_execution(self):
+        code,evidence=self.run_fake('source-mutation')
+        self.assertEqual(code,1);self.assertEqual(evidence['status'],'FAIL')
+        self.assertTrue(evidence['source_changed_during_execution'])
+        self.assertEqual(evidence['reason'],'Protected inputs changed during execution')
+        self.assertEqual(evidence['tests_passed'],1)
     def test_render_requires_readback_artifacts(self):
         code,evidence=self.run_fake('render-missing')
         self.assertEqual(code,1);self.assertEqual(evidence['status'],'FAIL')
@@ -149,6 +160,9 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(code,0);self.assertEqual(evidence['tests_passed'],1)
         self.assertEqual(evidence['observed_editor'],'6000.6.0f1')
         self.assertIn('packages-lock.json',evidence['artifact_hashes'])
+        self.assertEqual(evidence['source_identity']['commit'],'f'*40)
+        self.assertFalse(evidence['source_changed_during_execution'])
+        self.assertEqual(evidence['input_hashes'],evidence['input_hashes_after'])
         self.assertIn('editor.stdout.log',evidence['artifact_hashes'])
         self.assertIn('editor.stderr.log',evidence['artifact_hashes'])
         self.assertIn('Editor stdout evidence',evidence['_stdout'])
@@ -195,4 +209,90 @@ class FixtureTests(unittest.TestCase):
                 self.assertIn('pipeline-smoke.png',row['required_artifacts'])
                 if row['pipeline']!='builtin':self.assertIn('RenderPipeline.SubmitRenderRequest',script)
 
-if __name__=='__main__': unittest.main()
+
+class ReplaySafetyTests(unittest.TestCase):
+    def fixture(self, root):
+        source = root / 'fixture'; package = root / 'package'
+        (source / 'Packages').mkdir(parents=True); (source / 'Assets').mkdir(); (source / 'ProjectSettings').mkdir()
+        (source / 'Assets/Subject.unity').write_text('scene source')
+        (source / 'ProjectSettings/ProjectVersion.txt').write_text('m_EditorVersion: 6000.6.0f1')
+        (source / 'Packages/manifest.json').write_text('{"dependencies":{"artist":"file:../../package"}}')
+        package.mkdir(); (package / 'package.json').write_text('{"name":"artist","version":"1.0.0"}')
+        (package / 'Code.cs').write_text('class Original {}'); (package / 'Code.cs.meta').write_text('guid: source')
+        matrix=root/'matrix.yaml';matrix.write_text(json.dumps({'package_policy':'test','canonical_editor':'6000.6.0f1',
+            'fixtures':[{'id':'fake','project':'fixture','editor':'6000.6.0f1','pipeline':'builtin'}]}))
+        return source,package,matrix
+
+    def test_blocked_replay_preserves_unowned_output_project(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            output=root/'artifacts';(output/'project').mkdir(parents=True)
+            sentinel=output/'project/user-owned.txt';sentinel.write_text('preserve')
+            with patch.object(ci,'ROOT',root),patch.object(ci,'MATRIX',matrix),patch.dict(os.environ,{'UNITY_LICENSE_READY':'false'}):
+                self.assertEqual(ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False)),2)
+            self.assertEqual(sentinel.read_text(),'preserve')
+
+    def test_output_overlap_rejected_before_any_write(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            for output in [source,source/'new-output',package,package/'new-output',root]:
+                with self.subTest(output=output),patch.object(ci,'ROOT',root),patch.object(ci,'MATRIX',matrix),patch.dict(os.environ,{'UNITY_LICENSE_READY':'false'}):
+                    with self.assertRaises(ValueError):ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False))
+                    self.assertEqual((package/'Code.cs').read_text(),'class Original {}')
+                    self.assertEqual((source/'Assets/Subject.unity').read_text(),'scene source')
+                    self.assertFalse((source/'evidence.json').exists())
+                    self.assertFalse((package/'evidence.json').exists())
+
+    def test_fixture_root_symlink_rejected_before_output_created(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            source.rename(root/'real-fixture');source.symlink_to(root/'real-fixture',target_is_directory=True)
+            output=root/'new-artifacts'
+            with patch.object(ci,'ROOT',root),patch.object(ci,'MATRIX',matrix),self.assertRaises(ValueError):
+                ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False))
+            self.assertFalse(output.exists())
+
+    def test_input_hashes_change_for_scene_and_package_source_ignore_caches(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            first=ci.input_hashes(root,source,{'artist':package},matrix)
+            (package/'Library').mkdir();(package/'Library/cache.cs').write_text('generated')
+            self.assertEqual(first,ci.input_hashes(root,source,{'artist':package},matrix))
+            (package/'Code.cs').write_text('class Changed {}')
+            second=ci.input_hashes(root,source,{'artist':package},matrix)
+            self.assertNotEqual(first['digest'],second['digest'])
+            (source/'Assets/Subject.unity').write_text('changed scene')
+            self.assertNotEqual(second['digest'],ci.input_hashes(root,source,{'artist':package},matrix)['digest'])
+
+    def test_output_root_symlink_rejected_without_mutating_target(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            (root/'real-output').mkdir();output=root/'output-link';output.symlink_to(root/'real-output',target_is_directory=True)
+            with patch.object(ci,'ROOT',root),patch.object(ci,'MATRIX',matrix),self.assertRaises(ValueError):
+                ci.run(argparse.Namespace(fixture='fake',output=str(output),canary=False))
+            self.assertEqual(list((root/'real-output').iterdir()),[])
+
+    def test_local_package_root_and_file_symlinks_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            package.rename(root/'real-package');package.symlink_to(root/'real-package',target_is_directory=True)
+            with patch.object(ci,'ROOT',root),patch.object(ci,'MATRIX',matrix),self.assertRaises(ValueError):
+                ci.run(argparse.Namespace(fixture='fake',output=str(root/'output'),canary=False))
+            package.unlink();(root/'real-package').rename(package)
+            (package/'Code.cs').unlink();(package/'Code.cs').symlink_to(source/'Assets/Subject.unity')
+            with self.assertRaises(ValueError):ci.input_hashes(root,source,{'artist':package},matrix)
+            self.assertFalse((root/'output').exists())
+
+    def test_input_hashes_include_meta_and_json(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source,package,matrix=self.fixture(root)
+            first=ci.input_hashes(root,source,{'artist':package},matrix)
+            self.assertIn('package/Code.cs.meta',first['files'])
+            self.assertIn('package/package.json',first['files'])
+            (package/'Code.cs.meta').write_text('changed meta')
+            second=ci.input_hashes(root,source,{'artist':package},matrix)
+            self.assertNotEqual(first['digest'],second['digest'])
+            (package/'package.json').write_text('{"name":"artist","version":"2.0.0"}')
+            self.assertNotEqual(second['digest'],ci.input_hashes(root,source,{'artist':package},matrix)['digest'])
+
+if __name__ == '__main__': unittest.main()
